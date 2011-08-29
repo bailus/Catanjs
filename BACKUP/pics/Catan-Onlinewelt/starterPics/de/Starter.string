@@ -1,0 +1,34 @@
+#
+# Starter.string : Texte für den Starter der CatanOnlineWelt
+#
+# fonts
+#
+bigFont=Helvetica,1,12
+#
+# class to start
+#
+clientClass=SelfClient
+#
+# strings
+#
+t0=Herzlich Willkommen in der Catan Online Welt
+t1=Client Update - Catan Online Welt
+t2=Lade Updatedaten...
+t3=Kopiere Dateien...
+t4=Update fehlgeschlagen, ist 'update.info' beschädigt?
+t5=Lade Daten...
+t6=Zum Starten auf das Bild klicken...
+t7=Überprüfe Serverstatus...
+t8=Lade Update...
+t9=Packe Update aus...
+t10=Warte auf Verbindung...
+t11=Name hat ungültige Länge (3-20 Zeichen).
+t12=Ungültiges Zeichen im Namen.
+t13=Der Name ist registriert. Passwort falsch.
+t14=Frei verfügbarer Name. Kein Passwort nötig.
+t15=Eingabe Fehler.
+t16=Bitte Namen eingeben.
+t17=Bitte Passwort eingeben.
+t18=http://www.playcatan.de/rss.feed?type=rss
+t19=Neu Registrieren,250,380,100,12,http://www.playcatan.de/anmelden.html
+t20=Passwort vergessen?,410,380,130,12,http://www.playcatan.de/passwort.html

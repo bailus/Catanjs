@@ -1,0 +1,21 @@
+Kurzinformation - Elasund
+Ziel des Spiels: 10 Siegpunktsteine auf dem Spielfeld unterbringen. 
+Ihre Siegpunktsteine werden eingesetzt, wenn Sie: §BR§
+ §BR§
+    *neutrale Gebäude (rechts unten) bauen, §BR§
+    *bei jedem dritten Bau eines Ihrer Stadtmauerteile, §BR§ 
+    *beim Bau einer Kirchenstufe, §BR§
+    *wenn Sie genügend viele Felder mit Handelspunkten (Mühlen) überbauen. §BR§
+ §BR§    
+Zugaktionen: §BR§
+
+ §CFBEC03§Würfeln:§C000000§ In der mit dem Schiff markierten Reihe gibt es Gold- oder Machtkarten für Gebäude. Bei einer "7" wird für jeden Siegpunktstein in der markierten Reihe 1 Karte bezahlt. §BR§
+ §CFBEC03§1 oder 2 x bauen:§C000000§ Gebäude, Stadtmauerteile oder Kirchenstufen. Größere Gebäude überbauen kleinere.  §CBC0363§3 gleichfarbige Machtkarten:§C000000§ Gleich große Gebäude dürfen überbaut werden. §BR§
+ §CFBEC03§Baubrief§C000000§ in die markierte Reihe setzen oder 2 Gold nehmen.  §CBC0363§2 gleichfarbige Machtkarten:§C000000§ Baubrief in beliebige Reihe setzen. §BR§
+ §CFBEC03§Bonusaktion:§C000000§ Mit Machtkarten eigene Baubriefe ein- oder versetzen, Baubrief beliebig einsetzen oder 2 Gold nehmen. §BR§ 
+ §BR§
+Der Bau von Gebäuden kostet Gold. Auf der Baufläche muss eine bestimmte Anzahl eigene oder fremde Baubriefe ausliegen. 
+Ein  §C0DAFE4§Rechtsklick auf ein Gebäude§C000000§ informiert, wie viele Baubriefe und wie viel Gold der Bau des Gebäudes benötigt. 
+Es darf bauen, wer insgesamt die höheren Baubriefe auf der Baufläche ausliegen hat.
+Wurde der erste Teil der Kirche gebaut, informiert ein  §C0DAFE4§Rechtsklick auf den Kirchstapel§C000000§ (rechts unten) 
+über die Baufläche der Kirche.

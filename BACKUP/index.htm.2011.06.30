@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>openCOW</title>
+<script src="jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<style>
+body {
+  background-image:url('pics/background.jpg');
+  font-family:"droid sans", "calibri", "arial", sans-serif;
+  overflow:hidden;
+  color:white;
+}
+#cursor {
+  position:absolute;
+  z-index:10000000;
+  display:none;
+  opacity:0.8;
+}
+#cursor.robber {
+  display:block;
+  width: 74px; height: 72px;
+  background-image:url('pics/numbers.png');
+  background-position: -0px -640px;
+  background-repeat: none;
+}
+#cursor.road {
+  display:block;
+  width:60px;height:14px;
+  background-image:none;
+  -moz-transform:rotate(-60deg);
+  -webkit-transform:rotate(-60deg);
+  -o-transform:rotate(-60deg);  
+}
+#cursor.settlement {
+  display:block;
+  width:55px;height:50px;
+  background-image:url('pics/settlements.png');
+  background-repeat:no-repeat;
+}
+#cursor.city {
+  display:block;
+  width:67px;height:71px;
+  background-image:url('pics/cities.png');
+  background-repeat:no-repeat;
+}
+
+#boardcontainer {
+  position:relative;
+  top:-140px;
+}
+.tile {
+  position:absolute;
+  width:188px;
+  height:158px;
+  z-index:5;
+  background-image:url('pics/tiles.png');
+  background-repeat:no-repeat;
+}
+.tile.sea { background-position: 0 0; }
+.tile.wood { background-position: 0 -168px; }
+.tile.wheat { background-position: 0 -336px; }
+.tile.sheep { background-position: 0 -504px; }
+.tile.brick { background-position: 0 -672px; }
+.tile.ore { background-position: 0 -840px; }
+.tile.desert { background-position: 0 -1008px; }
+
+.tile .debug {
+  position:absolute;
+  left:0;
+  top:10%;
+  width:100%;
+  text-align:center;
+  color:white;
+  text-shadow:black 1px 1px 2px;
+  font-weight:bold;
+}
+
+#board .robber {
+  width: 74px; height: 72px;
+  background-image:url('pics/numbers.png');
+  background-position: -0px -640px;
+  background-repeat: none;
+  position:absolute;
+  bottom:0;
+  left:-10px;
+}
+
+.number {
+  margin:50px auto;
+  z-index:7;
+  width:54px;
+  height:54px;
+  background-image:url('pics/numbers.png');
+  background-repeat:no-repeat;
+  position:relative;
+}
+.n0 { background-image:none; }
+.n2 { background-position: 0 0; }
+.n3 { background-position: 0 -64px; }
+.n4 { background-position: 0 -128px; }
+.n5 { background-position: 0 -192px; }
+.n6 { background-position: 0 -256px; }
+.n8 { background-position: 0 -320px; }
+.n9 { background-position: 0 -384px; }
+.n10 { background-position: 0 -448px; }
+.n11 { background-position: 0 -512px; }
+.n12 { background-position: 0 -576px; }
+
+#board .road {
+  width:100%;height:14px;
+  position:absolute;
+  top:15%;
+  left:0;
+  z-index:25;
+}
+#cursor.player1.road, #board .player1.road, #buttonRoad.player1 { background-color:#ce0024; }
+#cursor.player2.road, #board .player2.road, #buttonRoad.player2 { background-color:#008cce; }
+#cursor.player3.road, #board .player3.road, #buttonRoad.player3 { background-color:#FFFFFF; }
+#cursor.player4.road, #board .player4.road, #buttonRoad.player4 { background-color:#e58700; }
+#cursor.player5.road, #board .player5.road, #buttonRoad.player5 { background-color:#2daf00; }
+#cursor.player6.road, #board .player6.road, #buttonRoad.player6 { background-color:#676767; }
+#cursor.player7.road, #board .player7.road, #buttonRoad.player7 { background-color:#724000; }
+.edge {
+  position:absolute;
+  z-index:20;
+  width:60px;
+  height:20px;
+}
+.edge .debug {
+  text-align:center;
+  font-size:12px;
+  width:100%;
+  height:100%;
+  background-color:rgba(255,255,255,0.3);
+}
+#board .settlement {
+  width:55px;height:50px;
+  position:absolute;
+  bottom:-5px;
+  left:-12px;
+  background-image:url('pics/settlements.png');
+  background-repeat:no-repeat;
+}
+#cursor.settlement.player1, #board .settlement.player1, #buttonSettlement.player1 { background-position: 0 0; }
+#cursor.settlement.player2, #board .settlement.player2, #buttonSettlement.player2 { background-position: 0 -60px; }
+#cursor.settlement.player3, #board .settlement.player3, #buttonSettlement.player3 { background-position: 0 -120px; }
+#cursor.settlement.player4, #board .settlement.player4, #buttonSettlement.player4 { background-position: 0 -180px; }
+#cursor.settlement.player5, #board .settlement.player5, #buttonSettlement.player5 { background-position: 0 -240px; }
+#cursor.settlement.player6, #board .settlement.player6, #buttonSettlement.player6 { background-position: 0 -300px; } 
+#cursor.settlement.player7, #board .settlement.player7, #buttonSettlement.player7 { background-position: 0 -360px; }
+
+#board .city {
+  width:67px;height:71px;
+  position:absolute;
+  bottom:-5px;
+  left:-18px;
+  background-image:url('pics/cities.png');
+  background-repeat:no-repeat;
+}
+#cursor.city.player1, #board .city.player1, #buttonCity.player1 { background-position: 0 0; }
+#cursor.city.player2, #board .city.player2, #buttonCity.player2 { background-position: 0 -81px; }
+#cursor.city.player3, #board .city.player3, #buttonCity.player3 { background-position: 0 -162px; }
+#cursor.city.player4, #board .city.player4, #buttonCity.player4 { background-position: 0 -243px; }
+#cursor.city.player5, #board .city.player5, #buttonCity.player5 { background-position: 0 -324px; }
+#cursor.city.player6, #board .city.player6, #buttonCity.player6 { background-position: 0 -405px; }
+#cursor.city.player7, #board .city.player7, #buttonCity.player7 { background-position: 0 -486px; }
+
+.intersection {
+  width:30px;height:30px;
+  position:absolute;
+  z-index:40;
+} 
+.intersection .debug {
+  width:100%;height:100%;
+  background-color:rgba(255,255,255,0.3);
+  font-size:10px;
+  text-align:center;
+  line-height:30px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.rotate1 {
+  -moz-transform:rotate(60deg);
+  -webkit-transform:rotate(60deg);
+  -o-transform:rotate(60deg);  
+}
+.rotate2 {
+  -moz-transform:rotate(-60deg);
+  -webkit-transform:rotate(-60deg);
+  -o-transform:rotate(-60deg);  
+}
+
+#bottompanel {
+  position:fixed;
+  z-index:100000;
+  width:100%;
+  height:80px;
+  bottom:0;
+  left:0;
+  background-color:rgba(0,0,0,0.7);
+  color:white;
+}
+#bottompanelcover {
+  position:fixed;
+  width:100%;
+  height:80px;
+  bottom:0;
+  left:0;
+}
+/*
+#playerspanel .player1 { border:4px solid rgba(150,0,10,0.8); }
+#playerspanel .player2 { border:4px solid rgba(0,85,150,0.8); }
+#playerspanel .player3 { border:4px solid rgba(167,167,167,0.8); }
+#playerspanel .player4 { border:4px solid rgba(196,195,0,0.8); }
+#playerspanel .player5 { border:4px solid rgba(18,127,0,0.8); }
+#playerspanel .player6 { border:4px solid rgba(75,75,75,0.8); }
+#playerspanel .player7 { border:4px solid rgba(114,64,0,0.8); }
+*/
+#playerspanel {
+  position:fixed;
+  right:10px;top:10px;
+  width:270px;height:0;
+  z-index:10000;
+}
+#playerspanel > * {
+  width:100%;
+  height:100px;
+  margin-bottom:8px;
+  background-color:rgba(0,0,0,0.7);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+#playerspanel .background {
+  width:100%;
+  height:100px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+#playerspanel > .player1 { -moz-box-shadow:0 0 10px rgba(255,65,72,0.8); -webkit-box-shadow:0 0 10px rgba(255,65,72,0.8); box-shadow: 0 0 10px rgba(255,65,72,0.8); }
+#playerspanel > .player2 { -moz-box-shadow:0 0 10px rgba(65,168,255,0.8); -webkit-box-shadow:0 0 10px rgba(65,168,255,0.8); box-shadow: 0 0 10px rgba(65,168,255,0.8); }
+#playerspanel > .player3 { -moz-box-shadow:0 0 10px rgba(248,248,248,0.8); -webkit-box-shadow:0 0 10px rgba(248,248,248,0.8); box-shadow: 0 0 10px rgba(248,248,248,0.8); }
+#playerspanel > .player4 { -moz-box-shadow:0 0 10px rgba(255,202,65,0.8); -webkit-box-shadow:0 0 10px rgba(255,202,65,0.8); box-shadow: 0 0 10px rgba(255,202,65,0.8); }
+#playerspanel > .player5 { -moz-box-shadow:0 0 10px rgba(73,217,55,0.8); -webkit-box-shadow:0 0 10px rgba(73,217,55,0.8); box-shadow: 0 0 10px rgba(73,217,55,0.8); }
+#playerspanel > .player6 { -moz-box-shadow:0 0 10px rgba(140,140,140,0.8); -webkit-box-shadow:0 0 10px rgba(140,140,140,0.8); box-shadow: 0 0 10px rgba(140,140,140,0.8); }
+#playerspanel > .player7 { -moz-box-shadow:0 0 10px rgba(255,152,65,0.8); -webkit-box-shadow:0 0 10px rgba(255,152,65,0.8); box-shadow: 0 0 10px rgba(255,152,65,0.8); }
+
+.player1 > .background { background-color: rgba(150,0,10,0.2); }
+.player2 > .background { background-color: rgba(0,85,150,0.2); }
+.player3 > .background { background-color: rgba(167,167,167,0.2); }
+.player4 > .background { background-color: rgba(196,195,0,0.2); }
+.player5 > .background { background-color: rgba(18,127,0,0.2); }
+.player6 > .background { background-color: rgba(75,75,75,0.2); }
+.player7 > .background { background-color: rgba(114,64,0,0.2); }
+
+
+#bottompanelcover.player1 { background-color:rgba(150,0,10,0.4); }
+#bottompanelcover.player2 { background-color:rgba(0,85,150,0.4); }
+#bottompanelcover.player3 { background-color:rgba(167,167,167,0.4); }
+#bottompanelcover.player4 { background-color:rgba(196,195,0,0.4); }
+#bottompanelcover.player5 { background-color:rgba(18,127,0,0.4); }
+#bottompanelcover.player6 { background-color:rgba(75,75,75,0.4); }
+#bottompanelcover.player7 { background-color:rgba(114,64,0,0.4); }
+#bottompanel > * {
+  position:absolute;
+}
+
+#title, #version {
+  font-weight:bold;
+  position:fixed;
+  left:30px;
+  z-index:10000;
+}
+#title {
+  font-size:30px;
+  top:20px;
+  color:rgba(255,255,255,0.8);
+}
+#version {
+  font-size:14px;
+  top:55px;
+  color:rgba(255,255,255,0.4);
+}
+#console {
+  position:fixed;
+  left:30px;
+  top:74px;
+  color:white;
+  font-size:12px;
+  width:360px;
+  height:80px;
+  overflow:visible;
+  z-index:1000;
+}
+#diceButton {
+  position:absolute;
+  width:100px;
+  height:100px;
+  left:435px;
+  top:10px;
+}
+#diceButton > * {
+  position:absolute;
+  width:31px;
+  height:31px;
+  overflow:hidden;
+  background-image:url('pics/dice.png');
+  color:rgba(0,0,0,0);
+}
+#dice {
+  position:fixed;
+  width:100px;
+  height:100px;
+  left:30px;
+  bottom:370px;
+}
+#dice > * {
+  position:absolute;
+  width:31px;
+  height:31px;
+  overflow:hidden;
+  background-image:url('pics/dice.png');
+  color:rgba(0,0,0,0);
+  z-index:20000;
+}
+.die1 { background-position:0 0; }
+.die2 { background-position:0 -31px; }
+.die3 { background-position:0 -62px; }
+.die4 { background-position:0 -93px; }
+.die5 { background-position:0 -124px; }
+.die6 { background-position:0 -155px; }
+#buttons {
+  left:258px;
+  top:-5px;
+  width:450px;
+  height:72px;
+}
+#buttons > * {
+  position:relative;
+  float:left;
+  margin-left:8px;
+}
+
+.button {
+  position:relative;
+  float:left;
+  width:71px;
+  height:71px;
+  margin-left:10px;
+  background-image:url('pics/buttons.png');
+}
+
+.button.road { background-position:0 0; }
+.button.road.highlight { background-position:0 213px; }
+.button.road.highlight:hover { background-position:0 71px; }
+.button.road:hover { background-position:0 284px; }
+.button.road.disabled { background-position:0 142px; }
+.button.development { background-position:71px 0; }
+.button.development.highlight { background-position:71px 213px; }
+.button.development.highlight:hover { background-position:71px 71px; }
+.button.development:hover { background-position:71px 284px; }
+.button.development.disabled { background-position:71px 142px; }
+.button.city { background-position:142px 0; }
+.button.city.highlight { background-position:142px 213px; }
+.button.city.highlight:hover { background-position:142px 71px; }
+.button.city:hover { background-position:142px 284px; }
+.button.city.disabled { background-position:142px 142px; }
+.button.settlement { background-position:213px 0; }
+.button.settlement.highlight { background-position:213px 213px; }
+.button.settlement.highlight:hover { background-position:213px 71px; }
+.button.settlement:hover { background-position:213px 284px; }
+.button.settlement.disabled { background-position:213px 142px; }
+.button .numberLeft {
+  position:absolute;
+  top:6px;right:8px;
+  width:20px;height:20px;
+  text-align:right;
+  color:rgba(0,0,0,0.8);
+  font-weight:bold;
+  font-size:12px;
+}
+
+.smallButton {
+  width:31px;height:24px;
+  background-image:url('pics/smallbuttons.png');
+}
+.smallButton.accept { background-position: 0px 0px; }
+.smallButton.cancel { background-position: -31px 0px; }
+.smallButton.ore { background-position: -62px 0px; }
+.smallButton.wheat { background-position: -93px 0px; }
+.smallButton.wood { background-position: -124px 0px; }
+.smallButton.brick { background-position: -155px 0px; }
+.smallButton.sheep { background-position: -186px 0px; }
+.smallButton.trade { background-position: -217px 0px; }
+.smallButton.bank { background-position: -248px 0px; }
+.smallButton.cardOut { background-position: -279px 0px; }
+.smallButton.cardSwap { background-position: -310px 0px; }
+.smallButton.cardIn { background-position: -341px 0px; }
+.smallButton.left { background-position: -372px 0px; }
+.smallButton.right { background-position: -403px 0px; }
+.smallButton.help { background-position: -434px 0px; }
+.smallButton.zero { background-position: -465px 0px; }
+.smallButton.plus { background-position: -496px 0px; }
+.smallButton.delete { background-position: -527px 0px; }
+.smallButton.end { background-position: -558px 0px; }
+.smallButton.accept:hover { background-position: 0px -24px; }
+.smallButton.cancel:hover { background-position: -31px -24px; }
+.smallButton.ore:hover { background-position: -62px -24px; }
+.smallButton.wheat:hover { background-position: -93px -24px; }
+.smallButton.wood:hover { background-position: -124px -24px; }
+.smallButton.brick:hover { background-position: -155px -24px; }
+.smallButton.sheep:hover { background-position: -186px -24px; }
+.smallButton.trade:hover { background-position: -217px -24px; }
+.smallButton.bank:hover { background-position: -248px -24px; }
+.smallButton.cardOut:hover { background-position: -279px -24px; }
+.smallButton.cardSwap:hover { background-position: -310px -24px; }
+.smallButton.cardIn:hover { background-position: -341px -24px; }
+.smallButton.left:hover { background-position: -372px -24px; }
+.smallButton.right:hover { background-position: -403px -24px; }
+.smallButton.help:hover { background-position: -434px -24px; }
+.smallButton.zero:hover { background-position: -465px -24px; }
+.smallButton.plus:hover { background-position: -496px -24px; }
+.smallButton.delete:hover { background-position: -527px -24px; }
+.smallButton.end:hover { background-position: -558px -24px; }
+.smallButton.accept.highlight { background-position: 0px -48px; }
+.smallButton.cancel.highlight { background-position: -31px -48px; }
+.smallButton.ore.highlight { background-position: -62px -48px; }
+.smallButton.wheat.highlight { background-position: -93px -48px; }
+.smallButton.wood.highlight { background-position: -124px -48px; }
+.smallButton.brick.highlight { background-position: -155px -48px; }
+.smallButton.sheep.highlight { background-position: -186px -48px; }
+.smallButton.trade.highlight { background-position: -217px -48px; }
+.smallButton.bank.highlight { background-position: -248px -48px; }
+.smallButton.cardOut.highlight { background-position: -279px -48px; }
+.smallButton.cardSwap.highlight { background-position: -310px -48px; }
+.smallButton.cardIn.highlight { background-position: -341px -48px; }
+.smallButton.left.highlight { background-position: -372px -48px; }
+.smallButton.right.highlight { background-position: -403px -48px; }
+.smallButton.help.highlight { background-position: -434px -48px; }
+.smallButton.zero.highlight { background-position: -465px -48px; }
+.smallButton.plus.highlight { background-position: -496px -48px; }
+.smallButton.delete.highlight { background-position: -527px -48px; }
+.smallButton.end.highlight { background-position: -558px -48px; }
+.smallButton.accept.disabled { background-position: 0px -72px; }
+.smallButton.cancel.disabled { background-position: -31px -72px; }
+.smallButton.ore.disabled { background-position: -62px -72px; }
+.smallButton.wheat.disabled { background-position: -93px -72px; }
+.smallButton.wood.disabled { background-position: -124px -72px; }
+.smallButton.brick.disabled { background-position: -155px -72px; }
+.smallButton.sheep.disabled { background-position: -186px -72px; }
+.smallButton.trade.disabled { background-position: -217px -72px; }
+.smallButton.bank.disabled { background-position: -248px -72px; }
+.smallButton.cardOut.disabled { background-position: -279px -72px; }
+.smallButton.cardSwap.disabled { background-position: -310px -72px; }
+.smallButton.cardIn.disabled { background-position: -341px -72px; }
+.smallButton.left.disabled { background-position: -372px -72px; }
+.smallButton.right.disabled { background-position: -403px -72px; }
+.smallButton.help.disabled { background-position: -434px -72px; }
+.smallButton.zero.disabled { background-position: -465px -72px; }
+.smallButton.plus.disabled { background-position: -496px -72px; }
+.smallButton.delete.disabled { background-position: -527px -72px; }
+.smallButton.end.disabled { background-position: -558px -72px; }
+.smallButton.accept.highlight:hover { background-position: 0px -96px; }
+.smallButton.cancel.highlight:hover { background-position: -31px -96px; }
+.smallButton.ore.highlight:hover { background-position: -62px -96px; }
+.smallButton.wheat.highlight:hover { background-position: -93px -96px; }
+.smallButton.wood.highlight:hover { background-position: -124px -96px; }
+.smallButton.brick.highlight:hover { background-position: -155px -96px; }
+.smallButton.sheep.highlight:hover { background-position: -186px -96px; }
+.smallButton.trade.highlight:hover { background-position: -217px -96px; }
+.smallButton.bank.highlight:hover { background-position: -248px -96px; }
+.smallButton.cardOut.highlight:hover { background-position: -279px -96px; }
+.smallButton.cardSwap.highlight:hover { background-position: -310px -96px; }
+.smallButton.cardIn.highlight:hover { background-position: -341px -96px; }
+.smallButton.left.highlight:hover { background-position: -372px -96px; }
+.smallButton.right.highlight:hover { background-position: -403px -96px; }
+.smallButton.help.highlight:hover { background-position: -434px -96px; }
+.smallButton.zero.highlight:hover { background-position: -465px -96px; }
+.smallButton.plus.highlight:hover { background-position: -496px -96px; }
+.smallButton.delete.highlight:hover { background-position: -527px -96px; }
+.smallButton.end.highlight:hover { background-position: -558px -96px; }
+#bottompanel .smallButton {
+  margin-top:20px;
+}
+#bottompanel .smallButton.trade {
+  margin-right:20px;
+}
+
+.icon {
+  width:40px;height:40px;
+  background-image:url('pics/icons.png');
+}
+.icon.ore { background-position:0 0; }
+.icon.wheat { background-position:0 -40px; }
+.icon.wood { background-position:0 -80px; }
+.icon.brick { background-position:0 -120px; }
+.icon.sheep { background-position:0 -160px; }
+#tradeButtons {
+  width:240px;height:40px;
+  margin-top:3px;
+}
+#tradeButtons .smallButton {
+  float:left;
+  margin-right:3px;
+  margin-left:14px;
+}
+#tradeButtons .cancel, #tradeButtons .cardSwap, #tradeButtons .bank { position:absolute;right:0; }
+#tradeButtons .cancel { top:3px; }
+#tradeButtons .cardSwap { top:36px; }
+#tradeButtons .bank { top:62px; }
+
+#tradeCards {
+  position:absolute;
+  width:240px;height:0;
+  top:36px;
+  left:5px;
+}
+
+#trade {
+  position:fixed;
+  z-index:100000;
+  width:300px;height:89px;
+  bottom:300px;left:15px;
+  background-color:rgba(0,0,0,0.6);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  display:none;
+}
+#cards {
+  left:20px;
+  top:10px;
+  width:240px;
+  height:50px;
+}
+#cardsSelected {
+  left:20px;
+  top:-150px;
+  width:270px;
+  height:80px;
+}
+.cardStack {
+  width:36px;
+  height:50px;
+  float:left;
+  margin:0 6px;
+}
+.card {
+  width:36px;
+  height:50px;
+  background-image:url('pics/cards.png');
+  margin-bottom:-45px;
+}
+#cards .card { margin-bottom:-57px; }
+#cardsSelected .card { margin-bottom:-55px; }
+#cards .card.bottom {
+  margin-bottom:-50px;
+  opacity:.1;
+}
+
+.card.ore { background-position:0 0; }
+.card.sheep { background-position:0 50px; }
+.card.brick { background-position:0 100px; }
+.card.wood { background-position:0 150px; }
+.card.wheat { background-position:0 200px; }
+
+.counter {
+  font-size:13px;
+  font-weight:bold;
+  margin:3px;
+  color:rgba(255,255,255,0.8);
+  background-color:rgba(0,0,0,0.2);
+  padding: 1px;
+  text-align:center;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+
+#dragHandle {
+  position:fixed;
+  z-index:-20;
+  width:100%;height:100%;
+  top:0;left:0;
+}
+
+.debug { display:none; }
+</style>
+</head>
+<body>
+<div id="boardcontainer">
+  <div id="title">OpenCOW</div>
+  <div id="version">v0.0.0</div>
+  <div id="console"></div>
+  <div id="dragHandle">&nbsp;</div>
+  <div id="board"></div>
+</div>
+<div id="bottompanel">
+  <div id="bottompanelcover"></div>
+  <div id="buttons"></div>
+  <div id="cardsSelected"></div>
+  <div id="cards"></div>
+</div>
+<div id="trade">
+  <div id="tradeButtons"></div>
+  <div id="tradeCards"></div>
+  <div id="tradeBackground"></div>
+</div>
+<div id="playerspanel"> 
+  <div class="player1"><div class="background">player1</div></div>
+  <div class="player2"><div class="background">player2</div></div>
+  <div class="player3"><div class="background">player3</div></div>
+</div>
+<div id="cursor">&nbsp;</div>
+<script>
+var turnCounter = 0;
+var totalPlayers = 4;
+var thisPlayer = 0;
+//var cards = { 'ore': 7, 'wheat':8, 'wood':6, 'brick':6, 'sheep':4 };
+var cards = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+var cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+var tradeCardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+var oldrobber = '';
+var freeRoad = 0;
+var freeSettlement = 0;
+var freeCity = 0;
+var pieces = {roads:15,settlements:5,cities:4,developments:['knight','knight']};
+var moverobber = 0;
+
+function currentMode() { //returns the current mode (initializing/start/play/finished)
+  if (turnCounter == -100) { return 'finished'; }
+  if (turnCounter <= 0) { return 'initializing'; }
+  else if (turnCounter <= totalPlayers*2) { return 'start'; }
+  else { return 'play'; }
+}
+
+function currentPlayer() { //returns the number of the current player.
+  if (turnCounter <= 0) { return 0; }
+  else if (turnCounter <= totalPlayers) { return turnCounter; }
+  else if (turnCounter <= totalPlayers*2) { return eval((turnCounter-(totalPlayers*2)-1)*-1); }
+  else { return eval((turnCounter-1)%totalPlayers+1); }
+}
+
+function startTurn(counter) {
+  console('debug','Turn '+counter+' begins...');
+  turnCounter = counter;
+  $('#dice').empty().remove();
+  if (currentPlayer() == thisPlayer) {
+    if (currentMode() == 'start') {
+      freeSettlement = 1;
+      freeRoad = 1;
+    }
+    if (currentMode() == 'play') {
+      refreshButtons();
+      makeDiceButton();
+    }
+  }
+  refreshCards();
+}
+
+function endTurn() {
+  var x = 1;
+  if (moverobber == 1) {  x = 0; }
+  if (freeRoad > 0) {  x = 0; console('warning','You need to build a road before ending your turn.'); }
+  if (freeSettlement > 0) {  x = 0; console('warning','You need to build a settlement before ending your turn.'); }
+  if (freeCity > 0) {  x = 0; console('warning','You need to build a city before ending your turn.'); }
+  if (x) {
+    cancelTrade();
+    $('#cursor').removeClass();
+    cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 }; refreshCards();
+    tradeCardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 }; refreshTradeCards();
+    startTurn(turnCounter+1);
+  }
+}
+
+function console(type,text) {
+  $('<div class="'+type+'">'+text+'</div>').hide().prependTo('#console').slideDown(300).delay(8000).fadeOut(2000,'linear');
+}
+
+function payout(number) {
+if (number == 7) {
+  if (currentPlayer() == thisPlayer) { moveRobber(); }
+} else {
+  $('.number').each(function() {
+    if ($(this).hasClass('n'+number)) {
+      var id = $(this).parent().attr('id').split('_');
+      var x = Number(id[1]);
+      var y = Number(id[2]);
+      var positions = [[x-1,y],[x-1,y-2],[x-1,y+2],[x+1,y],[x+1,y-2],[x+1,y+2]]
+      for(x in positions) {
+        var settlement = $('#settlement_'+positions[x][0]+'_'+positions[x][1]);
+        var city = $('#city_'+positions[x][0]+'_'+positions[x][1]);
+        var add = 0;
+        var playa = 0;
+        if (settlement.length) { add = 1; var playa = settlement.hasClass('player'+thisPlayer); }
+        if (city.length) { add = 2; var playa = city.hasClass('player'+thisPlayer); }
+        if ($(this).children('.robber').length) { add = 0; }
+        if ((add)&&(playa)) {
+          if ($(this).parent().hasClass('ore')) { cards.ore += add; }
+          if ($(this).parent().hasClass('wheat')) { cards.wheat += add; }
+          if ($(this).parent().hasClass('brick')) { cards.brick += add; }
+          if ($(this).parent().hasClass('wood')) { cards.wood += add; }
+          if ($(this).parent().hasClass('sheep')) { cards.sheep += add; }
+        }
+      }
+    }
+  });
+  refreshCards();
+}
+}
+
+/*
+function stuffAroundTile(x,y) {  //returns array: [[x,y,'city'],[x,y,'settlement']]
+  var positions = [[x-1,y],[x-1,y-2],[x-1,y+2],[x+1,y],[x+1,y-2],[x+1,y+2]]
+  var result = [];
+  for(x in positions) {
+    if ($('#settlement_'+positions[x][0]+'_'+positions[x][1]).length) {  result.push([positions[x][0],positions[x][1],'settlement']);  }
+    if ($('#city_'+positions[x][0]+'_'+positions[x][1]).length) {  result.push([positions[x][0],positions[x][1],'city']);  }
+  }
+  return result;
+}
+*/
+
+function rule100(x,y,player,override) {  //Settlements must be connected to a player-owned road
+  var a = $('#road_'+x+'_'+eval(y-1));
+  var b = $('#road_'+x+'_'+eval(y+1));
+  var c = $('#road_'+eval(x-1)+'_'+y);
+  var d = $('#road_'+eval(x+1)+'_'+y);
+  if ((a.hasClass('player'+player))||(b.hasClass('player'+player))||(c.hasClass('player'+player))||(d.hasClass('player'+player))) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function rule200(x,y,player) {  //Settlements must be built at least 2 roads away from all other settlements/cities
+  var a = $('#settlement_'+x+'_'+eval(y-2)).length;
+  var b = $('#settlement_'+x+'_'+eval(y+2)).length;
+  if (y%4==0) {
+    var c = $('#settlement_'+eval(x-2)+'_'+y).length;
+  } else {
+    var c = $('#settlement_'+eval(x+2)+'_'+y).length;
+  }
+  var d = $('#city_'+x+'_'+eval(y-2)).length;
+  var e = $('#city_'+x+'_'+eval(y+2)).length;
+  if (y%4==0) {
+    var f = $('#city_'+eval(x-2)+'_'+y).length;
+  } else {
+    var f = $('#city_'+eval(x+2)+'_'+y).length;
+  }
+  if ((a)||(b)||(c)||(d)||(e)||(f)) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+function rule300(x,y,player) {  //Roads must be connected to a road, city or settlement owned by the player [300]
+  //Find all the roads around us...
+  var a = $('#road_'+eval(x)+'_'+eval(y-2)).hasClass('player'+player);   //x,y-1
+  var b = $('#road_'+eval(x)+'_'+eval(y+2)).hasClass('player'+player);   //x,y+1
+  var c = $('#road_'+eval(x-1)+'_'+eval(y-1)).hasClass('player'+player); //x,y-1  x-1,y
+  var d = $('#road_'+eval(x-1)+'_'+eval(y+1)).hasClass('player'+player); //x,y+1  x-1,y
+  var e = $('#road_'+eval(x+1)+'_'+eval(y-1)).hasClass('player'+player); //x,y-1  x+1,y
+  var f = $('#road_'+eval(x+1)+'_'+eval(y+1)).hasClass('player'+player); //x+1,y  x,y+1
+  //Check for settlements in the way...
+  //x,y-1
+  if ($('#settlement_'+x+'_'+eval(y-1)).length) {  if (!$('#settlement_'+x+'_'+eval(y-1)).hasClass('player'+player)) {
+    a = 0; c = 0; e = 0;
+  } }
+  if ($('#city_'+x+'_'+eval(y-1)).length) {  if (!($('#city_'+x+'_'+eval(y-1)).hasClass('player'+player))) {
+    a = 0; c = 0; e = 0;
+  } }
+
+  //x,y+1
+  if ($('#settlement_'+x+'_'+eval(y+1)).length) {  if (!($('#settlement_'+x+'_'+eval(y+1)).hasClass('player'+player))) {
+    b = 0; d = 0; f = 0;
+  } }
+  if ($('#city_'+x+'_'+eval(y+1)).length) {  if (!($('#city_'+x+'_'+eval(y+1)).hasClass('player'+player))) {
+    b = 0; d = 0; f = 0;
+  } }
+
+  //x-1,y
+  if ($('#settlement_'+eval(x-1)+'_'+y).length) {  if (!($('#settlement_'+eval(x-1)+'_'+y).hasClass('player'+player))) {
+    c = 0; d = 0;
+  } }
+  if ($('#city_'+eval(x-1)+'_'+y).length) {  if (!($('#city_'+eval(x-1)+'_'+y).hasClass('player'+player))) {
+    c = 0; d = 0;
+  } }
+
+  //x+1,y
+  if ($('#settlement_'+eval(x+1)+'_'+y).length) {  if (!($('#settlement_'+eval(x+1)+'_'+y).hasClass('player'+player))) {
+    e = 0; f = 0;
+  } }
+  if ($('#city_'+eval(x+1)+'_'+y).length) {  if (!($('#city_'+eval(x+1)+'_'+y).hasClass('player'+player))) {
+    e = 0; f = 0;
+  } }
+
+//find all the settlements around us...
+  var g = $('#settlement_'+eval(x)+'_'+eval(y-1)).hasClass('player'+player);
+  var h = $('#settlement_'+eval(x)+'_'+eval(y+1)).hasClass('player'+player);
+  var i = $('#settlement_'+eval(x-1)+'_'+eval(y)).hasClass('player'+player);
+  var j = $('#settlement_'+eval(x+1)+'_'+eval(y)).hasClass('player'+player);
+//find all the cities around us...
+  var k = $('#city_'+eval(x)+'_'+eval(y-1)).hasClass('player'+player);
+  var l = $('#city_'+eval(x)+'_'+eval(y+1)).hasClass('player'+player);
+  var m = $('#city_'+eval(x-1)+'_'+eval(y)).hasClass('player'+player);
+  var n = $('#city_'+eval(x+1)+'_'+eval(y)).hasClass('player'+player);
+
+  if ((a)||(b)||(c)||(d)||(e)||(f)||(g)||(h)||(i)||(j)||(k)||(l)||(m)||(n)) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function payoutResources(x,y) { //x,y = the location of a city/settlement to payout
+  var positions = [[x-1,y-2],[x-1,y+2],[x+1,y],[x-1,y],[x+1,y-2],[x+1,y+2]];
+  var tileDiv;
+  for(i in positions) {
+    tileDiv = $('#tile_'+positions[i][0]+'_'+positions[i][1]);
+    if (tileDiv.length) { //if there's a tile here...
+      if (tileDiv.hasClass('ore')) { cards.ore += 1; }
+      if (tileDiv.hasClass('wheat')) { cards.wheat += 1; }
+      if (tileDiv.hasClass('brick')) { cards.brick += 1; }
+      if (tileDiv.hasClass('wood')) { cards.wood += 1; }
+      if (tileDiv.hasClass('sheep')) { cards.sheep += 1; }
+    }
+  }
+  refreshCards();
+}
+
+function buttonSettlement() {
+if ($('#cursor').hasClass('settlement')) { cancelBuild(); }
+else {
+cancelTrade();
+if (((cards.wheat >=1)&&(cards.wood >=1)&&(cards.brick >=1)&&(cards.sheep >=1))||freeSettlement) {
+  $('#board *').unbind('click');
+  $('#cursor').removeClass().addClass('settlement').addClass('player'+thisPlayer); //add the settlement to the cursor
+  if (freeSettlement<1) {
+    cardsSelected = { 'ore': 0, 'wheat':1, 'wood':1, 'brick':1, 'sheep':1 }; refreshCards();
+  }
+  //$('.button').removeClass('highlight');
+  //$('.button.settlement').addClass('highlight');
+  refreshButtons();
+  $('.intersection').each(function () {
+      $(this).click(function () {
+        var xy = $(this).attr('id').slice(13).split('_');
+        var x = Number(xy[0]);
+        var y = Number(xy[1]);
+        if (buildSettlement(x,y,thisPlayer,freeSettlement)) {
+          $('#board *').unbind('click');
+          if (freeSettlement<1) {
+            cards.wheat -= 1;
+            cards.wood -= 1;
+            cards.brick -= 1;
+            cards.sheep -= 1;
+            cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 }; refreshCards();
+          } else { freeSettlement -= 1; }
+          if ((turnCounter > totalPlayers)&&(turnCounter <= totalPlayers*2)) { payoutResources(x,y); }  //payout resources on the second round
+          $('#cursor').removeClass(); //remove the settlement from the cursor
+          refreshButtons();
+        }
+      });
+  });
+} else {
+  console('warning','Not enough resources.');
+}
+}
+}
+
+function buildSettlement(x,y,player,override) {
+  var id = x+'_'+y;
+  //Settlements must be connected to a player-owned road **except at the start** [100]
+  if ((rule100(x,y,player))||(override)) {
+    //Settlements must be built 2 at least roads away from all other settlements/cities [200]
+    if (rule200(x,y,player)) {
+      //Settlements cannot be built on top of other cities or settlements
+      if (($('#settlement_'+id).length == 0)&&($('#city_'+id).length == 0)) {
+        $('<div id="settlement_'+id+'" class="settlement player'+player+'">&nbsp;</div>')
+        .appendTo('#intersection_'+id);  //Build the settlement
+        console('info','Player '+player+' built a settlement. <span class="debug">settlement_'+id+'</span>');
+        return 1;
+      } else {
+        console('warning','<span class="debug">Player '+player+': cannot build settlement '+id+' </span>Settlements cannot be built on top of other cities or settlements.');
+        return 0;
+      }
+    } else {
+      console('warning','<span class="debug">Player '+player+': cannot build settlement '+id+' </span>Settlements must be at least 2 roads away from other settlements or cities.');
+      return 0;
+    }
+  } else {
+    console('warning','<span class="debug">Player '+player+': cannot build settlement '+id+' </span>Settlements must be connected to a player-owned road.');
+    return 0;
+  }
+}
+
+function buttonCity() {
+if ($('#cursor').hasClass('city')) { cancelBuild(); }
+else {
+cancelTrade();
+if ((cards.ore >=3)&&(cards.wheat >=2)) {
+  $('#board *').unbind('click');
+  $('#cursor').removeClass().addClass('city').addClass('player'+thisPlayer); //add the city to the cursor
+  if (freeRoad<1) {
+    cardsSelected = { 'ore': 3, 'wheat':2, 'wood':0, 'brick':0, 'sheep':0 }; refreshCards();
+  }
+  //$('.button').removeClass('highlight');
+  //$('.button.city').addClass('highlight');
+  refreshButtons();
+  $('.intersection').each(function () {
+      $(this).click(function () {
+        var xy = $(this).attr('id').slice(13).split('_');
+        var x = Number(xy[0]);
+        var y = Number(xy[1]);
+        if (buildCity(x,y,thisPlayer)) {
+          $('#board *').unbind('click');
+          if (freeRoad<1) {
+            cards.ore -= 3;
+            cards.wheat -= 2;
+            cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 }; refreshCards();
+          } else { freeRoad -= 1; }
+          $('#cursor').removeClass();  //remove the city from the cursor
+          refreshButtons();
+        }
+      });
+  });
+} else {
+  console('warning','Not enough resources.');
+}
+}
+}
+function buildCity(x,y,player) {
+  var id = x+'_'+y;
+  //Cities must be built on top of a settlement belonging to the player
+  if (($('#settlement_'+id).length) && ($('#settlement_'+id).hasClass('player'+player))) {
+    $('#settlement_'+id).remove();  //Remove the old settlement
+    $('<div id="city_'+id+'" class="city player'+player+'">&nbsp;</div>')
+    .appendTo('#intersection_'+id);  //Build the city
+    console('info','Player '+player+' built a city. <span class="debug">settlement_'+id+'</span>');
+    return 1;
+  } else {
+    console('warning','<span class="debug">Player '+player+': cannot build city '+id+' </span>Cities must be built on top of a settlement belonging to the player');
+    return 0;
+  }
+}
+
+function buttonRoad() {
+if ($('#cursor').hasClass('road')) { cancelBuild(); }
+else {
+cancelTrade();
+if (((cards.wood >=1)&&(cards.brick >=1))||freeRoad) {
+  $('#board *').unbind('click');
+  $('#cursor').removeClass().addClass('road').addClass('player'+thisPlayer); //add the road to the cursor
+  if (freeRoad<1) {
+    cardsSelected = { 'ore': 0, 'wheat':0, 'wood':1, 'brick':1, 'sheep':0 }; refreshCards();
+  }
+  refreshButtons();
+  $('.edge').each(function () {
+    if (!($(this).children('.road').length)) {
+      $(this).click(function () {
+        var xy = $(this).attr('id').slice(5).split('_');
+        var x = Number(xy[0]);
+        var y = Number(xy[1]);
+        if (buildRoad(x,y,thisPlayer)) {
+          $('#board *').unbind('click');
+          if (freeRoad<1) {
+            cards.wood -= 1;
+            cards.brick -= 1;
+            cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 }; refreshCards();
+          } else { freeRoad -= 1; }
+          $('.button').removeClass('highlight');
+          $('#cursor').removeClass();  //remove the road from the cursor
+          refreshButtons();
+        }
+      });
+    }
+  });
+} else {
+  console('warning','Not enough resources.');
+}
+}
+}
+function buildRoad(x,y,player) {
+  var id = x+'_'+y;
+  //Roads must be connected to a road, city or settlement owned by the player [300]
+  if (rule300(x,y,player)) {
+    //Roads cannot be built on top of other roads
+    if (!($('#road_'+id).length)) {
+      $('<div id="road_'+id+'" class="road player'+player+'">&nbsp;</div>')
+      .appendTo('#edge_'+id);
+      console('info','Player '+player+' built a road. <span class="debug">settlement_'+id+'</span>');
+      return 1;
+    } else {
+      console('warning','<span class="debug">Player '+player+': cannot build road '+id+' </span>Roads cannot be built on top of other roads.');
+      return 0;
+    }
+  } else {
+    console('warning','<span class="debug">Player '+player+': cannot build road '+id+' </span>Roads must be connected to a road, city or settlement owned by the player.');
+    return 0;
+  }
+}
+
+
+function makeIntersections(x,y,width,height) {
+  for (var ix=1;ix<=x;ix++) {
+    for (var iy=6;iy<y;iy++) {
+      if ((ix%2==0)&&(iy%2==0)) {
+	var intersectionId = ix+'_'+iy;
+	var factor = -10;
+	if (((iy%4==0)&&(ix%4==0))||(((iy-2)%4==0)&&((ix-2)%4==0)))  { factor = 29 }
+	$('<div class="intersection" id="intersection_'+intersectionId+'"><div class="debug">'+intersectionId+'</div></div>')
+	.css('left',(ix)*width*0.745*0.5+factor)
+	.css('top',(iy-0.4)*height*0.25)
+	.appendTo('#board');
+      }
+    }
+  }
+}
+
+function makeEdges(x,y,width,height) {
+  for (var ix=2;ix<=x;ix++) {
+    for (var iy=5;iy<y;iy++) {
+      if (ix%2 == 0) {
+	if (!(iy%2 == 0)) {
+	  var edgeLeft = (ix-0.1)*width*0.5*0.745;
+	  var edgeTop = (iy-0.1)*height*0.25;
+	  var edgeId = 'edge_' + ix + '_' + iy;
+	  if (ix%4 == 0) {
+	    if ((iy-1)%4 == 0) {
+	      var rotate = 'rotate2';
+	    } else {
+	      var rotate = 'rotate1';
+	    }
+	  } else {
+            if ((iy-1)%4 == 0) {
+	      var rotate = 'rotate1';
+	    } else {
+	      var rotate = 'rotate2';
+	    }
+	  }
+          $('<div class="edge '+rotate+'" id="'+edgeId+'"><div class="debug">'+edgeId+'</div></div>')
+	  .css('left',edgeLeft)
+	  .css('top',edgeTop)
+	  .appendTo('#board');
+	}
+      } else {
+	if ((((iy-2)%4 == 0)&&((ix+1)%4 == 0))||(((iy%4 == 0)&&((ix-1)%4 == 0)))) {
+	  var edgeLeft = (ix-0.08)*width*0.745*0.5;
+	  var edgeTop = (iy-0.17)*height*0.25;
+	  var edgeId = 'edge_' + ix + '_' + iy;
+	  $('<div class="edge" id="'+edgeId+'"><div class="debug">'+edgeId+'</div></div>')
+	  .css('left',edgeLeft)
+	  .css('top',edgeTop)
+	  .appendTo('#board');
+	}
+      }
+    }
+  }
+}
+
+function makeTiles(tiles,width,height) {
+  $.each(tiles,function(index,value) {
+    tileId = value[0]+'_'+value[1];
+    tileType = value[2];
+    tileNumber = value[3];
+    tileLeft = (value[0]-1)*width*0.745*0.5;
+    tileTop = (value[1]-2)*height*0.25;
+    $('<div class="tile '+tileType+'" id="tile_'+tileId+'"><div class="debug">'+tileId+'</div><div class="number n'+tileNumber+'">&nbsp;</div></div>')
+    .css('left',tileLeft)
+    .css('top',tileTop)
+    .appendTo('#board');
+  });
+}
+
+function makeRobber() {
+  $('#board > .desert > .number').append('<div class="robber">&nbsp;</div>');
+  console('info','The robber is in play!');
+}
+
+//Sam's jQuery Blink Plugin
+var doBlink = function(obj,durationOut,durationIn) {
+  jQuery(obj).animate({opacity:0.1},durationOut,'linear',function () {
+    jQuery(obj).animate({opacity:1},durationIn,'linear',function () { doBlink(obj,durationOut,durationIn); });
+  });
+};
+jQuery.fn.blink = function(durationOut,durationIn) { return this.each(function() { doBlink(this,durationOut,durationIn); }); };
+
+
+function moveRobber() {
+  moverobber = 1;
+  $('.robber').blink(300,300);
+  $('.robber').click(function () {
+    $('#cursor').addClass('robber');
+    oldrobber = $(this).parent().parent().attr('id');
+    $('.number').each(function () {
+      if (!(oldrobber == $(this).parent().attr('id'))) {
+        $(this).click(function() {
+          $(this).append('<div class="robber">&nbsp;</div>');
+          $('.number').unbind('click');
+          $('#cursor').removeClass('robber');
+          moverobber = 0;
+          refreshButtons();
+        });
+      }
+    });
+    $(this).remove();
+  });
+}
+
+
+function refreshDice(a,b) {
+  var dice = $('#dice').empty();
+  if ((a > 0)&&(a < 7)) {  $('<div id="dieA" class="die'+a+'">'+a+'</div>').appendTo(dice);  }
+  if ((b > 0)&&(b < 7)) {  $('<div id="dieB" class="die'+b+'">'+b+'</div>').appendTo(dice);  }
+  $(dice).children().each(function () { //move the dice a little randomly...
+    var angle = Math.floor(Math.random()*360);
+    if (this.id == 'dieA') {  var x = eval(Math.floor(Math.random()*20));  }
+    else {  var x = eval(Math.floor(Math.random()*20)+50);  }
+    var y = eval(Math.floor(Math.random()*30));
+    var style = '-moz-transform:rotate('+angle+'deg); -webkit-transform:rotate('+angle+'deg); -o-transform:rotate('+angle+'deg);top:'+y+'px;left:'+x+'px;';
+    $(this).attr('style',style);
+  });
+}
+function makeDiceButton() {
+  var a = eval(Math.floor(Math.random()*5)+1);
+  var b = eval(Math.floor(Math.random()*5)+1);
+  $('#diceButton').empty().remove();
+  refreshButtons();
+  var dice = $('<div id="diceButton"></div>').appendTo('#bottompanel');
+  if ((a > 0)&&(a < 7)) {  $('<div id="dieButtonA" class="die'+a+'">'+a+'</div>').appendTo(dice);  }
+  if ((b > 0)&&(b < 7)) {  $('<div id="dieButtonB" class="die'+b+'">'+b+'</div>').appendTo(dice);  }
+  $(dice).children().each(function () { //move the dice a little randomly...
+    var angle = Math.floor(Math.random()*360);
+    if (this.id == 'dieButtonA') {  var x = eval(Math.floor(Math.random()*5));  }
+    else {  var x = eval(Math.floor(Math.random()*5)+25);  }
+    var y = eval(Math.floor(Math.random()*10));
+    var style = '-moz-transform:rotate('+angle+'deg); -webkit-transform:rotate('+angle+'deg); -o-transform:rotate('+angle+'deg);top:'+y+'px;left:'+x+'px;';
+    $(this).attr('style',style);
+  });
+  $(dice).blink(300,300);
+  $(dice).click(function() { //When the dice button is clicked...
+    var a = Math.floor(Math.random()*5)+1;
+    var b = Math.floor(Math.random()*5)+1;
+    rollDice(a,b);
+    $('#diceButton').empty().remove();
+  });
+}
+
+function rollDice(a,b) {
+  $('#dice').empty().remove();
+  var dice = $('<div id="dice"></div>').appendTo('body');
+  $('#diceButton').empty().remove();
+  dice.animate({margin:0},{
+    duration: 300,
+    step: function(now, fx) {
+      refreshDice(eval(Math.floor(Math.random()*5)+1),eval(Math.floor(Math.random()*5)+1));
+    },
+    complete: function(now, fx) {
+      refreshDice(a,b);
+      payout(a+b);
+    }
+  });
+}
+
+function buttonDevelopment() {
+  cancelTrade();
+  console('info','Development cards don\'t exist.');
+}
+
+function refreshButtons() {
+  var roadsLeft = pieces.roads-$('.road.player'+thisPlayer).length;
+  var settlementsLeft = pieces.settlements-$('.settlement.player'+thisPlayer).length;
+  var citiesLeft = pieces.cities-$('.city.player'+thisPlayer).length;
+  var developmentsLeft = 0;
+  $('#buttons').empty();
+  var road = '', settlement = '', city = '', development = '', end = '', trade = '';
+//disable stuff if you don't have enough resources...
+  if ((roadsLeft < 1)||(cards.wood < 1)||(cards.brick < 1)) { road = ' disabled'; }
+  if ((settlementsLeft < 1)||(cards.wood < 1)||(cards.brick < 1)||(cards.sheep < 1)||(cards.wheat < 1)) { settlement = ' disabled'; }
+  if ((citiesLeft < 1)||(cards.ore < 3)||(cards.wheat < 2)) { city = ' disabled'; }
+  if ((developmentsLeft < 1)||(cards.ore < 1)||(cards.sheep < 1)||(cards.wheat < 1)) { development = ' disabled'; }
+
+  var clearCards = ' disabled';
+  if ($('#trade:visible').length) { trade = ' highlight'; }  //disable the trade button if the trade window is open
+  if ((currentMode() != 'play')||($('#diceButton').length)) { trade = ' disabled'; } //disable the trade button if we're not playing or the dice button is visible
+  if (!((cards.ore)||(cards.wood)||(cards.brick)||(cards.sheep)||(cards.wheat))) { trade = ' disabled'; } //disable the trade button if we have no cards to trade
+
+  if (freeRoad||freeSettlement||freeCity||($('#diceButton').length)) { var end = ' disabled'; }  //disable the end turn button if free stuff needs to be built or the dice button is visible
+  //if (!(currentPlayer() == thisPlayer)) { var end = ' disabled'; } //disable the end turn button if its not my turn
+
+  if (currentMode() == 'start') {
+    road = ' disabled'; settlement = ' disabled'; city = ' disabled'; development = ' disabled';
+    if (freeRoad>0) { road = ''; }
+    if (freeSettlement>0) { settlement = ''; }
+  }
+
+//highlight stuff
+  if ($('#cursor').hasClass('road')) { road = road+' highlight'; }
+  if ($('#cursor').hasClass('settlement')) { settlement = settlement+' highlight'; }
+  if ($('#cursor').hasClass('city')) { city = city+' highlight'; }
+
+  if (!(currentPlayer() == thisPlayer)||($('#diceButton').length)||($('#cursor.robber').length)) {  road = ' disabled'; settlement = ' disabled'; city = ' disabled'; development = ' disabled';  }  //disable everything if its not my turn or if the dice button is visible or if the robber is being moved
+  if ($('#diceButton').length) {  $('#buttons').css('opacity','0.1');  } else {  $('#buttons').css('opacity','1'); }  //hide #buttons if the dice button is visible
+//Create the buttons...
+  var tradeDiv = $('<div class="trade smallButton'+trade+'"></div>').appendTo('#buttons');
+  var roadDiv = $('<div class="road button'+road+'"><div class="numberLeft">'+roadsLeft+'</div></div>').appendTo('#buttons');
+  var settlementDiv = $('<div class="settlement button'+settlement+'"><div class="numberLeft">'+settlementsLeft+'</div></div>').appendTo('#buttons');
+  var cityDiv = $('<div class="city button'+city+'"><div class="numberLeft">'+citiesLeft+'</div></div>').appendTo('#buttons');
+  var developmentDiv = $('<div class="development button'+development+'"><div class="numberLeft">'+developmentsLeft+'</div></div>').appendTo('#buttons');
+  var endDiv = $('<div class="smallButton end'+end+'">&nbsp;</div>').appendTo('#buttons');
+//bind click handlers...
+  if (trade != ' disabled') {  tradeDiv.click(tradeButton);  }
+  if (road != ' disabled') {  roadDiv.click(buttonRoad);  }
+  if (settlement != ' disabled') {  settlementDiv.click(buttonSettlement);  }
+  if (city != ' disabled') {  cityDiv.click(buttonCity);  }
+  if (development != ' disabled') {  developmentDiv.click(buttonDevelopment);  }
+  if (end != ' disabled') {  endDiv.click(endTurn);  }
+}
+
+function refreshCards() {
+  //var cards = { 'ore': 2, 'wheat':2, 'wood':2, 'brick':2, 'sheep':2 };
+  //var cardsSelected = { 'ore': 0, 'wheat':0, 'wood':2, 'brick':1, 'sheep':0 };
+
+//draw the cards...
+  $('#cards').empty();
+  $('#cardsSelected').empty();
+  //draw the cards
+  $.each(cards,function (type,number) {
+    var cardStack = $('<div class="cardStack"></div>').appendTo('#cards');
+    $(cardStack).append('<div class="'+type+' card bottom">&nbsp;</div>');
+    number -= eval('cardsSelected.'+type);
+    for (i=0;i<number;i++) {
+      $(cardStack).append('<div class="'+type+' card">&nbsp;</div>');
+    }
+    if (cards[type] - cardsSelected[type] > 0) {
+      $(cardStack).click(function () {  //bind click handler
+        cardsSelected[type] += 1;
+        refreshCards();
+      });
+    }
+  });
+  //draw the selected cards
+  $.each(cardsSelected,function (type,number) {
+    var cardStack = $('<div class="cardStack"></div>').appendTo('#cardsSelected');
+    for (i=0;i<number;i++) {
+      $(cardStack).append('<div class="'+type+' card">&nbsp;</div>');
+    }
+    if (cardsSelected[type] > 0) {
+      $(cardStack).click(function () {  //bind click handler
+        cardsSelected[type] -= 1;
+        refreshCards();
+      });
+    }
+  });
+  //refresh the buttons
+  refreshButtons();
+  refreshTradeButtons();
+}
+
+function refreshTradeButtons() {
+  var tradeButtons = $('#tradeButtons').empty();
+  $.each(tradeCardsSelected,function(type,value){
+    $('<div class="smallButton '+type+'">&nbsp;</div>')
+      .appendTo(tradeButtons)
+      .click(function(){
+        tradeCardsSelected[type] += 1;
+        refreshTradeCards();
+      })
+  });
+  var buttonBank = $('<div class="smallButton bank">&nbsp;</div>').appendTo(tradeButtons);
+  var buttonSwap = $('<div class="smallButton cardSwap">&nbsp;</div>').appendTo(tradeButtons);
+  if (!(bankCheck())) { buttonBank.addClass('disabled'); } else { buttonBank.click(bankButton) }
+  if (!(swapCheck())) { buttonSwap.addClass('disabled'); } else { buttonBank.click(swapButton) }
+}
+
+function bankCheck(trade) {
+  var x = 0, i = 0;
+  var y = '', j = '';
+  $.each(tradeCardsSelected,function(index,value){ if (value) { x += 1; y = index; } })
+  $.each(cardsSelected,function(index,value){ if (value) { i += 1; j = index; } })
+  if ((x==1)&&(i==1)&&(!(y==j))) {  //if the correct cards are selected
+    var ratio = 4;  //TODO: check for harbours and set this ratio
+    if (cardsSelected[j]>=eval(ratio*tradeCardsSelected[y])) {  //if the right amount of cards are selected
+      if (trade) {
+        cards[y] += tradeCardsSelected[y];
+        cards[j] -= eval(ratio*tradeCardsSelected[y]);
+        cardsSelected = { 'ore':0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+        tradeCardsSelected = { 'ore':0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+        refreshCards();
+        refreshTradeCards();
+      }
+      return 1;
+    } else { return 0; }
+  } else { return 0; }
+}
+function bankButton() {
+  bankCheck(1);
+}
+
+function swapCheck() {
+  return 0;
+}
+function swapButton() {
+  alert('click');
+  return 0;
+}
+
+function refreshTradeCards() {
+  var tradeCards = $('#tradeCards').empty();
+  $.each(tradeCardsSelected,function(type,value){
+    targetStack = $('<div class="cardStack"></div>').appendTo(tradeCards);
+    for (i=0;i<value;i++) {
+      $('<div class="card '+type+'">&nbsp;</div>').appendTo(targetStack);
+    }
+    $(targetStack).click(function(){
+      tradeCardsSelected[type] -= 1;
+      refreshTradeCards();
+    });
+  })
+  refreshTradeButtons();
+}
+
+function cancelBuild() {
+  $('#cursor').removeClass();
+  $('#board .edge, #board .intersection').unbind('click');
+  cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+  refreshCards();
+  refreshButtons();
+}
+function cardClear() {
+  cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+  tradeCardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+  refreshCards();
+}
+function tradeButton() {
+  if ($('#trade:visible').length) {  cancelTrade(); }
+  else { openTrade(); }
+}
+function cancelTrade() {
+  cardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+  $('#trade').hide();
+  refreshCards();
+}
+function openTrade() {
+  tradeCardsSelected = { 'ore': 0, 'wheat':0, 'wood':0, 'brick':0, 'sheep':0 };
+  refreshTradeCards();
+  $('#trade').show();
+  refreshButtons();
+}
+
+function setPlayer(playerid) {
+  thisPlayer = playerid;
+  $('#buttonRoad').removeClass();
+  $('#buttonSettlement').removeClass();
+  $('#buttonCity').removeClass();
+  $('#buttonRoad').addClass('player'+playerid);
+  $('#buttonSettlement').addClass('player'+playerid);
+  $('#buttonCity').addClass('player'+playerid);
+  $('#bottompanelcover').addClass('player'+playerid);
+  console('info','Now playing as Player '+playerid+'.');
+}
+
+function shuffle(o) { 
+	for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+	return o;
+}
+
+
+var generateTiles = function(positions,types,numbers) {
+/*
+To generate a basic catan board:
+  positions = [[7,8],[5,10],[9,10],[3,12],[7,12],[11,12],[5,14],[9,14],[3,16],[7,16],[11,16],[5,18],[9,18],[3,20],[7,20],[11,20],[5,22],[9,22],[7,24]];
+  types = ['desert','sheep','sheep','sheep','sheep','brick','brick','brick','wheat','wheat','wheat','wheat','ore','ore','ore','wood','wood','wood','wood'];
+  numbers = [11,12,9,4,6,5,10,3,11,4,8,8,10,9,3,5,2,6];
+*/
+  var type = '', tiles = [];
+  for (var i=0,len=positions.length; i<len; ++i) {
+    type = types.pop();
+    if (type == 'desert') { number = 0; }
+    else { number = numbers.pop(); }
+    tiles[i] = [positions[i][0],positions[i][1],type,number];
+  }
+  //if (checkTiles(tiles)) { return tiles; }
+  //else { tiles = generateTiles(positions,types,numbers); }
+  return tiles;
+}
+
+function checkTiles(tiles) {
+  var tempTiles = [], x, y, number, jx, jy, res = 1;
+  for (var i=0,len=tiles.length; i<len; ++i) {  //create the tempTiles arrray containing all 6s and 8s
+    if ((tiles[i][3] == '8')||(tiles[i][3] == '6')) { tempTiles.push(tiles[i]);  }
+  }
+  for (var i=0,len=tempTiles.length; i<len; ++i) {
+    x = tempTiles[i][0];
+    y = tempTiles[i][1];
+    number = tempTiles[i][3];
+    for (var j=0,lenn=tempTiles.length; j<lenn; ++j) {
+      //check for nearby 6s and 8s...
+      jx = tempTiles[j][0];
+      jy = tempTiles[j][1];
+      if (x == jx) {
+       if (eval(y-4) == jy) { res = 0; }
+       if (eval(y+4) == jy) { res = 0; }
+      }
+      if ((eval(x+2) == jx)||(eval(x-2) == jx)) {
+        if (eval(y-2) == jy) { res = 0; }
+        if (eval(y+2) == jy) { res = 0; }
+      }
+    }
+  }
+  return res;
+}
+
+function makeBoard() {
+var positions = [[7,8],[5,10],[9,10],[3,12],[7,12],[11,12],[5,14],[9,14],[3,16],[7,16],[11,16],[5,18],[9,18],[3,20],[7,20],[11,20],[5,22],[9,22],[7,24]];
+var types = ['desert','sheep','sheep','sheep','sheep','brick','brick','brick','wheat','wheat','wheat','wheat','ore','ore','ore','wood','wood','wood','wood'];
+var numbers = [11,12,9,4,6,5,10,3,11,4,8,8,10,9,3,5,2,6];
+var tileSize = [188,158];
+var boardSize = [12,28];
+var tiles = [];
+var i = 0;
+//while (tiles == 0) {
+  types = shuffle(types);
+  numbers = shuffle(numbers);
+  tiles = generateTiles(positions,types,numbers);
+//}
+makeTiles(tiles,tileSize[0],tileSize[1]);
+makeEdges(boardSize[0],boardSize[1],tileSize[0],tileSize[1]);
+makeIntersections(boardSize[0],boardSize[1],tileSize[0],tileSize[1]);
+refreshTradeButtons();
+
+$(document).mousemove(function(e){
+  $('#cursor').css('left',eval(e.pageX+5));
+  $('#cursor').css('top',eval(e.pageY-10));
+});
+$('#boardcontainer').draggable({ scroll: false, containment: [(boardSize[0]*tileSize[0])/-3+400,(boardSize[1]*tileSize[1])/-4.55+400,$(window).width()-900,$(window).height()-700] });
+
+}
+
+$(document).ready(function(){
+makeBoard();
+refreshCards();
+buildSettlement(4,10,1,1);
+buildSettlement(6,8,1,1);
+buildCity(6,8,1);
+buildSettlement(8,12,3,1);
+buildCity(8,12,3);
+buildSettlement(10,16,3,1);
+buildRoad(4,9,1);
+buildRoad(5,8,1);
+buildRoad(9,12,3);
+buildRoad(10,13,3);
+buildRoad(10,15,3);
+buildRoad(10,17,3);
+buildRoad(11,18,3);
+setPlayer(2);
+makeRobber();
+startTurn(1);
+});
+</script>
+</body>

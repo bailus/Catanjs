@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="node_modules/express/node_modules/qs/support/expresso/test/serial/|node_modules/socket.io/node_modules/socket.io-client/lib/|node_modules/socket.io/lib-cov/transports/|node_modules/socket.io/lib/stores/|node_modules/express/node_modules/qs/support/should/test/|scripts/|node_modules/socket.io/node_modules/socket.io-client/test/|node_modules/express/lib/|node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/tmp/|node_modules/express/node_modules/qs/lib/|libs/|node_modules/socket.io/node_modules/socket.io-client/lib/vendor/web-socket-js/|BACKUP/|node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test/unit/compress/test/|node_modules/socket.io/node_modules/bison/|node_modules/socket.io/lib/|node_modules/socket.io/node_modules/policyfile/|node_modules/express/node_modules/connect/lib/|node_modules/socket.io/lib/transports/|node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test/unit/compress/expected/|BACKUP/pics/|node_modules/socket.io/new-old/|node_modules/express/node_modules/qs/|node_modules/express/node_modules/connect/|node_modules/express/node_modules/qs/support/expresso/lib/|node_modules/socket.io/node_modules/redis/|node_modules/socket.io/node_modules/socket.io-client/bin/|node_modules/socket.io/node_modules/policyfile/lib/|node_modules/socket.io/node_modules/socket.io-client/dist/|node_modules/socket.io/node_modules/socket.io-client/lib/transports/|node_modules/express/node_modules/qs/support/expresso/test/|node_modules/socket.io/node_modules/redis/lib/|node_modules/express/node_modules/connect/lib/middleware/|node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test/unit/|node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/lib/|node_modules/socket.io/new-old/public/js/|node_modules/express/node_modules/qs/test/|node_modules/express/node_modules/qs/support/should/examples/|node_modules/express/lib/view/|node_modules/socket.io/node_modules/socket.io-client/test/node/|node_modules/socket.io/lib-cov/|node_modules/express/|node_modules/express/node_modules/connect/lib/middleware/session/|node_modules/socket.io/|node_modules/socket.io/lib-cov/stores/|node_modules/socket.io/node_modules/redis/examples/|node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test/|node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/|node_modules/socket.io/node_modules/redis/tests/|node_modules/express/node_modules/qs/support/should/|node_modules/express/node_modules/qs/support/should/lib/|node_modules/socket.io/node_modules/policyfile/examples/|node_modules/express/node_modules/mime/|node_modules/socket.io/node_modules/policyfile/tests/|node_modules/socket.io/node_modules/redis/lib/parser/|node_modules/express/lib/router/" kind="src" path=""/>
+	<classpathentry excluding="pics/" kind="src" path="BACKUP"/>
+	<classpathentry kind="src" path="BACKUP/pics"/>
+	<classpathentry kind="src" path="libs"/>
+	<classpathentry excluding="node_modules/qs/support/expresso/test/serial/|node_modules/qs/support/should/test/|lib/|node_modules/qs/lib/|node_modules/connect/lib/|node_modules/qs/|node_modules/connect/|node_modules/qs/support/expresso/lib/|node_modules/qs/support/expresso/test/|node_modules/connect/lib/middleware/|node_modules/qs/test/|node_modules/qs/support/should/examples/|lib/view/|node_modules/connect/lib/middleware/session/|node_modules/qs/support/should/|node_modules/qs/support/should/lib/|node_modules/mime/|lib/router/" kind="src" path="node_modules/express"/>
+	<classpathentry excluding="view/|router/" kind="src" path="node_modules/express/lib"/>
+	<classpathentry kind="src" path="node_modules/express/lib/router"/>
+	<classpathentry kind="src" path="node_modules/express/lib/view"/>
+	<classpathentry excluding="lib/|lib/middleware/|lib/middleware/session/" kind="src" path="node_modules/express/node_modules/connect"/>
+	<classpathentry excluding="middleware/|middleware/session/" kind="src" path="node_modules/express/node_modules/connect/lib"/>
+	<classpathentry excluding="session/" kind="src" path="node_modules/express/node_modules/connect/lib/middleware"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/connect/lib/middleware/session"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/mime"/>
+	<classpathentry excluding="support/expresso/test/serial/|support/should/test/|lib/|support/expresso/lib/|support/expresso/test/|test/|support/should/examples/|support/should/|support/should/lib/" kind="src" path="node_modules/express/node_modules/qs"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/qs/lib"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/qs/support/expresso/lib"/>
+	<classpathentry excluding="serial/" kind="src" path="node_modules/express/node_modules/qs/support/expresso/test"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/qs/support/expresso/test/serial"/>
+	<classpathentry excluding="test/|examples/|lib/" kind="src" path="node_modules/express/node_modules/qs/support/should"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/qs/support/should/examples"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/qs/support/should/lib"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/qs/support/should/test"/>
+	<classpathentry kind="src" path="node_modules/express/node_modules/qs/test"/>
+	<classpathentry excluding="node_modules/socket.io-client/lib/|lib-cov/transports/|lib/stores/|node_modules/socket.io-client/test/|node_modules/socket.io-client/node_modules/uglify-js/tmp/|node_modules/socket.io-client/lib/vendor/web-socket-js/|node_modules/socket.io-client/node_modules/uglify-js/test/unit/compress/test/|node_modules/bison/|lib/|node_modules/policyfile/|lib/transports/|node_modules/socket.io-client/node_modules/uglify-js/test/unit/compress/expected/|new-old/|node_modules/redis/|node_modules/socket.io-client/bin/|node_modules/policyfile/lib/|node_modules/socket.io-client/dist/|node_modules/socket.io-client/lib/transports/|node_modules/redis/lib/|node_modules/socket.io-client/node_modules/uglify-js/test/unit/|node_modules/socket.io-client/node_modules/uglify-js/lib/|new-old/public/js/|node_modules/socket.io-client/test/node/|lib-cov/|lib-cov/stores/|node_modules/redis/examples/|node_modules/socket.io-client/node_modules/uglify-js/test/|node_modules/socket.io-client/node_modules/uglify-js/|node_modules/redis/tests/|node_modules/policyfile/examples/|node_modules/policyfile/tests/|node_modules/redis/lib/parser/" kind="src" path="node_modules/socket.io"/>
+	<classpathentry excluding="stores/|transports/" kind="src" path="node_modules/socket.io/lib"/>
+	<classpathentry excluding="transports/|stores/" kind="src" path="node_modules/socket.io/lib-cov"/>
+	<classpathentry kind="src" path="node_modules/socket.io/lib-cov/stores"/>
+	<classpathentry kind="src" path="node_modules/socket.io/lib-cov/transports"/>
+	<classpathentry kind="src" path="node_modules/socket.io/lib/stores"/>
+	<classpathentry kind="src" path="node_modules/socket.io/lib/transports"/>
+	<classpathentry excluding="public/js/" kind="src" path="node_modules/socket.io/new-old"/>
+	<classpathentry kind="src" path="node_modules/socket.io/new-old/public/js"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/bison"/>
+	<classpathentry excluding="lib/|examples/|tests/" kind="src" path="node_modules/socket.io/node_modules/policyfile"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/policyfile/examples"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/policyfile/lib"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/policyfile/tests"/>
+	<classpathentry excluding="lib/|examples/|tests/|lib/parser/" kind="src" path="node_modules/socket.io/node_modules/redis"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/redis/examples"/>
+	<classpathentry excluding="parser/" kind="src" path="node_modules/socket.io/node_modules/redis/lib"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/redis/lib/parser"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/redis/tests"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/bin"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/dist"/>
+	<classpathentry excluding="vendor/web-socket-js/|transports/" kind="src" path="node_modules/socket.io/node_modules/socket.io-client/lib"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/lib/transports"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/lib/vendor/web-socket-js"/>
+	<classpathentry excluding="tmp/|test/unit/compress/test/|test/unit/compress/expected/|test/unit/|lib/|test/" kind="src" path="node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/lib"/>
+	<classpathentry excluding="unit/compress/test/|unit/compress/expected/|unit/" kind="src" path="node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test"/>
+	<classpathentry excluding="compress/test/|compress/expected/" kind="src" path="node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test/unit"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test/unit/compress/expected"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test/unit/compress/test"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/tmp"/>
+	<classpathentry excluding="node/" kind="src" path="node_modules/socket.io/node_modules/socket.io-client/test"/>
+	<classpathentry kind="src" path="node_modules/socket.io/node_modules/socket.io-client/test/node"/>
+	<classpathentry kind="src" path="scripts"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+</classpath>

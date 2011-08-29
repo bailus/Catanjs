@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>asdf</title>
+<script src="http://localhost:1337/socket.io/socket.io.js"></script>
+</head>
+<body>
+<script>
+  var socket = io.connect('http://localhost:1337');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
+</body>
+</html>

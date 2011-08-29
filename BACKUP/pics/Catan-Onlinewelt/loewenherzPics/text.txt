@@ -1,0 +1,30 @@
+Kurzinformation - Löwenherz 
+Burgen gründen: Jeder setzt Burgen auf Wiesen und angrenzend je einen Ritter auf einem Wald oder einer Wiese ein. 
+Eigene Burgen müssen einen Mindestabstand von 6 Feldern besitzen. Im Spiel zu zweit setzt jeder noch 2 
+neutrale Burgen + Ritter. §BR§
+
+Spielziel: Jede eigene Burg so mit Grenzen zu umgeben, dass möglichst wertvolle Gebiete entstehen. Ein Wald zählt 1, ein Dorf 3 und die Königsstadt 5 Siegpunkte. §BR§
+
+Spielzug: §BR§
+	*Auf eine der 3 Karte rechts (Kartenhand) klicken. §BR§
+	*Angeklickte Karte spielen oder verkaufen. §BR§
+	*Kartenhand ergänzen: Auf Kartenstapel oder offene Karte links (Machtmarkt) klicken. §BR§
+
+Kartenaktionen: §BR§
+ §C06930A§Grenzen:§C000000§Grenzen setzen §BR§
+ §CFBEC03§Ritter:§C000000§Ritter neben eigener Burg oder Ritter auf Wiese oder Wald einsetzen, Wald +1 Dukat §BR§
+ §CF00303§Erweitern:§C000000§Ein Gebiet um 2 Felder erweitern §BR§
+ §C0DAFE4§Bündnis:§C000000§Ein Bündnis zwischen 2 Gebieten schließen §BR§
+ §CBC0363§Überläufer:§C000000§Ein Ritter wechselt zwischen 2 benachbarten Gebieten §BR§
+
+Dukateneinnahmen aus Minen: §BR§
+Für jede Minensorte in seinen Gebieten erhält ein Spieler zu Beginn seines Zuges 1 Dukat. §BR§
+Minenmonopol: Wer in seinen Gebieten 3 oder 4 Minen einer Sorte besitzt, erhält 5 Siegpunkte. §BR§ 
+
+Spielende: §BR§
+Es gewinnt, wer zu zweit 50, zu dritt 40 und zu viert 30 oder mehr Punkte erreicht. 
+Erreicht keiner die erforderliche Punktzahl, endet das Spiel sobald des Kartenstapel aufgebraucht ist 
+und die Spieler ihre Handkarten abgespielt haben. Der Spieler mit den (zweit)meisten Dukaten erhält dann 
+noch 5 bzw 3 Punkte. §BR§
+
+
