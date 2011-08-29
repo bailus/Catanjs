@@ -5,6 +5,7 @@
 "author": "Samuel Bailey <sam.bailus@gmail.com>",
 "dependencies": {
   "socket.io": "x.x.x",
+  "socket.io-client": "x.x.x",
   "validator": "x.x.x"
 },
 "engine": "node 0.4.10"
