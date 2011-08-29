@@ -1,5 +1,0 @@
-# name=aktion
-Spiel=passgame
-info=info
-exitStadt=exit:0,Badhaus
-entranceEingang=entranceEingang
