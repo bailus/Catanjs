@@ -1,9 +1,11 @@
 {
 "name": "openCOW",
-"author": "Samuel Bailey <sam.bailus@gmail.com>",
+"description": "openCOW",
 "version": "0.0.0",
+"author": "Samuel Bailey <sam.bailus@gmail.com>",
 "dependencies": {
   "socket.io": "0.8.x",
   "validator": "0.2.x"
-}
+},
+"engine": "node 0.4.10"
 }
