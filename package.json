@@ -4,7 +4,7 @@
 "version": "0.0.0",
 "author": "Samuel Bailey <sam.bailus@gmail.com>",
 "dependencies": {
-  "socket.io-server": "x.x.x",
+  "socket.io": "x.x.x",
   "socket.io-client": "x.x.x",
   "validator": "x.x.x"
 },
