@@ -2,7 +2,6 @@
 "name": "openCOW",
 "author": "Samuel Bailey <sam.bailus@gmail.com>",
 "version": "0.0.0",
-"scripts": {"start":"node server.js"},
 "dependencies": {
   "socket.io": "0.8.x",
   "validator": "0.2.x"
