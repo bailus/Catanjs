@@ -1,6 +1,6 @@
 var io = require('socket.io').listen(1337),
     check = require('validator').check,
-    sanitize = require('validator').sanitize,
+    sanitize = require('validator').sanitize;
 /* production settings for socket.io */
 //io.enable('browser client minification');  // send minified client
 //io.enable('browser client etag');          // apply etag caching logic based on version number
