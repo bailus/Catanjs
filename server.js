@@ -68,9 +68,12 @@ var generateTiles = function(board) {
     else { number = numbers.pop(); }
     tiles[i] = [positions[i][0],positions[i][1],type,number];
   }
-  if (!(checkTiles(tiles))) { tiles = generateTiles(board); }
-  tiles = tiles.concat(fixedTiles);
-  return tiles;
+  if (!(checkTiles(tiles))) {
+    tiles = generateTiles(board);
+  } else {
+    tiles = tiles.concat(fixedTiles);
+  }
+    return tiles;
 };
 
 
@@ -630,7 +633,6 @@ return gameid;
 
 //newGame(); //start a game as soon as the server starts
 var lobby = io.of('/lobby').on('connection',function(socket){  //initial connection from the client
-  auth();
   socket.set('playername','adsf');
   var i, gameslist = [];
   for (i in games) {
@@ -656,7 +658,26 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
+var http = require('express').createServer();
 
+http.get('/', function(req, res){
+  res.contentType('text/html');
+  res.sendfile('index.htm');
+});
+http.get('/themes/default.css', function(req, res){
+  res.contentType('text/css');
+  res.sendfile('themes/default.css');
+});
+http.get('/lib.js', function(req, res){
+  res.contentType('text/javascript');
+  res.sendfile('lib.js');
+});
+http.get('/background.jpg', function(req, res){
+  res.contentType('image/jpeg');
+  res.sendfile('background.jpg');
+});
+
+http.listen(80);
 
 
 

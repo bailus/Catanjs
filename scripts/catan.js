@@ -1144,7 +1144,7 @@ function dialog(title,body,fn) {
 
 var socket;
 function connect(gameid) {
-	socket = io.connect('http://bailus.no.de:1337'+gameid);
+	socket = io.connect('http://'+window.location.hostname+':1337'+gameid);
 	socket.on('connection',function(data){
 	  konsole('info','Connected to game '+gameid);
 	});
@@ -1199,7 +1199,7 @@ function connect(gameid) {
 
 var lobbysocket;
 function lobby() {
-	lobbysocket = io.connect('http://bailus.no.de:1337/lobby');
+	lobbysocket = io.connect('http://'+window.location.hostname+':1337/lobby');
 	lobbysocket.on('connection',function(data){
 		konsole('info','Connected to the lobby.');
 	});
