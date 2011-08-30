@@ -6,7 +6,8 @@
 "dependencies": {
   "socket.io": "x.x.x",
   "socket.io-client": "x.x.x",
-  "validator": "x.x.x"
+  "validator": "x.x.x",
+  "express": "x.x.x"
 },
 "engine": "node 0.4.10",
 "start": "node --debug=5858 server.js"
