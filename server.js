@@ -1,4 +1,5 @@
-var io = require('socket.io').listen(1337),
+var http = require('express').createServer();
+var io = require('socket.io').listen(http),
     check = require('validator').check,
     sanitize = require('validator').sanitize;
 /* production settings for socket.io */
@@ -658,7 +659,6 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
-var http = require('express').createServer();
 
 http.get('/', function(req, res){
   res.contentType('text/html');
@@ -669,7 +669,7 @@ http.get('/themes/default.css', function(req, res){
   res.sendfile('themes/default.css');
 });
 http.get('/lib.js', function(req, res){
-  res.contentType('text/javascript');
+  res.contentType('application/javascript');
   res.sendfile('lib.js');
 });
 http.get('/background.jpg', function(req, res){
