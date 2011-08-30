@@ -669,12 +669,16 @@ http.get('/themes/default.css', function(req, res){
   res.sendfile('themes/default.css');
 });
 http.get('/lib.js', function(req, res){
-  res.contentType('application/javascript');
+  res.contentType('text/javascript');
   res.sendfile('lib.js');
 });
 http.get('/background.jpg', function(req, res){
   res.contentType('image/jpeg');
   res.sendfile('background.jpg');
+});
+http.get('/server.js', function(req, res){
+  res.contentType('text/javascript');
+  res.sendfile('server.js');
 });
 
 http.listen(80);
