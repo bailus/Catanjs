@@ -1264,6 +1264,10 @@ function makenewgame() {
 
 $(document).ready(function(){
 $('#boardcontainer').draggable({ scroll: false, cursor: 'move', distance:30 });
+$('#board').mousewheel(function(event,delta){
+  delta = delta*10;
+  $('#boardcontainer').css('zoom',$('#boardcontainer').css('zoom')*100+delta+'%');
+});
 $('#sidepanelhide').click(function(){ if ($('#sidepanel').width() < 30) { $('#sidepanel').animate({width:'460px'},400).removeClass('hide'); } else { $('#sidepanel').animate({width:'20px'},400).addClass('hide'); } });
 $('#sidepanel form').submit(chatsend);
 $('#lobby > form').submit(lobbychatsend);

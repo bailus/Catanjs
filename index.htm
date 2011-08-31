@@ -58,7 +58,7 @@ body {
 .tile {
   position:absolute;
   width:188px;
-  height:158px;
+  height:160px;
   z-index:5;
   background-repeat:no-repeat;
 }
@@ -741,7 +741,7 @@ body {
 
 </style><link rel="stylesheet" type="text/css" href="themes/default.css" id="themeCSS"></head><body class="background">
 <img src="background.jpg" alt="" class="bgimage" />
-<div id="boardcontainer">
+<div id="boardcontainer" style="zoom:100%;">
   <div id="dragHandle">&nbsp;</div>
   <div id="board"></div>
 </div>
@@ -2059,6 +2059,10 @@ function makenewgame() {
 
 $(document).ready(function(){
 $('#boardcontainer').draggable({ scroll: false, cursor: 'move', distance:30 });
+$('#board').mousewheel(function(event,delta){
+  delta = delta*10;
+  $('#boardcontainer').css('zoom',$('#boardcontainer').css('zoom')*100+delta+'%');
+});
 $('#sidepanelhide').click(function(){ if ($('#sidepanel').width() < 30) { $('#sidepanel').animate({width:'460px'},400).removeClass('hide'); } else { $('#sidepanel').animate({width:'20px'},400).addClass('hide'); } });
 $('#sidepanel form').submit(chatsend);
 $('#lobby > form').submit(lobbychatsend);
