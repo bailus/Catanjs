@@ -672,7 +672,8 @@ http.get('/authenticate',function(req, res){
     null, // realm (optional)
     false, // attempt immediate authentication first?
     function(authUrl) {
-      res.redirect(authUrl);
+      res.writeHead(302, { Location: authUrl });
+      res.end();
     }
   );
 });
@@ -701,10 +702,10 @@ http.get('/background.jpg', function(req, res){
   res.contentType('image/jpeg');
   res.sendfile('background.jpg');
 });
-http.get('/server.js', function(req, res){
+/*http.get('/server.js', function(req, res){
   res.contentType('text/javascript');
   res.sendfile('server.js');
-});
+});*/
 
 http.listen(80);
 
