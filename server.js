@@ -667,7 +667,7 @@ http.get('/',function(req, res){
 });
 http.get('/authenticate',function(req, res){
   openid.authenticate(
-    parsedUrl.query.openid_identifier, // user supplied identifier
+    req.param(openid_identifier), // user supplied identifier
     'http://bailus.no.de/verify', // our callback URL
     null, // realm (optional)
     false, // attempt immediate authentication first?
