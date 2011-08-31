@@ -1,0 +1,13 @@
+.button {
+  background-position:0 0;
+  width:66px;height:66px;
+  background-repeat:no-repeat;
+  z-index:100002;
+}
+.button > * {
+  z-index:100001;
+}
+.button:hover { background-position:0 -70px; }
+.button.disabled { background-position:0 -140px; }
+.button.disabled > .city, .button.disabled > .settlement, .button.disabled > .road { opacity:0.2; }
+.button.highlight > .city, .button.highlight > .settlement, .button.highlight > .road { opacity:0; }
