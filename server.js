@@ -673,7 +673,7 @@ http.get('/authenticate',function(req, res){
     false, // attempt immediate authentication first?
     function(authUrl) {
       res.redirect(authUrl);
-    });
+    }
   );
 });
 http.get('/verify',function(req, res){
