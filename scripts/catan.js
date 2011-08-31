@@ -1262,7 +1262,7 @@ function makenewgame() {
 
 $(document).ready(function(){
 $('#boardcontainer').draggable({ scroll: false, cursor: 'move', distance:30 });
-$('#board').mousewheel(function(event,delta){
+$('#boardcontainer').mousewheel(function(event,delta){
   delta = delta*10;
   $('#boardcontainer').css('zoom',$('#boardcontainer').css('zoom')*100+delta+'%');
 });
