@@ -1,7 +1,7 @@
 var http = require('express').createServer();
 var io = require('socket.io').listen(http),
     check = require('validator').check,
-    sanitize = require('validator').sanitize
+    sanitize = require('validator').sanitize,
     openid = require('openid');
 /* production settings for socket.io */
 //io.enable('browser client minification');  // send minified client
