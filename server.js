@@ -1,7 +1,8 @@
 var http = require('express').createServer();
 var io = require('socket.io').listen(http),
     check = require('validator').check,
-    sanitize = require('validator').sanitize;
+    sanitize = require('validator').sanitize
+    openid = require('openid');
 /* production settings for socket.io */
 //io.enable('browser client minification');  // send minified client
 //io.enable('browser client etag');          // apply etag caching logic based on version number
@@ -660,7 +661,31 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
-http.get('/', function(req, res){
+http.get('/',function(req, res){
+  res.contentType('text/html');
+  res.sendfile('login.htm');
+});
+http.get('/authenticate',function(req, res){
+  openid.authenticate(
+    parsedUrl.query.openid_identifier, // user supplied identifier
+    'http://bailus.no.de/verify', // our callback URL
+    null, // realm (optional)
+    false, // attempt immediate authentication first?
+    function(authUrl) {
+      res.redirect(authUrl);
+    });
+  );
+});
+http.get('/verify',function(req, res){
+  var result = openid.verifyAssertion(req);
+  res.contentType('text/html');
+  if (result.authenticated) {
+    res.send(Success);
+  } else {
+    res.send(Failure);
+  }
+});
+http.get('/game', function(req, res){
   res.contentType('text/html');
   res.sendfile('index.htm');
 });
@@ -682,6 +707,10 @@ http.get('/server.js', function(req, res){
 });
 
 http.listen(80);
+
+
+
+
 
 
 
