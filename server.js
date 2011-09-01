@@ -672,7 +672,8 @@ http.get('/authenticate',function(req, res){
     null, // realm (optional)
     false, // attempt immediate authentication first?
     function(authUrl) {
-      res.redirect(authUrl);
+      res.writeHead(302, { Location: authUrl });
+      res.end();
     }
   );
 });
