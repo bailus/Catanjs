@@ -1,7 +1,7 @@
-.developmentCard.freevp { background-position:0 -90px; }
-.developmentCard.knight { background-position:0 -180px; }
-.developmentCard.freeres { background-position:0 -270px; }
-.developmentCard.freeroad { background-position:0 -360px; }
+.developmentCard.freeres { background-position:0 -90px; }
+.developmentCard.freeroad { background-position:0 -180px; }
+.developmentCard.freevp { background-position:0 -270px; }
+.developmentCard.knight { background-position:0 -360px; }
 #developmentCards {
   position:fixed;
   left:0;
