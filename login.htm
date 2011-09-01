@@ -1,15 +1,18 @@
 <html>
-<head><title>OpenCOW</title></head>
-<body>
-<p><a href="/authenticate?openid=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid">Login with your Google account</a></p>
-<p><a href="/authenticate?openid=facebook.anyopenid.com">Login with your Facebook account</a></p>
-<p><a href="/authenticate?openid=twitter.anyopenid.com">Login with your Twitter account</a></p>
-<p><a href="/authenticate?openid=live.anyopenid.com">Login with your Windows Live account</a></p>
-<p><a href="/authenticate?openid=me.yahoo.com">Login with your Yahoo! account</a></p>
-<form method="get" action="/authenticate">
-<p>Login using OpenID</p>
-<input name="openid" />
-<input type="submit" value="Login" />
-</form>
-</body>
+  <head><title>OpenCOW</title></head>
+  <link href="/themes/login.css" rel="stylesheet" type="text/css" />
+  <body>
+    <p>
+      <a href="/authenticate?openid=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid"><div class="login ">Login with your Google account</div></a>
+      <a href="/authenticate?openid=facebook.anyopenid.com"><div class="login google" title="Login with your Facebook account">&nbsp;</div></a>
+      <a href="/authenticate?openid=twitter.anyopenid.com"><div class="login twitter" title="Login with your Twitter account">&nbsp;</div></a>
+      <a href="/authenticate?openid=live.anyopenid.com"><div class="login live" title="Login with your Windows Live account">&nbsp;</div></a>
+      <a href="/authenticate?openid=me.yahoo.com"><div class="login yahoo" title="Login with your Yahoo! account">&nbsp;</div></a>
+    </p>
+    <form method="get" action="/authenticate">
+      <p>Login using OpenID</p>
+      <input name="openid" />
+      <input type="submit" value="Login" />
+    </form>
+  </body>
 </html>
