@@ -195,12 +195,12 @@ body {
 #playerspanel {
   position:fixed;
   top:0;left:0;
-  width:200%;height:75px;
+  width:200%;height:77px;
   z-index:10000;
 }
 #playerspanel > * {
   width:160px;
-  height:65px;
+  height:67px;
   margin:5px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -210,9 +210,9 @@ body {
 }
 #playerspanel .playername {
   width:160px;
-  height:15px;
+  height:17px;
   line-height:20px;
-  font-size:12px;
+  font-size:14px;
   text-align:center;
   font-weight:bold;
   overflow:hidden;
@@ -232,7 +232,7 @@ body {
 .stats.roads { background-position:1px 2px; }
 
 #playerspanel .chat {
-  margin-top:73px;
+  margin-top:75px;
   left:0;
   width:156px;height:20px;
   color:white;
@@ -245,7 +245,7 @@ body {
   opacity:0.8;
 }
 #playerspanel .trade {
-  margin-top:70px;
+  margin-top:72px;
   left:0;
   width:160px;height:90px;
   background-color:rgba(0,0,0,0.4);
