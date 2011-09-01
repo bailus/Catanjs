@@ -2,7 +2,9 @@ var http = require('express').createServer();
 var io = require('socket.io').listen(http),
     check = require('validator').check,
     sanitize = require('validator').sanitize,
-    openid = require('openid');
+    openid = require('openid'),
+    everyauth = reuqire('everyauth'),
+    connect = require('connect');
 /* production settings for socket.io */
 //io.enable('browser client minification');  // send minified client
 //io.enable('browser client etag');          // apply etag caching logic based on version number
@@ -659,49 +661,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
-
-var relyingParty = new openid.RelyingParty(
-    'http://bailus.no.de/verify', // Verification URL (yours)
-    null, // Realm (optional, specifies realm for OpenID authentication)
-    false, // Use stateless verification
-    false, // Strict mode
-    [] // List of extensions to enable and include
-);
-http.get('/',function(req, res){
-  res.contentType('text/html');
-  res.sendfile('login.htm');
-});
-http.get('/authenticate',function(req, res){
-  relyingParty.authenticate(req.query.openid, false, function(error, authUrl){
-    if (error) {
-      res.writeHead(200);
-      res.end('Authentication failed: ' + error);
-    } else if (!authUrl) {
-      res.writeHead(200);
-      res.end('Authentication failed');
-    } else {
-      res.writeHead(302, { Location: authUrl });
-      res.end();
-    }
-  });
-  /*openid.authenticate(
-    req.query.openid, // user supplied identifier
-    'http://bailus.no.de/verify', // our callback URL
-    null, // realm (optional)
-    false, // attempt immediate authentication first?
-    function(authUrl) { res.redirect(authUrl); }
-  );*/
-});
-/*http.get('/verify',function(req, res){
-  var result = openid.verifyAssertion(req);
-  res.contentType('text/html');
-  if (result.authenticated) {
-    res.send(Success);
-  } else {
-    res.send(Failure);
-  }
-});*/
-http.get('/game', function(req, res){
+http.get('/', function(req, res){
   res.contentType('text/html');
   res.sendfile('index.htm');
 });
@@ -722,8 +682,36 @@ http.get('/background.jpg', function(req, res){
   res.sendfile('server.js');
 });*/
 
-http.listen(80);
+http.listen(1337);
 
+
+everyauth.facebook
+  .appId('28532075887')
+  .appSecret('a57fd04e11811d18822a61e1a26e1e10')
+  .handleAuthCallbackError( function (req, res) {
+    // If a user denies your app, Facebook will redirect the user to
+    // /auth/facebook/callback?error_reason=user_denied&error=access_denied&error_description=The+user+denied+your+request.
+    // This configurable route handler defines how you want to respond to
+    // that.
+    // If you do not configure this, everyauth renders a default fallback
+    // view notifying the user that their authentication failed and why.
+  })
+  .findOrCreateUser( function (session, accessToken, accessTokExtra, fbUserMetadata) {
+    // find or create user logic goes here
+  })
+  .redirectPath('/');
+
+var routes = function (app) {
+  // Define your routes here
+};
+
+connect(
+    connect.bodyParser()
+  , connect.cookieParser()
+  , connect.session({secret: 'whodunnit'})
+  , everyauth.middleware()
+  , connect.router(routes);
+).listen(80);
 
 
 
