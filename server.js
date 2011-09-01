@@ -635,6 +635,9 @@ return gameid;
 
 //newGame(); //start a game as soon as the server starts
 var lobby = io.of('/lobby').on('connection',function(socket){  //initial connection from the client
+  socket.emit('login');
+  socket.on('login',function(data){
+  console.log(data);
   socket.set('playername','adsf');
   var i, gameslist = [];
   for (i in games) {
@@ -654,6 +657,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
   socket.on('newgame',function(data){
     //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
     socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
+  });
   });
 });
 
