@@ -1162,8 +1162,8 @@ function dialog(title,body,fn) {
 var socket;
 function connect(gameid) {
 	socket = io.connect('http://'+window.location.hostname+gameid);
-	socket.on('connection',function(data){
-	  konsole('info','Connected to game '+gameid);
+	lobbysocket.on('login',function(){
+		lobbysocket.emit('login',{'id':id,'key':key});
 	});
 	socket.on('init', function (data) {
 	  setPlayer(data.player);
