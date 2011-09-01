@@ -688,7 +688,7 @@ http.get('/game', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
     if (!error && result.authenticated) {
       res.contentType('text/html');
-      res.write(result);
+      console.log(result);
       res.sendfile('index.htm');
     } else {
       res.redirect('http://bailus.no.de/');
