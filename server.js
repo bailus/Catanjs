@@ -131,7 +131,7 @@ var getStats = function(gameid,player) {
   var stats = {
     'player':player,
     'playername':games[gameid].players[player-1].playername,
-    'service':'openid',
+    'service':games[gameid].players[player-1].service,
     'cards':0,
     'developments':games[gameid].players[player-1].developmentCards.length,
     'roads':0,
