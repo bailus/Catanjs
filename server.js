@@ -692,7 +692,9 @@ http.get('/game', function(req, res){
     if (!error && result.authenticated) {
       res.contentType('text/html');
       var nickname;
-      if (result.nickname) {
+      if (result.fullname) {
+	nickname = result.fullname;
+      } else if (result.nickname) {
 	nickname = result.nickname;
       } else if (result.firstname && result.lastname) {
 	nickname = result.firstname+' '+result.lastname;
