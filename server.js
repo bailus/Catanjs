@@ -144,7 +144,7 @@ var getStats = function(gameid,player) {
   for (city in games[gameid].cities) { if (games[gameid].cities[city][2] == player) { stats.vp += 2; } } //add up the players cities
 //TODO: if longest road or largest army  stats.vp += 2;
   for (devCard in games[gameid].players[player-1].developmentCards) { if (games[gameid].players[player-1].developmentCards[devCard] == 'freevp') { stats.vp += 1; } }
-  return stats;
+  return stats; 
 };
 
 var payNumber = function(gameid,number) {
