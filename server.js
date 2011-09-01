@@ -3,7 +3,7 @@ var io = require('socket.io').listen(http),
     check = require('validator').check,
     sanitize = require('validator').sanitize,
     openid = require('openid'),
-    everyauth = reuqire('everyauth'),
+    everyauth = require('everyauth'),
     connect = require('connect');
 /* production settings for socket.io */
 //io.enable('browser client minification');  // send minified client
