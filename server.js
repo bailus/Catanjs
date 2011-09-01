@@ -131,11 +131,11 @@ var getStats = function(gameid,player) {
   var stats = {
     'player':player,
     'playername':games[gameid].players[player-1].playername,
-    'service':games[gameid].players[player-1].service,
     'cards':0,
     'developments':games[gameid].players[player-1].developmentCards.length,
     'roads':0,
-    'vp':0
+    'vp':0,
+    'service':games[gameid].players[player-1].service
   };
   var card = 0, road = 0, settlement = 0, city = 0;
   for (card in games[gameid].players[player-1].cards) { stats.cards += games[gameid].players[player-1].cards[card]; } //add up the players cards
@@ -472,12 +472,17 @@ io.of('/'+gameid).on('connection', function (socket) {
   socket.on('login',function(data){
     var playername = '', playerid, key;
     for (p in players) {
-      if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playername = players[p].nickname; playerid = encodeURIComponent(data.key); key = players[p].key }
+      if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) {
+        playername = players[p].nickname;
+        playerid = encodeURIComponent(data.key);
+        key = players[p].key;
+        service = players[p].service;
+      }
     }
     if (!(playername == '')) {
 	  socket.set('playername',playername);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
-	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'key':key });
+	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
             console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
@@ -728,12 +733,12 @@ http.get('/verify', function(req, res){
       }
       var key = Math.floor(Math.random()*10000000000000000);
       var id = encodeURIComponent(result.claimedIdentifier);
-      var service = 'openid';
-      if (result.claimedIdentifier.substring(21) == 'https://me.yahoo.com/') { service = 'yahoo'; }
-      else if (result.claimedIdentifier.substring(27) == 'https://live.anyopenid.com/') { service = 'live'; }
-      else if (result.claimedIdentifier.substring(31) == 'https://facebook.anyopenid.com/') { service = 'facebook'; }
-      else if (result.claimedIdentifier.substring(32) == 'https://www.google.com/accounts/') { service = 'google'; }
-      players.push({'id':id,'nickname':nickname,'service':service,'key':key});
+      var s = 'openid';
+      if (result.claimedIdentifier.substring(21) == 'https://me.yahoo.com/') { s = 'yahoo'; }
+      else if (result.claimedIdentifier.substring(27) == 'https://live.anyopenid.com/') { s = 'live'; }
+      else if (result.claimedIdentifier.substring(31) == 'https://facebook.anyopenid.com/') { s = 'facebook'; }
+      else if (result.claimedIdentifier.substring(32) == 'https://www.google.com/accounts/') { s = 'google'; }
+      players.push({'id':id,'nickname':nickname,'service':s,'key':key});
       console.log(result);
       console.log(players);
       res.redirect('http://bailus.no.de/game?id='+id+'&key='+key);
