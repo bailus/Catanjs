@@ -131,6 +131,7 @@ var getStats = function(gameid,player) {
   var stats = {
     'player':player,
     'playername':games[gameid].players[player-1].playername,
+    'service':games[gameid].players[player-1].service,
     'cards':0,
     'developments':games[gameid].players[player-1].developmentCards.length,
     'roads':0,
@@ -715,19 +716,24 @@ http.get('/verify', function(req, res){
       res.contentType('text/html');
       var nickname;
       if (result.fullname) {
-	nickname = result.fullname;
+        nickname = result.fullname;
       } else if (result.nickname) {
-	nickname = result.nickname;
+	      nickname = result.nickname;
       } else if (result.firstname && result.lastname) {
-	nickname = result.firstname+' '+result.lastname;
+	      nickname = result.firstname+' '+result.lastname;
       } else if (result.email) {
-	nickname = result.email.split('@',1)[0];
+	      nickname = result.email.split('@',1)[0];
       } else {
-	nickname = result.claimedIdentifier;
+	      nickname = result.claimedIdentifier;
       }
       var key = Math.floor(Math.random()*10000000000000000);
       var id = encodeURIComponent(result.claimedIdentifier);
-      players.push({'id':id,'nickname':nickname,'key':key});
+      var service = 'openid';
+      if (result.claimedIdentifier.substring(21) == 'https://me.yahoo.com/') { service = 'yahoo'; }
+      else if (result.claimedIdentifier.substring(27) == 'https://live.anyopenid.com/') { service = 'live'; }
+      else if (result.claimedIdentifier.substring(31) == 'https://facebook.anyopenid.com/') { service = 'facebook'; }
+      else if (result.claimedIdentifier.substring(32) == 'https://www.google.com/accounts/') { service = 'google'; }
+      players.push({'id':id,'nickname':nickname,'service',service,'key':key});
       console.log(result);
       console.log(players);
       res.redirect('http://bailus.no.de/game?id='+id+'&key='+key);
