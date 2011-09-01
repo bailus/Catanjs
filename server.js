@@ -660,13 +660,17 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
-
+var players = [];
 var relyingParty = new openid.RelyingParty(
   'http://bailus.no.de/game', // Verification URL (yours)
   null, // Realm (optional, specifies realm for OpenID authentication)
   false, // Use stateless verification
   false, // Strict mode
-  [] // List of extensions to enable and include
+  [
+    new openid.UserInterface(),
+    new openid.SimpleRegistration({ "nickname" : true }),
+    new openid.AttributeExchange({ "http://axschema.org/namePerson/friendly": "required" })
+  ]
 );
 
 http.get('/', function(req, res){
@@ -688,7 +692,16 @@ http.get('/game', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
     if (!error && result.authenticated) {
       res.contentType('text/html');
-      console.log(result);
+      var nickname;
+      if (result["http://axschema.org/namePerson/friendly"]) {
+	nickname = result["http://axschema.org/namePerson/friendly"];
+      } else if (result.nickname) {
+	nickname = result.nickname;
+      } else {
+	nickname = result.claimedIdentifier;
+      }
+      players.push({'id':result.claimedIdentifier,'nickname':nickname});
+      console.log(players);
       res.sendfile('index.htm');
     } else {
       res.redirect('http://bailus.no.de/');
