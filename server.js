@@ -639,7 +639,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
   socket.on('login',function(data){
     var playername = '';
     for (p in players) {
-      if (data.id == encodeURIComponent(players[p].id)) { playername = players[p].nickname; }
+      if (data.id == players[p].id) { playername = players[p].nickname; }
     }
     if (!(playername == '')) {
 	  socket.set('playername',playername);
