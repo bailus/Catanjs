@@ -615,6 +615,7 @@ io.of('/'+gameid).on('connection', function (socket) {
 		chat(gameid,player,playername,data);
 	      });
 	      });
+	      });
 	    });
 	    socket.on('disconnect',function(data){
 	      socket.get('player',function(err,player){
