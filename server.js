@@ -468,14 +468,14 @@ console.log('Game '+gameid+': Initializing');
 io.of('/'+gameid).on('connection', function (socket) {
   socket.emit('login');
   socket.on('login',function(data){
-    var playername = '';
+    var playername = '', playerid, key;
     for (p in players) {
-      if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playername = players[p].nickname; }
+      if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playername = players[p].nickname; playerid = encodeURIComponent(data.key); key = players[p].key }
     }
     if (!(playername == '')) {
 	  socket.set('playername',playername);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
-	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, playerid:'1234' });
+	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playerid':playerid, 'key':key });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
             console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
