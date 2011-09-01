@@ -1128,7 +1128,7 @@ function setStats(stats) {
   } else {
     var statsDiv = $('<div></div>').addClass('player'+stats.player).appendTo('#playerspanel'); //create an empty statDiv
   }
-  $('<div class="playername"><span class="service '+stats.service+'">&nbsp;</span>'+stats.playername+'</div>').appendTo(statsDiv);
+  $('<div class="playername"><span class="serviceicon '+stats.service+'">&nbsp;</span>'+stats.playername+'</div>').appendTo(statsDiv);
   $('<div class="cards stats" title="Resources">'+stats.cards+'</div>').appendTo(statsDiv);
   $('<div class="knights stats" title="Knights">0</div>').appendTo(statsDiv);
   $('<div class="roads stats" title="Longest Road">'+stats.roads+'</div>').appendTo(statsDiv);
