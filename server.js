@@ -669,7 +669,7 @@ var relyingParty = new openid.RelyingParty(
   [
     new openid.UserInterface(),
     new openid.SimpleRegistration({ "nickname" : true }),
-    new openid.AttributeExchange({ "http://axschema.org/namePerson/friendly": "required" })
+    new openid.AttributeExchange({ "http://axschema.org/namePerson": "required" })
   ]
 );
 
