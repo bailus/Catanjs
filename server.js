@@ -424,8 +424,8 @@ var bank = function(gameid,player,data) {
     }
   }
 };
-var chat = function(gameid,player,data) {
-  io.of('/'+gameid).emit('chat',player,data);
+var chat = function(gameid,playername,data) {
+  io.of('/'+gameid).emit('chat',playername,data);
 };
 var lobbychat = function(player,data) {
   io.of('/lobby').emit('chat',player,data);
@@ -473,6 +473,7 @@ io.of('/'+gameid).on('connection', function (socket) {
       if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playername = players[p].nickname; }
     }
     if (!(playername == '')) {
+      socket.set('playername',playername);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
 	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, playerid:'1234' });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
@@ -608,9 +609,9 @@ io.of('/'+gameid).on('connection', function (socket) {
 	      });
 	    });
 	    socket.on('chat',function(data){
-	      socket.get('player',function(err,player){
+	      socket.get('playername',function(err,playername){
 	      socket.get('gameid',function(err,gameid){
-		chat(gameid,player,data);
+		chat(gameid,playername,data);
 	      });
 	      });
 	    });
