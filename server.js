@@ -734,10 +734,10 @@ http.get('/verify', function(req, res){
       var key = Math.floor(Math.random()*10000000000000000);
       var id = encodeURIComponent(result.claimedIdentifier);
       var s = 'openid';
-      if (result.claimedIdentifier.substring(21) == 'https://me.yahoo.com/') { s = 'yahoo'; }
-      else if (result.claimedIdentifier.substring(27) == 'https://live.anyopenid.com/') { s = 'live'; }
-      else if (result.claimedIdentifier.substring(31) == 'https://facebook.anyopenid.com/') { s = 'facebook'; }
-      else if (result.claimedIdentifier.substring(32) == 'https://www.google.com/accounts/') { s = 'google'; }
+      if (result.claimedIdentifier.substr(0,21) == 'https://me.yahoo.com/') { s = 'yahoo'; }
+      else if (result.claimedIdentifier.substr(0,27) == 'https://live.anyopenid.com/') { s = 'live'; }
+      else if (result.claimedIdentifier.substr(0,31) == 'https://facebook.anyopenid.com/') { s = 'facebook'; }
+      else if (result.claimedIdentifier.substr(0,32) == 'https://www.google.com/accounts/') { s = 'google'; }
       players.push({'id':id,'nickname':nickname,'service':s,'key':key});
       console.log(result);
       console.log(players);
