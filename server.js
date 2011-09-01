@@ -637,27 +637,32 @@ return gameid;
 var lobby = io.of('/lobby').on('connection',function(socket){  //initial connection from the client
   socket.emit('login');
   socket.on('login',function(data){
-  console.log(data);
-  socket.set('playername','adsf');
-  var i, gameslist = [];
-  for (i in games) {
-    gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
-  }
-  socket.emit('games',gameslist);
-  socket.on('chat',function(data){
-    socket.get('playername',function(err,playername){
-      lobbychat(playername,data);
-    });
-  });
-  socket.on('joingame',function(data){
-    if (games[data].players.length < games[data].maxPlayers) {
-      socket.emit('gameid','/'+data); //tell the client to join the game
+    var playername = '';
+    for (p in players) {
+      if (data.id == encodeURIComponent(players[p].id)) { playername = players[p].nickname; }
     }
-  });
-  socket.on('newgame',function(data){
-    //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
-    socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
-  });
+    if (!(playername == '')) {
+	  socket.set('playername',playername);
+	  var i, gameslist = [];
+	  for (i in games) {
+	    gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
+	  }
+	  socket.emit('games',gameslist);
+	  socket.on('chat',function(data){
+	    socket.get('playername',function(err,playername){
+	      lobbychat(playername,data);
+	    });
+	  });
+	  socket.on('joingame',function(data){
+	    if (games[data].players.length < games[data].maxPlayers) {
+	      socket.emit('gameid','/'+data); //tell the client to join the game
+	    }
+	  });
+	  socket.on('newgame',function(data){
+	    //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
+	    socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
+	  });
+    }
   });
 });
 
