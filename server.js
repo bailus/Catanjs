@@ -639,9 +639,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
   socket.on('login',function(data){
     var playername = '';
     for (p in players) {
-console.log(data.id);
-console.log(players[p].id);
-      if (data.id == players[p].id) { playername = players[p].nickname; }
+      if (encodeURIComponent(data.id) == players[p].id) { playername = players[p].nickname; }
     }
     if (!(playername == '')) {
 	  socket.set('playername',playername);
