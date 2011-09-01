@@ -667,7 +667,6 @@ var relyingParty = new openid.RelyingParty(
   false, // Use stateless verification
   false, // Strict mode
   [
-    new openid.UserInterface(),
     new openid.SimpleRegistration({ "nickname" : true }),
     new openid.AttributeExchange({ "http://axschema.org/contact/email": "required" })
   ]
