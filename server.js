@@ -686,13 +686,12 @@ http.get('/authenticate', function(req, res){
 });
 http.get('/game', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
-    if (error) {
-      res.send('Authentication failed: ' + error);
-    } else if (!result.authenticated) {
-      res.send('Authentication failed');
-    } else {
+    if (!error && result.authenticated) {
       res.contentType('text/html');
+      res.write(result);
       res.sendfile('index.htm');
+    } else {
+      res.redirect('http://bailus.no.de/');
     }
   });
 });
