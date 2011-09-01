@@ -717,9 +717,7 @@ http.get('/verify', function(req, res){
 http.get('/game', function(req, res){
   var a = 0;
   for (p in players) {
-console.log(req.query.id);
-console.log(players[p].id);
-    if ((req.query.id == players[p].id)&&(req.query.key == players[p].key)) { a = 1; }
+    if ((encodeURIComponent(req.query.id) == players[p].id)&&(req.query.key == players[p].key)) { a = 1; }
   }
   if (a) {
     res.contentType('text/html');
