@@ -668,7 +668,7 @@ var relyingParty = new openid.RelyingParty(
   false, // Strict mode
   [
     new openid.SimpleRegistration({ "nickname" : true, "fullname" : true, "email": true }),
-    new openid.AttributeExchange({ "http://axschema.org/namePerson/friendly": "optional", "http://axschema.org/namePerson/first": "optional", "http://axschema.org/namePerson/last": "optional", "http://axschema.org/contact/email": "optional" })
+    new openid.AttributeExchange({ "http://axschema.org/namePerson/friendly": "required", "http://axschema.org/namePerson/first": "required", "http://axschema.org/namePerson/last": "required", "http://axschema.org/contact/email": "required" })
   ]
 );
 
