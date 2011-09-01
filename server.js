@@ -662,7 +662,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 var players = [];
 var relyingParty = new openid.RelyingParty(
-  'http://bailus.no.de/game', // Verification URL (yours)
+  'http://bailus.no.de/verify', // Verification URL (yours)
   null, // Realm (optional, specifies realm for OpenID authentication)
   false, // Use stateless verification
   false, // Strict mode
@@ -687,7 +687,7 @@ http.get('/authenticate', function(req, res){
     }
   });
 });
-http.get('/game', function(req, res){
+http.get('/verify', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
     if (!error && result.authenticated) {
       res.contentType('text/html');
@@ -703,19 +703,20 @@ http.get('/game', function(req, res){
       } else {
 	nickname = result.claimedIdentifier;
       }
-      players.push({'id':result.claimedIdentifier,'nickname':nickname});
+      var key = Math.floor(Math.random()*100000000000000000000);
+      players.push({'id':result.claimedIdentifier,'nickname':nickname,'key':key});
       console.log(result);
       console.log(players);
-      res.sendfile('index.htm');
+      res.redirect('http://bailus.no.de/game?id='+result.claimedIdentifier+'&key='+key);
     } else {
       res.redirect('http://bailus.no.de/');
     }
   });
 });
-/*http.get('/game', function(req, res){
+http.get('/game', function(req, res){
   res.contentType('text/html');
   res.sendfile('index.htm');
-});*/
+});
 http.get('/themes/default.css', function(req, res){
   res.contentType('text/css');
   res.sendfile('themes/default.css');
