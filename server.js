@@ -667,8 +667,8 @@ var relyingParty = new openid.RelyingParty(
   false, // Use stateless verification
   false, // Strict mode
   [
-    new openid.SimpleRegistration({ "nickname" : true, "fullname" : true }),
-    new openid.AttributeExchange({ "http://axschema.org/namePerson": "required" })
+    new openid.SimpleRegistration({ "nickname" : true, "fullname" : true, "email": true }),
+    new openid.AttributeExchange({ "http://axschema.org/namePerson/friendly": "optional", "http://axschema.org/namePerson": "optional", "http://axschema.org/contact/email": "optional" })
   ]
 );
 
@@ -696,6 +696,12 @@ http.get('/game', function(req, res){
 	nickname = result["http://axschema.org/namePerson/friendly"];
       } else if (result.nickname) {
 	nickname = result.nickname;
+      } else if (result["http://axschema.org/namePerson"]) {
+	nickname = result["http://axschema.org/namePerson"];
+      } else if (result["http://axschema.org/contact/email"]) {
+	nickname = result["http://axschema.org/contact/email"].split('@',1)[0];
+      } else if (result.email) {
+	nickname = result.email.split('@',1)[0];
       } else {
 	nickname = result.claimedIdentifier;
       }
