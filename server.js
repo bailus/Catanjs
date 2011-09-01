@@ -704,18 +704,29 @@ http.get('/verify', function(req, res){
 	nickname = result.claimedIdentifier;
       }
       var key = Math.floor(Math.random()*100000000000000000000);
-      players.push({'id':result.claimedIdentifier,'nickname':nickname,'key':key});
+      var id = encodeURIComponent(result.claimedIdentifier);
+      players.push({'id':id,'nickname':nickname,'key':key});
       console.log(result);
       console.log(players);
-      res.redirect('http://bailus.no.de/game?id='+result.claimedIdentifier+'&key='+key);
+      res.redirect('http://bailus.no.de/game?id='+id+'&key='+key);
     } else {
       res.redirect('http://bailus.no.de/');
     }
   });
 });
 http.get('/game', function(req, res){
-  res.contentType('text/html');
-  res.sendfile('index.htm');
+  var a = 0;
+  for (p in players) {
+    if ((req.query.id == players[p].id)&&(req.query.id == players[p].id)) {
+      a = 1;
+    }
+  }
+  if (a) {
+    res.contentType('text/html');
+    res.sendfile('index.htm');
+  } else {
+    res.redirect('http://bailus.no.de/');
+  }
 });
 http.get('/themes/default.css', function(req, res){
   res.contentType('text/css');
