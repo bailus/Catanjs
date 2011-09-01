@@ -666,15 +666,13 @@ http.get('/',function(req, res){
   res.sendfile('login.htm');
 });
 http.get('/authenticate',function(req, res){
-  res.send();
   openid.authenticate(
     req.query.openid_identifier, // user supplied identifier
     'http://bailus.no.de/verify', // our callback URL
     null, // realm (optional)
     false, // attempt immediate authentication first?
     function(authUrl) {
-      res.writeHead(302, { Location: authUrl });
-      res.end();
+      res.redirect(authUrl);
     }
   );
 });
