@@ -701,7 +701,7 @@ http.get('/game', function(req, res){
 	nickname = result.claimedIdentifier;
       }
       players.push({'id':result.claimedIdentifier,'nickname':nickname});
-      console.log(players);
+      console.log(result);
       res.sendfile('index.htm');
     } else {
       res.redirect('http://bailus.no.de/');
