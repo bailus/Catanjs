@@ -695,7 +695,7 @@ http.get('/game', function(req, res){
       if (result.nickname) {
 	nickname = result.nickname;
       } else if (result.firstname && result.lastname) {
-	nickname = result.firstname+' '+result.firstname;
+	nickname = result.firstname+' '+result.lastname;
       } else if (result.email) {
 	nickname = result.email.split('@',1)[0];
       } else {
