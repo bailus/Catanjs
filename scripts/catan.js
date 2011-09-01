@@ -69,6 +69,21 @@ function currentPlayer() { //returns the number of the current player.
   else { return eval((turnCounter-1)%totalPlayers+1); }
 }
 
+function searchToObject() {
+  var pairs = window.location.search.substring(1).split("&"),
+    obj = {},
+    pair,
+    i;
+  for ( i in pairs ) {
+    if ( pairs[i] === "" ) continue;
+    pair = pairs[i].split("=");
+    obj[ decodeURIComponent( pair[0] ) ] = decodeURIComponent( pair[1] );
+  }
+  return obj;
+}
+var searchObject = searchToObject();
+var id = searchObject.id, key = searchObject.key;
+
 function startTurn(counter) {
   konsole('debug','Turn '+counter+' begins...');
   turnCounter = counter;
@@ -1201,7 +1216,7 @@ var lobbysocket;
 function lobby() {
 	lobbysocket = io.connect('http://'+window.location.hostname+'/lobby');
 	lobbysocket.on('connection',function(data){
-		konsole('info','Connected to the lobby.');
+		lobbysocket.emit('login',{'id':id,'key':key});
 	});
 	lobbysocket.on('games',function(data){
 		var i, gamesDiv = $('#games').empty();
