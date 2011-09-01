@@ -703,7 +703,7 @@ http.get('/verify', function(req, res){
       } else {
 	nickname = result.claimedIdentifier;
       }
-      var key = Math.floor(Math.random()*100000000000000000000);
+      var key = Math.floor(Math.random()*10000000000000000);
       var id = encodeURIComponent(result.claimedIdentifier);
       players.push({'id':id,'nickname':nickname,'key':key});
       console.log(result);
