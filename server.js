@@ -763,6 +763,10 @@ http.get('/themes/default.css', function(req, res){
   res.contentType('text/css');
   res.sendfile('themes/default.css');
 });
+http.get('/themes/login.css', function(req, res){
+  res.contentType('text/css');
+  res.sendfile('themes/login.css');
+});
 http.get('/lib.js', function(req, res){
   res.contentType('text/javascript');
   res.sendfile('lib.js');
