@@ -232,7 +232,7 @@ body {
 .stats.roads { background-position:1px 2px; }
 
 #playerspanel .chat {
-  margin-top:75px;
+  margin-top:65px;
   left:0;
   width:156px;height:20px;
   color:white;
@@ -245,7 +245,7 @@ body {
   opacity:0.8;
 }
 #playerspanel .trade {
-  margin-top:72px;
+  margin-top:62px;
   left:0;
   width:160px;height:90px;
   background-color:rgba(0,0,0,0.4);
