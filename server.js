@@ -691,14 +691,15 @@ http.get('/verify', function(req, res){
     } else if (!result.authenticated) {
       res.send('Authentication failed');
     } else {
-      res.redirect('/game');
+      res.contentType('text/html');
+      res.sendfile('index.htm');
     }
   });
 });
-http.get('/game', function(req, res){
+/*http.get('/game', function(req, res){
   res.contentType('text/html');
   res.sendfile('index.htm');
-});
+});*/
 http.get('/themes/default.css', function(req, res){
   res.contentType('text/css');
   res.sendfile('themes/default.css');
