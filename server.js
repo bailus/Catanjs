@@ -666,8 +666,9 @@ http.get('/',function(req, res){
   res.sendfile('login.htm');
 });
 http.get('/authenticate',function(req, res){
+try {
   openid.authenticate(
-    req.query.openid_identifier, // user supplied identifier
+    req.query.openid, // user supplied identifier
     'http://bailus.no.de/verify', // our callback URL
     null, // realm (optional)
     false, // attempt immediate authentication first?
@@ -676,6 +677,9 @@ http.get('/authenticate',function(req, res){
       res.end();
     }
   );
+} catch(err) {
+  res.send(req.query.openid);
+}
 });
 http.get('/verify',function(req, res){
   var result = openid.verifyAssertion(req);
