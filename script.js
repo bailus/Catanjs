@@ -1217,7 +1217,7 @@ function connect(gameid) {
 var lobbysocket;
 function lobby() {
 	lobbysocket = io.connect('http://'+window.location.hostname+'/lobby');
-	lobbysocket.on('connection',function(data){
+	lobbysocket.on('connection',function(){
 alert(id);
 		lobbysocket.emit('login',{'id':id,'key':key});
 	});
