@@ -424,8 +424,8 @@ var bank = function(gameid,player,data) {
     }
   }
 };
-var chat = function(gameid,player,data) {
-  io.of('/'+gameid).emit('chat',player,data);
+var chat = function(gameid,player,playername,data) {
+  io.of('/'+gameid).emit('chat',player,playername,data);
 };
 var lobbychat = function(player,data) {
   io.of('/lobby').emit('chat',player,data);
@@ -610,8 +610,9 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    });
 	    socket.on('chat',function(data){
 	      socket.get('player',function(err,player){
+	      socket.get('playername',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		chat(gameid,player,data);
+		chat(gameid,player,playername,data);
 	      });
 	      });
 	    });
