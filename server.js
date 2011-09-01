@@ -610,7 +610,7 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    });
 	    socket.on('chat',function(data){
 	      socket.get('player',function(err,player){
-	      socket.get('playername',function(err,player){
+	      socket.get('playername',function(err,playername){
 	      socket.get('gameid',function(err,gameid){
 		chat(gameid,player,playername,data);
 	      });
