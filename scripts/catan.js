@@ -1242,7 +1242,8 @@ function joinGame() {
   lobbysocket.emit('joingame',$(this).attr('id').slice(4));
 }
 function chat(player,playername,data) {
-//<div><span class="player1">player1</span>Some text here...</div>
+console.log(player);
+console.log(playername);
   $('<div><span class="player'+player+'">'+playername+'</span>'+data+'</div>').hide().prependTo('#chat').slideDown(100);
   if ($('#sidepanel').hasClass('hide')) {
     $('<div class="chat player'+player+'">'+data+'</div>').click(function(){ $('#sidepanel').removeClass('hide'); $('#chatinput').focus(); }).hide().appendTo('#playerspanel .player'+player).slideDown(100).delay(4000).slideUp(100);
