@@ -692,14 +692,10 @@ http.get('/game', function(req, res){
     if (!error && result.authenticated) {
       res.contentType('text/html');
       var nickname;
-      if (result["http://axschema.org/namePerson/friendly"]) {
-	nickname = result["http://axschema.org/namePerson/friendly"];
-      } else if (result.nickname) {
+      if (result.nickname) {
 	nickname = result.nickname;
-      } else if (result["http://axschema.org/namePerson/first"] && result["http://axschema.org/namePerson/last"]) {
-	nickname = result["http://axschema.org/namePerson/first"]+' '+result["http://axschema.org/namePerson/last"];
-      } else if (result["http://axschema.org/contact/email"]) {
-	nickname = result["http://axschema.org/contact/email"].split('@',1)[0];
+      } else if (result.firstname && result.lastname) {
+	nickname = result.firstname+' '+result.firstname;
       } else if (result.email) {
 	nickname = result.email.split('@',1)[0];
       } else {
