@@ -660,24 +660,39 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
-
+var relyingParty = new openid.RelyingParty(
+    'http://bailus.no.de/verify', // Verification URL (yours)
+    null, // Realm (optional, specifies realm for OpenID authentication)
+    false, // Use stateless verification
+    false, // Strict mode
+    [] // List of extensions to enable and include
+);
 http.get('/',function(req, res){
   res.contentType('text/html');
   res.sendfile('login.htm');
 });
 http.get('/authenticate',function(req, res){
-  var authenticate = openid.authenticate(
+  relyingParty.authenticate(req.query.openid, false, function(error, authUrl){
+    if (error) {
+      res.writeHead(200);
+      res.end('Authentication failed: ' + error);
+    } else if (!authUrl) {
+      res.writeHead(200);
+      res.end('Authentication failed');
+    } else {
+      res.writeHead(302, { Location: authUrl });
+      res.end();
+    }
+  });
+  /*openid.authenticate(
     req.query.openid, // user supplied identifier
     'http://bailus.no.de/verify', // our callback URL
     null, // realm (optional)
     false, // attempt immediate authentication first?
-    function(authUrl) {
-      res.redirect(authUrl);
-      res.end();
-    }
-  );
+    function(authUrl) { res.redirect(authUrl); }
+  );*/
 });
-http.get('/verify',function(req, res){
+/*http.get('/verify',function(req, res){
   var result = openid.verifyAssertion(req);
   res.contentType('text/html');
   if (result.authenticated) {
@@ -685,7 +700,7 @@ http.get('/verify',function(req, res){
   } else {
     res.send(Failure);
   }
-});
+});*/
 http.get('/game', function(req, res){
   res.contentType('text/html');
   res.sendfile('index.htm');
