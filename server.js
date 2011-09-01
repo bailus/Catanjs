@@ -659,6 +659,8 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
+
+
 var relyingParty = new openid.RelyingParty(
   'http://bailus.no.de/verify', // Verification URL (yours)
   null, // Realm (optional, specifies realm for OpenID authentication)
@@ -674,7 +676,7 @@ http.get('/', function(req, res){
 http.get('/authenticate', function(req, res){
   relyingParty.authenticate(req.query.openid, false, function(error, authUrl) {
     if (error) {
-      res.send('Authentication failed!: ' + error);
+      res.send('Authentication failed: ' + error);
     } else if (!authUrl) {
       res.send('Authentication failed');
     } else {
@@ -684,7 +686,13 @@ http.get('/authenticate', function(req, res){
 });
 http.get('/verify', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
-    res.send(!error && result.authenticated ? 'Success :)' : 'Failure :(');
+    if (error) {
+      res.send('Authentication failed: ' + error);
+    } else if (!result.authenticated) {
+      res.send('Authentication failed');
+    } else {
+      res.redirect('/game');
+    }
   });
 });
 http.get('/game', function(req, res){
