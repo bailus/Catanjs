@@ -130,6 +130,7 @@ var sendStats = function(gameid,player) {
 var getStats = function(gameid,player) {
   var stats = {
     'player':player,
+    'playername':games[gameid].players[player-1].playername,
     'cards':0,
     'developments':games[gameid].players[player-1].developmentCards.length,
     'roads':0,
@@ -475,7 +476,7 @@ io.of('/'+gameid).on('connection', function (socket) {
     if (!(playername == '')) {
 	  socket.set('playername',playername);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
-	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playerid':playerid, 'key':key });
+	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'key':key });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
             console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
