@@ -666,7 +666,7 @@ http.get('/',function(req, res){
   res.sendfile('login.htm');
 });
 http.get('/authenticate',function(req, res){
-  res.send(req.param(req.query.openid_identifier));
+  res.send(req.query.openid_identifier);
   /*openid.authenticate(
     req.param(openid_identifier), // user supplied identifier
     'http://bailus.no.de/verify', // our callback URL
