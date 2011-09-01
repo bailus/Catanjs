@@ -743,10 +743,13 @@ var server = require('http').createServer(
             // NOTE: Passing just the URL is also possible
             relyingParty.verifyAssertion(req, function(error, result)
             {
-              res.writeHead(200);
-              res.end(!error && result.authenticated 
-                  ? 'Success :)'
-                  : 'Failure :(');
+		if (!error && result.authenticated) {
+                  res.writeHead(302, { Location: 'http://bailus.no.de:1337/' });
+                  res.end();
+		} else {
+                  res.writeHead(302, { Location: 'http://bailus.no.de/' });
+                  res.end();
+		}
             });
         }
         else
