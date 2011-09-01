@@ -83,8 +83,6 @@ function searchToObject() {
 }
 var searchObject = searchToObject();
 var id = searchObject.id, key = searchObject.key;
-console.log(id);
-console.log(key);
 
 function startTurn(counter) {
   konsole('debug','Turn '+counter+' begins...');
@@ -1218,7 +1216,8 @@ var lobbysocket;
 function lobby() {
 	lobbysocket = io.connect('http://'+window.location.hostname+'/lobby');
 	lobbysocket.on('connection',function(data){
-console.log(asdfasdf);
+console.log(id);
+console.log(key);
 		lobbysocket.emit('login',{'id':id,'key':key});
 	});
 	lobbysocket.on('games',function(data){

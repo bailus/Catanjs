@@ -1218,6 +1218,8 @@ var lobbysocket;
 function lobby() {
 	lobbysocket = io.connect('http://'+window.location.hostname+'/lobby');
 	lobbysocket.on('connection',function(data){
+console.log(id);
+console.log(key);
 		lobbysocket.emit('login',{'id':id,'key':key});
 	});
 	lobbysocket.on('games',function(data){
