@@ -665,7 +665,7 @@ http.get('/',function(req, res){
   res.contentType('text/html');
   res.sendfile('login.htm');
 });
-http.get('/authenticate?:id',function(req, res){
+http.get('/authenticate',function(req, res){
   res.send(req.param(req.query.openid_identifier));
   /*openid.authenticate(
     req.param(openid_identifier), // user supplied identifier
