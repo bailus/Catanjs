@@ -715,18 +715,18 @@ http.get('/verify', function(req, res){
   });
 });
 http.get('/game', function(req, res){
-  var a = 0;
+  /*var a = 0;
   for (p in players) {
     if ((req.query.id == players[p].id)&&(req.query.id == players[p].id)) {
       a = 1;
     }
   }
-  if (a) {
+  if (a) {*/
     res.contentType('text/html');
     res.sendfile('index.htm');
-  } else {
+/*  } else {
     res.redirect('http://bailus.no.de/');
-  }
+  }*/
 });
 http.get('/themes/default.css', function(req, res){
   res.contentType('text/css');
