@@ -1,8 +1,7 @@
 var http = require('express').createServer();
 var io = require('socket.io').listen(http),
     check = require('validator').check,
-    sanitize = require('validator').sanitize,
-    openid = require('openid');
+    sanitize = require('validator').sanitize;
 /* production settings for socket.io */
 //io.enable('browser client minification');  // send minified client
 //io.enable('browser client etag');          // apply etag caching logic based on version number
@@ -659,7 +658,35 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 
 
 
+var relyingParty = new openid.RelyingParty(
+  'http://bailus.no.de/verify', // Verification URL (yours)
+  null, // Realm (optional, specifies realm for OpenID authentication)
+  false, // Use stateless verification
+  false, // Strict mode
+  [] // List of extensions to enable and include
+);
+
 http.get('/', function(req, res){
+  res.contentType('text/html');
+  res.sendfile('login.htm');
+});
+http.get('/authenticate', function(req, res){
+  relyingParty.authenticate(req.query.openid, false, function(error, authUrl) {
+    if (error) {
+      res.send('Authentication failed: ' + error);
+    } else if (!authUrl) {
+      res.send('Authentication failed');
+    } else {
+      res.redirect(authUrl);
+    }
+  });
+});
+http.get('/verify', function(req, res){
+  relyingParty.verifyAssertion(req.url, function(error, result) {
+    res.send(!error && result.authenticated ? 'Success :)' : 'Failure :(');
+  });
+});
+http.get('/game', function(req, res){
   res.contentType('text/html');
   res.sendfile('index.htm');
 });
@@ -680,7 +707,7 @@ http.get('/background.jpg', function(req, res){
   res.sendfile('server.js');
 });*/
 
-http.listen(1337);
+http.listen(80);
 
 
 
@@ -688,14 +715,7 @@ http.listen(1337);
 
 
 
-
-
-
-
-
-
-
-
+/*   Simple OpenID...
 
 var url = require('url');
 var querystring = require('querystring');
@@ -707,7 +727,8 @@ var relyingParty = new openid.RelyingParty(
     []); // List of extensions to enable and include
 
 
-var server = require('http').createServer(
+var openid = require('openid'),
+    server = require('http').createServer(
     function(req, res)
     {
         var parsedUrl = url.parse(req.url);
@@ -743,13 +764,10 @@ var server = require('http').createServer(
             // NOTE: Passing just the URL is also possible
             relyingParty.verifyAssertion(req, function(error, result)
             {
-		if (!error && result.authenticated) {
-                  res.writeHead(302, { Location: 'http://bailus.no.de:1337/' });
-                  res.end();
-		} else {
-                  res.writeHead(302, { Location: 'http://bailus.no.de/' });
-                  res.end();
-		}
+              res.writeHead(200);
+              res.end(!error && result.authenticated 
+                  ? 'Success :)'
+                  : 'Failure :(');
             });
         }
         else
@@ -765,3 +783,5 @@ var server = require('http').createServer(
         }
     });
 server.listen(80);
+
+*/
