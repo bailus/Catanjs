@@ -733,7 +733,7 @@ http.get('/verify', function(req, res){
       else if (result.claimedIdentifier.substring(27) == 'https://live.anyopenid.com/') { service = 'live'; }
       else if (result.claimedIdentifier.substring(31) == 'https://facebook.anyopenid.com/') { service = 'facebook'; }
       else if (result.claimedIdentifier.substring(32) == 'https://www.google.com/accounts/') { service = 'google'; }
-      players.push({'id':id,'nickname':nickname,'service',service,'key':key});
+      players.push({'id':id,'nickname':nickname,'service':service,'key':key});
       console.log(result);
       console.log(players);
       res.redirect('http://bailus.no.de/game?id='+id+'&key='+key);
