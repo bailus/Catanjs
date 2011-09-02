@@ -656,7 +656,7 @@ body {
   overflow-x:hidden;
 }
 #players .player {
-  width:79px;height:20px;line-height:20px;
+  height:20px;line-height:20px;
   font-size:14px;
 }
 #games, #newgame, #connecting {
