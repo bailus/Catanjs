@@ -670,7 +670,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
       playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
     }
 	  socket.emit('games',gameslist);
-	  io.of('/lobby').broadcast.emit('players',playerslist);
+	  io.of('/lobby').emit('players',playerslist);
 	  socket.on('chat',function(data){
 	    socket.get('playername',function(err,playername){
 	      lobbychat(playername,data);
