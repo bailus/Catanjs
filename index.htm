@@ -653,7 +653,7 @@ body {
 #players {
   position:fixed;
   left:50%;bottom:40px;
-  width:180px;top:140px;
+  width:120px;top:140px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -2051,7 +2051,7 @@ function lobby() {
 	lobbysocket.on('players',function(data){
 		var j, playersDiv = $('#players').empty();
 		for (j in data) {
-			$('<div class="player" title="'+data[j].id+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</div>').prependTo(playersDiv);
+			$('<div class="player" title="'+decodeURIComponent(data[j].id)+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</div>').prependTo(playersDiv);
 		}
 	});
 	lobbysocket.on('game',function(data){
