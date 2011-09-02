@@ -667,7 +667,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	    gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
 	  }
     for (i in players) {
-      playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service, );
+      playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service );
     }
 	  socket.emit('games',gameslist);
 	  socket.emit('players',playerslist);
