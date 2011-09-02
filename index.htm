@@ -632,7 +632,6 @@ body {
   background-color:#444;
 }
 #lobbychat {
-  position:absolute;
   position:fixed;
   top:140px;left:50%;bottom:65px;
   width:400px;
@@ -641,7 +640,7 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
   overflow:auto;
-  margin-left:5px;
+  margin-left:210px;
 }
 #lobby {
   position:fixed;
@@ -650,6 +649,21 @@ body {
   background-color:black;
   color:white;
   z-index:100000000;
+}
+#players {
+  position:fixed;
+  left:50%;bottom:40px;
+  width:200px;top:140px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border:1px solid #666;
+  overflow:auto;
+  padding:10px;
+}
+#players .player {
+  width:79px;
+  overflow:hidden;
 }
 #games, #newgame, #connecting {
   position:fixed;
@@ -709,7 +723,7 @@ body {
   position:fixed;
   left:50%;bottom:35px;
   width:400px;height:25px;
-  margin-left:5px;
+  margin-left:210px;
 }
 #lobbychat .player {
   background-color:#222;
