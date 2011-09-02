@@ -1225,6 +1225,12 @@ function lobby() {
 			$('<div id="game'+data[i][3]+'"><div class="type">'+data[i][0]+'</div><div class="name">'+data[i][1]+'</div><div class="players">'+data[i][2]+'</div></div>').click(joinGame).prependTo(gamesDiv);
 		}
 	});
+	lobbysocket.on('players',function(data){
+		var j, playersDiv = $('#players').empty();
+		for (j in data) {
+			$('<div class="player"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</div>').prependTo(playersDiv);
+		}
+	});
 	lobbysocket.on('game',function(data){
 		if ($('#game'+data[3]).length) { var thisgame = $('#game'+data[3]).empty(); }
 		else { var thisgame = $('<div id="game'+data[3]+'">').click(joinGame).hide().prependTo('#games'); }

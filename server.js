@@ -662,11 +662,15 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
     }
     if (!(playername == '')) {
 	  socket.set('playername',playername);
-	  var i, gameslist = [];
+	  var i, gameslist = [], playerslist = [];
 	  for (i in games) {
 	    gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
 	  }
+    for (i in players) {
+      playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service, );
+    }
 	  socket.emit('games',gameslist);
+	  socket.emit('players',playerslist);
 	  socket.on('chat',function(data){
 	    socket.get('playername',function(err,playername){
 	      lobbychat(playername,data);
