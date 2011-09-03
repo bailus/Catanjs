@@ -100,12 +100,12 @@
     <script>
       $('form').parent().children('.login').click(function(event){
         if ($(this).parent().hasClass('visible')) {
-          $('.visible').removeClass('visible');
           $('.visible').animate({ width:64 },300);
+          $('.visible').removeClass('visible');
         }
         else {
-          $('.visible').removeClass('visible');
           $('.visible').animate({ width:64 },300);
+          $('.visible').removeClass('visible');
           $(this).parent().animate({ width:300 },300,function(){
             $(this).addClass('visible');
           });
