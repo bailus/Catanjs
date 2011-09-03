@@ -60,19 +60,19 @@
       <a href="/authenticate?openid=me.yahoo.com" title="Login with your Yahoo! account"><div class="login yahoo"></div></a>
       <a href="/authenticate?openid=facebook.anyopenid.com" title="Login with your Facebook account"><div class="login facebook"></div></a>
       <a href="/authenticate?openid=twitter.anyopenid.com" title="Login with your Twitter account"><div class="login twitter"></div></a>
+      <span title="Login with your AOL account">
+        <div class="login aol"></div>
+        <form class="aol">
+          <div>Enter your AOL username:</div>
+          <div><input name="openid" class="aol" /><input type="button" value="Login" /></div>
+        </form>
+      </span>
       <a href="/authenticate?openid=live.anyopenid.com" title="Login with your Windows Live account"><div class="login live"></div></a>
       <span title="Login with your openID account">
         <div class="login openid"></div>
         <form method="get" action="/authenticate">
           <div>Login using openID:</div>
           <div><input name="openid" /><input type="submit" value="Login" /></div>
-        </form>
-      </span>
-      <span title="Login with your AOL account">
-        <div class="login aol"></div>
-        <form class="aol">
-          <div>Enter your AOL username:</div>
-          <div><input name="openid" class="aol" /><input type="button" value="Login" /></div>
         </form>
       </span>
     </div>
