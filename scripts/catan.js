@@ -1234,7 +1234,7 @@ function lobby() {
 	lobbysocket.on('game',function(data){
 		if ($('#game'+data[3]).length) { var thisgame = $('#game'+data[3]).empty(); }
 		else { var thisgame = $('<div id="game'+data[3]+'">').click(joinGame).hide().prependTo('#games'); }
-		$('<div class="type">'+data[0]+'</div><div class="name">'+data[1]+'</div><div class="players">'+data[2]+'</div>').appendTo(thisgame);
+		$('<div class="boardicon '+data[0]+'"></div><div class="type">'+data[0]+'</div><div class="name">'+data[1]+'</div><div class="players">'+data[2]+'</div>').appendTo(thisgame);
 		thisgame.slideDown(200);
 	});
 	lobbysocket.on('gameid',function(data){

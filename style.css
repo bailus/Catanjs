@@ -672,7 +672,7 @@ body {
   overflow:auto;
   background-color:black;
 }
-#games { top:185px; }
+#games { top:165px; }
 #newgame { z-index:100000010;display:none; }
 #connecting { z-index:100000020;display:none; }
 #gamebuttons {
@@ -698,20 +698,29 @@ body {
   background-color:#444;
 }
 #games > div {
-  height:24px;
+  height:64px;
+  width:370px;
+  overflow:hidden;
+  position:absolute;
 }
 #games > div:hover {
   background-color:#222;
 }
-#games .type, #games .name, #games .players { float:left;overflow:hidden; }
+#games .boardicon {
+  top:0;left:0;
+}
 #games .type {
-  width:70px;
+  top:2px;left:70px;
+  width:250px;
   font-weight:bold;
 }
 #games .name {
-  width:260px;
+  width:300px;
+  top:22px;left:70px;
 }
 #games .players {
+  top:2px;right:2px;
+  text-align:right;
   width:30px;
 }
 #lobby > form {
