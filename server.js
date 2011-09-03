@@ -431,7 +431,7 @@ var chat = function(gameid,player,playername,data) {
 };
 lobbychatbuffer = [];
 var lobbychat = function(playerid,playername,playerservice,data) {
-  if (lobbychatbuffer.length() >= 10) { lobbychatbuffer.splice(0,1); }
+  if (lobbychatbuffer.length >= 10) { lobbychatbuffer.splice(0,1); }
   lobbychatbuffer.push({'playerid':playerid,'playername':playername,'playerservice':playerservice,'data':data});
   io.of('/lobby').emit('chat',playerid,playername,playerservice,data);
 };
