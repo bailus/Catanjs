@@ -701,6 +701,7 @@ body {
   height:64px;
   width:370px;
   overflow:hidden;
+  position:relative;
 }
 #games > div:hover {
   background-color:#222;
