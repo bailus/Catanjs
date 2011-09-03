@@ -70,9 +70,9 @@
       </span>
       <span title="Login with your Blogger account">
         <div class="login blogger"></div>
-        <form method="get" action="/authenticate">
+        <form method="get" action="#" onsubmit="window.location = $(this).parent().children('input')[0].attr('value')+'.blogger.com';">
           <div>Enter your Blogger username:</div>
-          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = $(this).parent().children('input')[0].attr('value')+'.blogger.com';" /></div>
+          <div><input name="openid" /><input type="submit" value="Login" /></div>
         </form>
       </span>
       <span title="Login with your LiveJournal account">
