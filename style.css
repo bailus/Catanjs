@@ -569,14 +569,14 @@ body {
 #chat > div {
   margin:10px;
   color:white;
-  width:300px;
+  width:360px;
   font-size:14px;
   line-height:25px;
 }
 #lobbychat > div {
   margin:10px;
   color:white;
-  width:360px;
+  width:300px;
   font-size:14px;
   line-height:25px;
 }
@@ -648,6 +648,16 @@ body {
   color:white;
   z-index:100000000;
 }
+#lobbytitle {
+  position:fixed;
+  left:0;top:0;
+  width:100%;
+  height:60px;
+  line-height:60px;
+  font-size:40px;
+  text-align:center;
+  font-weight:bold;
+}
 #players {
   position:fixed;
   left:50%;bottom:40px;
@@ -709,9 +719,10 @@ body {
   font-size:14px;
   line-height:20px;
   height:64px;
-  width:280px;
+  width:265px;
   overflow:hidden;
   position:relative;
+  cursor:pointer;
 }
 #games > div:hover {
   background-color:#222;
@@ -725,17 +736,21 @@ body {
   top:2px;left:70px;
   width:150px;
   font-weight:bold;
+  height:20px;
 }
 #games .name {
-  width:200px;
+  width:190px;
   position:absolute;
   top:22px;left:70px;
+  overflow:hidden;
+  height:20px;
 }
 #games .players {
   position:absolute;
   top:2px;right:2px;
   text-align:right;
-  width:30px;
+  width:40px;
+  height:20px;
 }
 #lobby > form {
   position:fixed;
