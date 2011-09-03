@@ -70,7 +70,7 @@
       </span>
       <span title="Login with your Blogger account">
         <div class="login blogger"></div>
-        <form method="get" action="#" onsubmit="window.location = $(this).parent().children('input')[0].attr('value')+'.blogger.com'; return true;">
+        <form class="blogger">
           <div>Enter your Blogger username:</div>
           <div><input name="openid" /><input type="submit" value="Login" /></div>
         </form>
@@ -110,6 +110,9 @@
           });
         }
       });
+      $('form.blogger').submit(function(){
+        window.location = $(this).children('input[name="openid"]').attr('value')+'.blogger.com'
+  `   });
     </script>
   </body>
 </html>
