@@ -626,7 +626,7 @@ body {
 #lobbychat {
   position:fixed;
   top:140px;left:50%;bottom:65px;
-  width:300px;
+  width:320px;
   border:1px solid #666;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -654,7 +654,7 @@ body {
   padding:4px;
   overflow:auto;
   overflow-x:hidden;
-  margin-left:225px;
+  margin-left:245px;
 }
 #players .player {
   height:20px;line-height:20px;
@@ -672,7 +672,7 @@ body {
   overflow:auto;
   background-color:black;
 }
-#games { top:165px; }
+#games { top:185px; }
 #newgame { z-index:100000010;display:none; }
 #connecting { z-index:100000020;display:none; }
 #gamebuttons {
@@ -717,7 +717,7 @@ body {
 #lobby > form {
   position:fixed;
   left:50%;bottom:35px;
-  width:300px;height:25px;
+  width:320px;height:25px;
   margin-left:-85px;
 }
 #lobbychat .player {
@@ -727,7 +727,7 @@ body {
   background-color:black;
   color:white;
   border:1px solid #666;
-  width:230px;
+  width:250px;
   height:18px;line-height:18px;
   padding:0;margin:0;
   -webkit-border-radius: 3px;
