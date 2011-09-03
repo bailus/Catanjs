@@ -674,8 +674,12 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	  socket.emit('games',gameslist);
 	  io.of('/lobby').emit('players',playerslist);
 	  socket.on('chat',function(data){
+	    socket.get('playerid',function(err,playername){
 	    socket.get('playername',function(err,playername){
-	      lobbychat(playername,data);
+	    socket.get('playerservice',function(err,playername){
+	      lobbychat(playerid,playername,playerservice,data);
+	    });
+	    });
 	    });
 	  });
 	  socket.on('joingame',function(data){
