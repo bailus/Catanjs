@@ -1224,7 +1224,7 @@ function lobby() {
 	lobbysocket.on('games',function(data){
 		var i, gamesDiv = $('#games').empty();
 		for (i in data) {
-			$('<div id="game'+data[i][3]+'"><div class="type">'+data[i][0]+'</div><div class="name">'+data[i][1]+'</div><div class="players">'+data[i][2]+'</div></div>').click(joinGame).prependTo(gamesDiv);
+			$('<div id="game'+data[i][3]+'"><div class="boardicon '+data[0]+'"></div><div class="type">'+data[i][0]+'</div><div class="name">'+data[i][1]+'</div><div class="players">'+data[i][2]+'</div></div>').click(joinGame).prependTo(gamesDiv);
 		}
 	});
 	lobbysocket.on('players',function(data){

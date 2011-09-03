@@ -701,24 +701,27 @@ body {
   height:64px;
   width:370px;
   overflow:hidden;
-  position:absolute;
 }
 #games > div:hover {
   background-color:#222;
 }
 #games .boardicon {
+  position:absolute;
   top:0;left:0;
 }
 #games .type {
+  position:absolute;
   top:2px;left:70px;
   width:250px;
   font-weight:bold;
 }
 #games .name {
   width:300px;
+  position:absolute;
   top:22px;left:70px;
 }
 #games .players {
+  position:absolute;
   top:2px;right:2px;
   text-align:right;
   width:30px;
