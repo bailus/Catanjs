@@ -635,7 +635,7 @@ body {
 #lobbychat {
   position:fixed;
   top:140px;left:50%;bottom:65px;
-  width:320px;
+  width:305px;
   border:1px solid #666;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
