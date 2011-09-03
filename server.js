@@ -429,7 +429,10 @@ var bank = function(gameid,player,data) {
 var chat = function(gameid,player,playername,data) {
   io.of('/'+gameid).emit('chat',player,playername,data);
 };
+lobbychatbuffer = [];
 var lobbychat = function(playerid,playername,playerservice,data) {
+  if (lobbychatbuffer.length() >= 10) { lobbychatbuffer.splice(0,1); }
+  lobbychatbuffer.push({'playerid':playerid,'playername':playername,'playerservice':playerservice,'data':data});
   io.of('/lobby').emit('chat',playerid,playername,playerservice,data);
 };
 
@@ -673,6 +676,10 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
       }
 	    socket.emit('games',gameslist);
 	    io.of('/lobby').emit('players',playerslist);
+      var line;
+      for (line in lobbychatbuffer) {
+        socket.emit('chat',lobbychatbuffer[line].playerid,lobbychatbuffer[line].playername,lobbychatbuffer[line].playerservice,lobbychatbuffer[line].data);
+      }
 	    socket.on('chat',function(data){
 	      socket.get('playerid',function(err,playerid){
 	      socket.get('playername',function(err,playername){
