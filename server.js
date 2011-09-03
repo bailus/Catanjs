@@ -429,8 +429,8 @@ var bank = function(gameid,player,data) {
 var chat = function(gameid,player,playername,data) {
   io.of('/'+gameid).emit('chat',player,playername,data);
 };
-var lobbychat = function(player,data) {
-  io.of('/lobby').emit('chat',player,data);
+var lobbychat = function(playerid,playername,playerservice,data) {
+  io.of('/lobby').emit('chat',playerid,playername,playerservice,data);
 };
 
 
@@ -484,7 +484,7 @@ io.of('/'+gameid).on('connection', function (socket) {
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
 	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
-            console.log('Game '+gameid+': Player '+player+' connected');
+      console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
 	      player: player,
 	      tiles: games[gameid].tiles,
@@ -499,119 +499,119 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    socket.on('build',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		if (!(games[gameid].robberMove)) {
-		  var o = 0;
-		  if (data[2] == 'road') { if (checkRoad(gameid,data[0],data[1],player)) { o = 1; buildRoad(gameid,data[0],data[1],player); console.log('Game '+gameid+': Player '+player+' built a road'); } }
-		  if (data[2] == 'settlement') { if (checkSettlement(gameid,data[0],data[1],player)) { o = 1; buildSettlement(gameid,data[0],data[1],player); console.log('Game '+gameid+': Player '+player+' built a settlement'); } }
-		  if (data[2] == 'city') { if (checkCity(gameid,data[0],data[1],player)) { o = 1; buildCity(gameid,data[0],data[1],player); console.log('Game '+gameid+': Player '+player+' built a city'); } }
-		  if (o) {
-		    games[gameid].players[player-1].sock.broadcast.emit('build',[data[0],data[1],data[2],player]);
-		    sendStats(gameid,player);
+		  if (!(games[gameid].robberMove)) {
+		    var o = 0;
+		    if (data[2] == 'road') { if (checkRoad(gameid,data[0],data[1],player)) { o = 1; buildRoad(gameid,data[0],data[1],player); console.log('Game '+gameid+': Player '+player+' built a road'); } }
+		    if (data[2] == 'settlement') { if (checkSettlement(gameid,data[0],data[1],player)) { o = 1; buildSettlement(gameid,data[0],data[1],player); console.log('Game '+gameid+': Player '+player+' built a settlement'); } }
+		    if (data[2] == 'city') { if (checkCity(gameid,data[0],data[1],player)) { o = 1; buildCity(gameid,data[0],data[1],player); console.log('Game '+gameid+': Player '+player+' built a city'); } }
+		    if (o) {
+		      games[gameid].players[player-1].sock.broadcast.emit('build',[data[0],data[1],data[2],player]);
+		      sendStats(gameid,player);
+		    }
 		  }
-		}
 	      });
 	      });
 	    });
 	    socket.on('end',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		if (!(games[gameid].robberMove)) {
-		  if (player == currentPlayer(gameid)) { endTurn(gameid); }
-		  else { konsole('info','Its not your turn!'); }
-		}
+		      if (!(games[gameid].robberMove)) {
+		        if (player == currentPlayer(gameid)) { endTurn(gameid); }
+		        else { konsole('info','Its not your turn!'); }
+		      }
 	      });
 	      });
 	    });
 	    socket.on('dice',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		if (!(games[gameid].robberMove)) {
-		  rollDice(gameid);
-		  sendStats(gameid);
-		  console.log('Game '+gameid+': Player '+player+' rolled the dice');
-		}
+		      if (!(games[gameid].robberMove)) {
+		        rollDice(gameid);
+		        sendStats(gameid);
+		        console.log('Game '+gameid+': Player '+player+' rolled the dice');
+		      }
 	      });
 	      });
 	    });
 	    socket.on('knightMove',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		if (data instanceof Array) {
-		if (data.length = 2) {
-		  var x = sanitize(data[0]).toInt();
-		  var y = sanitize(data[1]).toInt();
-		  if (currentPlayer(gameid) == player) {
-		    knightMove(gameid,player,x,y);
-		  } else { console.log('Invalid data (wrong player): '+data); }
-		} else { console.log('Invalid data: '+data); }
-		} else { console.log('Invalid data: '+data); }
+		      if (data instanceof Array) {
+		      if (data.length = 2) {
+		        var x = sanitize(data[0]).toInt();
+		        var y = sanitize(data[1]).toInt();
+		        if (currentPlayer(gameid) == player) {
+		          knightMove(gameid,player,x,y);
+		        } else { console.log('Invalid data (wrong player): '+data); }
+		      } else { console.log('Invalid data: '+data); }
+		      } else { console.log('Invalid data: '+data); }
 	      });
 	      });
 	    });
 	    socket.on('robberMove',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		if (data instanceof Array) {
-		if (data.length = 2) {
-		  var x = sanitize(data[0]).toInt();
-		  var y = sanitize(data[1]).toInt();
-		  if (currentPlayer(gameid) == player) {
-		    knightMove(gameid,player,x,y);
-		  } else { console.log('Invalid data (wrong player): '+data); }
-		} else { console.log('Invalid data: '+data); }
-		} else { console.log('Invalid data: '+data); }
+		      if (data instanceof Array) {
+		      if (data.length = 2) {
+		        var x = sanitize(data[0]).toInt();
+		        var y = sanitize(data[1]).toInt();
+		        if (currentPlayer(gameid) == player) {
+		          knightMove(gameid,player,x,y);
+		        } else { console.log('Invalid data (wrong player): '+data); }
+		      } else { console.log('Invalid data: '+data); }
+		      } else { console.log('Invalid data: '+data); }
 	      });
 	      });
 	    });
 	    socket.on('robberSteal',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		if (data) {
-		  var victim = sanitize(data).toInt();
-		  robberSteal(gameid,player,victim);
-		} else { console.log('Invalid data'); }
+		      if (data) {
+		        var victim = sanitize(data).toInt();
+		        robberSteal(gameid,player,victim);
+		      } else { console.log('Invalid data'); }
 	      });
 	      });
 	    });
 	    socket.on('getDevelopment',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		getDevelopment(gameid,player);
+		      getDevelopment(gameid,player);
 	      });
 	      });
 	    });
 	    socket.on('trade',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		//if (data) {
-		//if ((data.player)&&(data.give)&&(data.get)) {
-		  //data.player = sanitize(data.player).toInt();
-		  //if ((data.player>0)&&(data.player<8)) {
-		    trade(gameid,player,data);
-		  //}
-		//} else { console.log('Invalid data: '+data); }
-		//} else { console.log('Invalid data'); }
+		      //if (data) {
+		      //if ((data.player)&&(data.give)&&(data.get)) {
+		        //data.player = sanitize(data.player).toInt();
+		        //if ((data.player>0)&&(data.player<8)) {
+		      trade(gameid,player,data);
+		        //}
+		      //} else { console.log('Invalid data: '+data); }
+		      //} else { console.log('Invalid data'); }
 	      });
 	      });
 	    });
 	    socket.on('tradeAccept',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		tradeAccept(gameid,player,data);
+		      tradeAccept(gameid,player,data);
 	      });
 	      });
 	    });
 	    socket.on('tradeDecline',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		tradeDecline(gameid,player,data);
+		      tradeDecline(gameid,player,data);
 	      });
 	      });
 	    });
 	    socket.on('bank',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		bank(gameid,player,data);
+		      bank(gameid,player,data);
 	      });
 	      });
 	    });
@@ -619,7 +619,7 @@ io.of('/'+gameid).on('connection', function (socket) {
 	      socket.get('player',function(err,player){
 	      socket.get('playername',function(err,playername){
 	      socket.get('gameid',function(err,gameid){
-		chat(gameid,player,playername,data);
+		      chat(gameid,player,playername,data);
 	      });
 	      });
 	      });
@@ -627,12 +627,12 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    socket.on('disconnect',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
-		games[gameid].players[player-1].playerid = '';
-		var p, q = 0;
-		for (p in games[gameid].players) {
-		  if (games[gameid].players[p].playerid == '') { q += 1; }
-		}
-		if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }
+		      games[gameid].players[player-1].playerid = '';
+		      var p, q = 0;
+		      for (p in games[gameid].players) {
+		        if (games[gameid].players[p].playerid == '') { q += 1; }
+		      }
+		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }
 	      });
 	      });
 	    });
@@ -661,7 +661,9 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
       if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playername = players[p].nickname; }
     }
     if (!(playername == '')) {
+	  socket.set('playerid',playerid);
 	  socket.set('playername',playername);
+	  socket.set('playerservice',playerservice);
 	  var i, gameslist = [], playerslist = [];
 	  for (i in games) {
 	    gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);

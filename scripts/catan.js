@@ -1241,8 +1241,8 @@ function lobby() {
 		$('#lobby').hide();
 		connect(data);
 	});
-	lobbysocket.on('chat',function(player,data){
-		lobbychat(player,data);
+	lobbysocket.on('chat',function(playerid,playername,playerservice,data){
+		lobbychat(playerid,playername,playerservice,data);
 	});
 }
 function joinGame() {
@@ -1262,8 +1262,8 @@ function chatsend() {
   input.attr('value','');
   return false;
 }
-function lobbychat(player,data) {
-  $('<div><span class="player">'+player+'</span>'+data+'</div>').hide().prependTo('#lobbychat').slideDown(100);
+function lobbychat(playerid,playername,playerservice,data) {
+  $('<div><span class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</span>'+data+'</div>').hide().prependTo('#lobbychat').slideDown(100);
 }
 function lobbychatsend() {
   var input = $('#lobbychatinput');
