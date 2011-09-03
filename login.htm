@@ -68,6 +68,35 @@
           <div><input name="openid" /><input type="submit" value="Login" /></div>
         </form>
       </span>
+      <span title="Login with your Blogger account">
+        <div class="login blogger"></div>
+        <form method="get" action="/authenticate">
+          <div>Enter your Blogger username:</div>
+          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = $(this).parent().children('input')[0].attr('value')+'.blogger.com';" /></div>
+        </form>
+      </span>
+      <span title="Login with your LiveJournal account">
+        <div class="login livejournal"></div>
+        <form method="get" action="/authenticate">
+          <div>Enter your LiveJournal username:</div>
+          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = $(this).parent().children('input')[0].attr('value')+'.livejournal.com';" /></div>
+        </form>
+      </span>
+      <span title="Login with your AOL account">
+        <div class="login aol"></div>
+        <form method="get" action="/authenticate">
+          <div>Enter your AOL username:</div>
+          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = 'openid.aol.com/'+$(this).parent().children('input')[0].attr('value');" /></div>
+        </form>
+      </span>
+      <span title="Login with your MySpace account">
+        <div class="login myspace"></div>
+        <form method="get" action="/authenticate">
+          <div>Enter your MySpace username:</div>
+          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = 'myspace.com/'+$(this).parent().children('input')[0].attr('value');" /></div>
+        </form>
+      </span>
+      <a href="/authenticate?openid=hyves.nl" title="Login with your Hyves account"><div class="login hyves"></div></a>
     </div>
     <script>
       $('form').parent().children('.login').click(function(event){
