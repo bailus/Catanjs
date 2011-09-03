@@ -96,15 +96,16 @@
           <div><input name="openid" class="myspace" /><input type="button" value="Login" /></div>
         </form>
       </span>
-      <a href="/authenticate?openid=hyves.nl" title="Login with your Hyves account"><div class="login hyves"></div></a>
     </div>
     <script>
       $('form').parent().children('.login').click(function(event){
         if ($(this).parent().hasClass('visible')) {
-          $(this).parent().removeClass('visible');
-          $(this).parent().animate({ width:64 },300);
+          $('.visible').removeClass('visible');
+          $('.visible').animate({ width:64 },300);
         }
         else {
+          $('.visible').removeClass('visible');
+          $('.visible').animate({ width:64 },300);
           $(this).parent().animate({ width:300 },300,function(){
             $(this).addClass('visible');
           });
