@@ -72,28 +72,28 @@
         <div class="login blogger"></div>
         <form class="blogger">
           <div>Enter your Blogger username:</div>
-          <div><input name="openid" /><input type="submit" value="Login" /></div>
+          <div><input name="openid" class="blogger" /><input type="submit" value="Login" /></div>
         </form>
       </span>
       <span title="Login with your LiveJournal account">
         <div class="login livejournal"></div>
-        <form method="get" action="/authenticate">
+        <form class="livejournal">
           <div>Enter your LiveJournal username:</div>
-          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = $(this).parent().children('input')[0].attr('value')+'.livejournal.com';" /></div>
+          <div><input name="openid" class="livejournal" /><input type="button" value="Login" /></div>
         </form>
       </span>
       <span title="Login with your AOL account">
         <div class="login aol"></div>
-        <form method="get" action="/authenticate">
+        <form class="aol">
           <div>Enter your AOL username:</div>
-          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = 'openid.aol.com/'+$(this).parent().children('input')[0].attr('value');" /></div>
+          <div><input name="openid" class="aol" /><input type="button" value="Login" /></div>
         </form>
       </span>
       <span title="Login with your MySpace account">
         <div class="login myspace"></div>
-        <form method="get" action="/authenticate">
+        <form class="myspace">
           <div>Enter your MySpace username:</div>
-          <div><input name="openid" /><input type="button" value="Login" onclick="window.location = 'myspace.com/'+$(this).parent().children('input')[0].attr('value');" /></div>
+          <div><input name="openid" class="myspace" /><input type="button" value="Login" /></div>
         </form>
       </span>
       <a href="/authenticate?openid=hyves.nl" title="Login with your Hyves account"><div class="login hyves"></div></a>
@@ -111,8 +111,17 @@
         }
       });
       $('form.blogger').submit(function(){
-        window.location = $(this).children('input[name="openid"]').attr('value')+'.blogger.com';
-  `   });
+        window.location = '/authenticate?openid='+$('input.blogger').attr('value')+'.blogger.com'; return false;
+      });
+      $('form.livejournal').submit(function(){
+        window.location = '/authenticate?openid='+$('input.livejournal').attr('value')+'.livejournal.com'; return false;
+      });
+      $('form.aol').submit(function(){
+        window.location = '/authenticate?openid=openid.aol.com%2F'+$('input.aol').attr('value'); return false;
+      });
+      $('form.myspace').submit(function(){
+        window.location = '/authenticate?openid=myspace.com%2F'+$('input.myspace').attr('value'); return false;
+      });
     </script>
   </body>
 </html>
