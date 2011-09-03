@@ -696,6 +696,10 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
           var p, index;
           for (p in players) { if (players[p].id == playerid) { index = p; } }
           if (index.length) { players.splice(index,1); }
+          for (i in players) {
+            playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
+          }
+	        io.of('/lobby').emit('players',playerslist);
 	      });
 	    });
     }
