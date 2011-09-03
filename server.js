@@ -658,7 +658,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
   socket.on('login',function(data){
     var playername = '';
     for (p in players) {
-      if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playername = players[p].nickname; }
+      if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playerid = players[p].id; playername = players[p].nickname; playerservice = players[p].service; }
     }
     if (!(playername == '')) {
 	  socket.set('playerid',playerid);
