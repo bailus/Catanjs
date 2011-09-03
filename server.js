@@ -691,7 +691,6 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	    //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
 	    socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
 	  });
-    }
   });
 });
 

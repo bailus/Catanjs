@@ -574,7 +574,7 @@ body {
   line-height:25px;
 }
 #lobbychat .serviceicon {
-  display:inline-block;
+  display:inline;
 }
 #lobbychat > div {
   margin:10px;
