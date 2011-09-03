@@ -604,6 +604,7 @@ body {
   float:left;
   height:25px;
   line-height:25px;
+  padding-right:4px;
 }
 #sidepanelhide {
   position:absolute;
