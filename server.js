@@ -694,7 +694,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	    socket.on('disconnect',function(data){
 	      socket.get('playerid',function(err,playerid){
           var p;
-          for (p in players) { if (players[p].id == playerid) { players = players.splice(p,1); break; } }
+          for (p in players) { if (players[p].id == playerid) { players.splice(p,1); } }
           console.log(players);
           for (i in players) {
             playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
