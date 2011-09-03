@@ -592,9 +592,10 @@ body {
 }
 #lobbychat .serviceicon {
   margin:2px;
+  margin-right:4px;
 }
 #lobbychat .player {
-  margin-right:6px;
+  margin-right:4px;
   font-weight:bold;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -604,7 +605,7 @@ body {
   float:left;
   height:20px;
   line-height:20px;
-  padding-right:6px;
+  padding-right:4px;
   font-size:12px;
 }
 #sidepanelhide {
