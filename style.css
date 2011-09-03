@@ -579,9 +579,10 @@ body {
 #lobbychat > div {
   margin:10px;
   color:white;
-  width:300px;
+  width:280px;
   font-size:14px;
   line-height:25px;
+  word-wrap: break-word;
 }
 #chat > div > span, #lobbychat > div > span {
   margin-right:10px;
@@ -635,7 +636,7 @@ body {
 #lobbychat {
   position:fixed;
   top:140px;left:50%;bottom:65px;
-  width:305px;
+  width:320px;
   border:1px solid #666;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
