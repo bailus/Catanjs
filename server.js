@@ -693,9 +693,9 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	    });
 	    socket.on('disconnect',function(data){
 	      socket.get('playerid',function(err,playerid){
-          var p, index;
+          var p, index = 'false';
           for (p in players) { if (players[p].id == playerid) { index = p; } }
-          if (index.length) { players.splice(index,1); }
+          if (index != 'false') { players.splice(index,1); }
           for (i in players) {
             playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
           }
