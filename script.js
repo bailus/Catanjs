@@ -1265,7 +1265,7 @@ function chatsend() {
   return false;
 }
 function lobbychat(playerid,playername,playerservice,data) {
-  $('<div><span class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</span>'+data+'</div>').hide().prependTo('#lobbychat').slideDown(100);
+  $('<div><div class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div>'+data+'</div>').hide().prependTo('#lobbychat').slideDown(100);
 }
 function lobbychatsend() {
   var input = $('#lobbychatinput');
