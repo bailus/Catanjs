@@ -661,36 +661,44 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
       if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playerid = players[p].id; playername = players[p].nickname; playerservice = players[p].service; }
     }
     if (!(playername == '')) {
-	  socket.set('playerid',playerid);
-	  socket.set('playername',playername);
-	  socket.set('playerservice',playerservice);
-	  var i, gameslist = [], playerslist = [];
-	  for (i in games) {
-	    gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
-	  }
-    for (i in players) {
-      playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
-    }
-	  socket.emit('games',gameslist);
-	  io.of('/lobby').emit('players',playerslist);
-	  socket.on('chat',function(data){
-	    socket.get('playerid',function(err,playerid){
-	    socket.get('playername',function(err,playername){
-	    socket.get('playerservice',function(err,playerservice){
-	      lobbychat(playerid,playername,playerservice,data);
-	    });
-	    });
-	    });
-	  });
-	  socket.on('joingame',function(data){
-	    if (games[data].players.length < games[data].maxPlayers) {
-	      socket.emit('gameid','/'+data); //tell the client to join the game
+	    socket.set('playerid',playerid);
+	    socket.set('playername',playername);
+	    socket.set('playerservice',playerservice);
+	    var i, gameslist = [], playerslist = [];
+	    for (i in games) {
+	      gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
 	    }
-	  });
-	  socket.on('newgame',function(data){
-	    //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
-	    socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
-	  });
+      for (i in players) {
+        playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
+      }
+	    socket.emit('games',gameslist);
+	    io.of('/lobby').emit('players',playerslist);
+	    socket.on('chat',function(data){
+	      socket.get('playerid',function(err,playerid){
+	      socket.get('playername',function(err,playername){
+	      socket.get('playerservice',function(err,playerservice){
+	        lobbychat(playerid,playername,playerservice,data);
+	      });
+	      });
+	      });
+	    });
+	    socket.on('joingame',function(data){
+	      if (games[data].players.length < games[data].maxPlayers) {
+	        socket.emit('gameid','/'+data); //tell the client to join the game
+	      }
+	    });
+	    socket.on('newgame',function(data){
+	      //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
+	      socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
+	    });
+	    socket.on('disconnect',function(data){
+	      socket.get('playerid',function(err,playerid){
+          var p, index;
+          for (p in players) { if (players[p].id == playerid) { index = p; } }
+          if (index.length) { players.splice(index,1); }
+	      });
+	    });
+    }
   });
 });
 
