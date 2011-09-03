@@ -1263,7 +1263,7 @@ function chatsend() {
   return false;
 }
 function lobbychat(playerid,playername,playerservice,data) {
-  $('<div><span class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</span>'+data+'</div>').hide().prependTo('#lobbychat').slideDown(100);
+  $('<div><span class="player"><span class="serviceicon '+playerservice+'"></span>'+playername+'</span>'+data+'</div>').hide().prependTo('#lobbychat').slideDown(100);
 }
 function lobbychatsend() {
   var input = $('#lobbychatinput');
