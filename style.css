@@ -609,6 +609,7 @@ body {
   padding-right:4px;
   font-size:12px;
   background-color:#222;
+  z-index:100000001;
 }
 #lobbychat .time {
   -webkit-border-radius: 3px;
@@ -616,18 +617,25 @@ body {
   border-radius: 3px;
   background-color:#222;
   float:right;
-  height:16px;
-  line-height:16px;
-  padding:0 3px;
-  margin-top:2px;
-  vertical-align:baseline;
-  font-size:10px;
+  height:13px;
+  line-height:13px;
+  padding-top:8px;
+  font-size:11px;
+  color:#333;
+  font-weight:bold;
 }
 #lobbychat .text {
   font-size:13px;
   line-height:20px;
   word-wrap: break-word;
   border-top:2px solid #222;
+  float:left;
+  width:100%;
+  margin-bottom:16px;
+  line-height:16px;
+  font-size:13px;
+  padding-top:4px;
+  margin-top:-2px;
 }
 #sidepanelhide {
   position:absolute;
