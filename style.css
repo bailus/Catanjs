@@ -575,14 +575,6 @@ body {
 }
 #lobbychat > div {
   margin:4px;
-  color:white;
-  font-size:13px;
-  line-height:20px;
-  word-wrap: break-word;
-  background-color:#111;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
 }
 #lobbychat > div + div {
   margin-top:14px;
@@ -627,6 +619,12 @@ body {
   margin-top:2px;
   vertical-align:baseline;
   font-size:10px;
+}
+#lobbychat .text {
+  font-size:13px;
+  line-height:20px;
+  word-wrap: break-word;
+  border-top:2px solid #222;
 }
 #sidepanelhide {
   position:absolute;
@@ -792,7 +790,7 @@ body {
 #lobby > form {
   position:fixed;
   right:170px;left:420px;
-  bottom:35px;height:25px;
+  bottom:40px;height:20px;
 }
 #lobbychatinput {
   background-color:black;
