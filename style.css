@@ -717,7 +717,7 @@ body {
 }
 #players .player {
   height:20px;line-height:20px;
-  font-size:14px;
+  font-size:13px;
 }
 #games, #newgame, #connecting {
   position:fixed;
@@ -810,8 +810,8 @@ body {
   border-radius: 3px;
   position:absolute;
   left:0;right:70px;
-  top:0;height:20px;
-  line-height:20px;
+  top:0;height:18px;
+  line-height:18px;
 }
 #lobbychatsend {
   background-color:#222;
