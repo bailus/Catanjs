@@ -1264,7 +1264,7 @@ function chatsend() {
 }
 function lobbychat(playerid,playername,playerservice,data) {
   var date = new Date();
-  $('<div><div class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div><div class="time">'+date.getHours()+':'+date.getMinutes()+'</div><div class="text">'+data+'</div></div>').hide().prependTo('#lobbychat').slideDown(100);
+  $('<div><div class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div><div class="time">'+date..toLocaleTimeString()+'</div><div class="text">'+data+'</div></div>').hide().prependTo('#lobbychat').slideDown(100);
 }
 function lobbychatsend() {
   var input = $('#lobbychatinput');
