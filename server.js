@@ -432,7 +432,7 @@ var chat = function(gameid,player,playername,data) {
 lobbychatbuffer = [];
 var lobbychat = function(playerid,playername,playerservice,data) {
   if (lobbychatbuffer.length >= 10) { lobbychatbuffer.splice(0,1); }
-  var date = new Date().getTime();
+  var date = new Date().toUTCString();
   lobbychatbuffer.push({'playerid':playerid,'playername':playername,'playerservice':playerservice,'data':data,'date':date});
   io.of('/lobby').emit('chat',date,playerid,playername,playerservice,data);
 };
