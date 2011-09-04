@@ -8,7 +8,7 @@ var io = require('socket.io').listen(http),
 //io.enable('browser client etag');          // apply etag caching logic based on version number
 //io.set('log level', 1);                    // reduce logging
 
-//io.set('transports',['websocket','flashsocket']);
+io.set('transports',['websocket','flashsocket']);
 /*,'htmlfile','xhr-polling','jsonp-polling'*/
 
 
@@ -679,7 +679,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	    io.of('/lobby').emit('players',playerslist);
       var line;
       for (line in lobbychatbuffer) {
-        socket.emit('chat',lobbychatbuffer[line].playerid,lobbychatbuffer[line].playername,lobbychatbuffer[line].playerservice,lobbychatbuffer[line].data);
+        socket.emit('chat',lobbychatbuffer[line].date,lobbychatbuffer[line].playerid,lobbychatbuffer[line].playername,lobbychatbuffer[line].playerservice,lobbychatbuffer[line].data);
       }
 	    socket.on('chat',function(data){
 	      socket.get('playerid',function(err,playerid){
