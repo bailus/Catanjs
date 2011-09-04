@@ -431,10 +431,21 @@ var chat = function(gameid,player,playername,data) {
 };
 lobbychatbuffer = [];
 var lobbychat = function(playerid,playername,playerservice,data) {
-  if (lobbychatbuffer.length >= 10) { lobbychatbuffer.splice(0,1); }
-  var date = new Date().toUTCString();
-  lobbychatbuffer.push({'playerid':playerid,'playername':playername,'playerservice':playerservice,'data':data,'date':date});
-  io.of('/lobby').emit('chat',date,playerid,playername,playerservice,data);
+  var date = new Date();
+  var then, now, res = 1;
+  for (line in lobbychatbuffer) {
+    if (lobbychatbuffer[line].playerid == playerid) {
+      then = new Date(lobbychatbuffer[line].date).getTime();
+      now = date.getTime();
+      if (now-then<10000) { res = 0; } //if its been less than 10 seconds since this player last said something
+    }
+  }
+  if (res) {
+    if (lobbychatbuffer.length >= 10) { lobbychatbuffer.splice(0,1); }
+    var date = date.toUTCString();
+    lobbychatbuffer.push({'playerid':playerid,'playername':playername,'playerservice':playerservice,'data':data,'date':date});
+    io.of('/lobby').emit('chat',date,playerid,playername,playerservice,data);
+  }
 };
 
 
@@ -685,7 +696,10 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	      socket.get('playerid',function(err,playerid){
 	      socket.get('playername',function(err,playername){
 	      socket.get('playerservice',function(err,playerservice){
-	        lobbychat(playerid,playername,playerservice,data);
+          data = sanitize(data).xss().trim();
+          if (data.length) {
+	          lobbychat(playerid,playername,playerservice,data);
+          }
 	      });
 	      });
 	      });
