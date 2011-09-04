@@ -671,7 +671,6 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
   overflow:auto;
-  margin-left:-85px;
 }
 #lobby {
   position:fixed;
@@ -703,7 +702,6 @@ body {
   padding:4px;
   overflow:auto;
   overflow-x:hidden;
-  margin-left:245px;
 }
 #players .player {
   height:20px;line-height:20px;
@@ -717,8 +715,8 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
   border:1px solid #666;
-  margin-right:95px;
   overflow:auto;
+  overflow-x:hidden;
   background-color:black;
 }
 #games { top:165px; }
