@@ -1243,8 +1243,8 @@ function lobby() {
 		$('#lobby').hide();
 		connect(data);
 	});
-	lobbysocket.on('chat',function(playerid,playername,playerservice,data){
-		lobbychat(playerid,playername,playerservice,data);
+	lobbysocket.on('chat',function(date,playerid,playername,playerservice,data){
+		lobbychat(date,playerid,playername,playerservice,data);
 	});
 }
 function joinGame() {
@@ -1264,8 +1264,8 @@ function chatsend() {
   input.attr('value','');
   return false;
 }
-function lobbychat(playerid,playername,playerservice,data) {
-  var date = new Date();
+function lobbychat(date,playerid,playername,playerservice,data) {
+  var date = new Date(date);
   $('<div><div class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div><div class="time">'+date.toLocaleTimeString()+'</div><div class="text">'+data+'</div></div>').hide().prependTo('#lobbychat').slideDown(100);
 }
 function lobbychatsend() {
