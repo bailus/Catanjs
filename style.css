@@ -579,11 +579,13 @@ body {
   font-size:13px;
   line-height:20px;
   word-wrap: break-word;
-  margin-bottom:16px;
   background-color:#111;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+#lobbychat > div + div {
+  margin-top:14px;
 }
 #chat > div > span {
   margin-right:10px;
