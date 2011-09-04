@@ -608,6 +608,16 @@ body {
   padding-right:4px;
   font-size:12px;
 }
+#lobbychat .time {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  float:right;
+  height:20px;
+  line-height:20px;
+  padding-right:4px;padding-left:4px;
+  font-size:12px;
+}
 #sidepanelhide {
   position:absolute;
   left:0;top:0;
