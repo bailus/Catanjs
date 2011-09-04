@@ -731,7 +731,7 @@ body {
   overflow-x:hidden;
   background-color:black;
 }
-#games { top:165px; }
+#games { top:165px;width:340px; }
 #newgame { z-index:100000010;display:none; }
 #connecting { z-index:100000020;display:none; }
 #gamebuttons {
@@ -762,7 +762,7 @@ body {
   font-size:14px;
   line-height:20px;
   height:64px;
-  width:265px;
+  width:100%;
   overflow:hidden;
   position:relative;
   cursor:pointer;
