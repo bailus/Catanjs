@@ -432,12 +432,12 @@ var chat = function(gameid,player,playername,data) {
 lobbychatbuffer = [];
 var lobbychat = function(playerid,playername,playerservice,data) {
   var date = new Date();
-  var then, now, res = 1;
+  var then, now, res = 3;
   for (line in lobbychatbuffer) {
     if (lobbychatbuffer[line].playerid == playerid) {
       then = new Date(lobbychatbuffer[line].date).getTime();
       now = date.getTime();
-      if (now-then<10000) { res = 0; } //if its been less than 10 seconds since this player last said something
+      if (now-then<10000) { res -= 1; } //if its been less than 10 seconds since this player last said something
     }
   }
   if (res) {
