@@ -2,7 +2,9 @@ var http = require('express').createServer();
 var io = require('socket.io').listen(http),
     check = require('validator').check,
     sanitize = require('validator').sanitize,
-    openid = require('openid');
+    openid = require('openid'),
+    mongoose = require('mongoose');
+
 /* production settings for socket.io */
 //io.enable('browser client minification');  // send minified client
 //io.enable('browser client etag');          // apply etag caching logic based on version number
@@ -11,6 +13,59 @@ var io = require('socket.io').listen(http),
 io.set('transports',['websocket','flashsocket']);
 /*,'htmlfile','xhr-polling','jsonp-polling'*/
 
+
+function callback(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
+	var cb = function(){
+		var args = opts.args ? opts.args : [];
+		var scope = opts.scope ? opts.scope : this;
+		var fargs = opts.supressArgs === true ?
+			[] : toArray(arguments);
+		func.apply(scope,fargs.concat(args));
+	}
+	return cb;
+}
+function toArray(arrayLike){  //A utility function for callback()
+	var arr = [];
+	for(var i = 0; i &lt; arrayLike.length; i++){
+		arr.push(arrayLike[i]);
+	}
+	return arr;
+}
+
+
+
+//connect to the database
+mongoose.connect('mongodb://localhost/game');
+var Schema = mongoose.Schema;
+var Player = new Schema({playerid:String,playername:String});
+var playerModel = mongoose.model('playerModel',Player);
+
+function addPlayerToDB(playerid,playername,func) { //add the player to the database
+  var playerInstance = new playerModel();
+  playerInstance.playerid = playerid;
+  playerInstance.playername = playername;
+  playerInstance.save(callback(function (err) {
+    if (!err) { func(); }
+    else { console.log(err); }
+  },{'args':func}));
+}
+function bind(scope, fn) {
+  return function () {
+    fn.apply(scope, arguments);
+  };
+}
+function getPlayerFromDB(playerid,func) { //get the player from the database
+  playerModel.findOne({playerid},callback(function(err,player) {
+    if (!err) { func(player); }
+    else { console.log(err); }
+  },{'args':func}));
+}
+
+addPlayerToDB('1234','asdf',function(){
+  getPlayerFromDB('1234',function(player) {
+    console.log('Player '+player.playerid+', '+player.playername);
+  });
+});
 
 var randomOrder = function(){ return (Math.round(Math.random())-0.5); };
 
