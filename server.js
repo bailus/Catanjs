@@ -50,7 +50,7 @@ addPlayerToDB = function(playerid,playername,func) { //add the player to the dat
   },{'args':func}));
 };
 getPlayerFromDB = function(playerid,func) { //get the player from the database
-  playerModel.findOne({playerid},callback(function(err,player) {
+  playerModel.findOne({'playerid':playerid},callback(function(err,player) {
     if (!err) { func(player); }
     else { console.log(err); }
   },{'args':func}));
