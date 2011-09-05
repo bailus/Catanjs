@@ -42,25 +42,30 @@ var playerModel = mongoose.model('playerModel',Player);
 
 getPlayerFromDB = function(playerid,func) { //get the player from the database
   playerModel.findOne({'playerid':playerid},callback(function(err,player) {
-    if (!err) { if (func) { func(player); } }
-    else { console.log(err); }
+    func(err,player);
   },{'args':func}));
 };
 addPlayerToDB = function(playerid,playername,func) { //add the player to the database
-  var playerInstance = new playerModel();
-  playerInstance.playerid = playerid;
-  playerInstance.playername = playername;
-  playerInstance.save(callback(function (err) {
-    if (!err) { if (func) { func(); } }
-    else { console.log(err); }
-  },{'args':func}));
+  getPlayerFromDB(playerid,function(err,player){
+    if (!player) { var player = new playerModel(); }
+    player.playerid = playerid;
+    player.playername = playername;
+    player.save(callback(function (err) {
+      func(err);
+    },{'args':func}));
+  });
 };
 
-addPlayerToDB('1234','asdf',function(){
-  getPlayerFromDB('1234',function(player) {
-    console.log('Player '+player.playerid+', '+player.playername);
-  });
+addPlayerToDB('1234','asdf',function(err){
+  if (err) { console.log('error adding player to db'); }
+  else {
+    getPlayerFromDB('1234',function(err,player) {
+      if (err) { console.log('error getting player from db'); }
+      else { console.log('Player '+player.playerid+', '+player.playername); }
+    });
+  }
 });
+
 
 var randomOrder = function(){ return (Math.round(Math.random())-0.5); };
 
