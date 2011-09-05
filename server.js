@@ -47,7 +47,10 @@ getPlayerFromDB = function(playerid,func) { //get the player from the database
 };
 addPlayerToDB = function(playerid,playername,func) { //add the player to the database
   getPlayerFromDB(playerid,function(err,player){
-    if (!player) { var player = new playerModel(); }
+    if (!player) {
+      console.log('creating a new player in the database');
+      var player = new playerModel();
+    }
     player.playerid = playerid;
     player.playername = playername;
     player.save(callback(function (err) {
