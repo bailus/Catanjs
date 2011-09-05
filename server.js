@@ -14,7 +14,7 @@ io.set('transports',['websocket','flashsocket']);
 /*,'htmlfile','xhr-polling','jsonp-polling'*/
 
 
-function callback(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
+callback = function(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
 	var cb = function(){
 		var args = opts.args ? opts.args : [];
 		var scope = opts.scope ? opts.scope : this;
@@ -23,14 +23,14 @@ function callback(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-b
 		func.apply(scope,fargs.concat(args));
 	}
 	return cb;
-}
-function toArray(arrayLike){  //A utility function for callback()
+};
+toArray = function(arrayLike){  //A utility function for callback()
 	var arr = [];
 	for(var i = 0; i &lt; arrayLike.length; i++){
 		arr.push(arrayLike[i]);
 	}
 	return arr;
-}
+};
 
 
 
