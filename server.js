@@ -40,7 +40,7 @@ var Schema = mongoose.Schema;
 var Player = new Schema({playerid:String,playername:String});
 var playerModel = mongoose.model('playerModel',Player);
 
-function addPlayerToDB(playerid,playername,func) { //add the player to the database
+addPlayerToDB = function(playerid,playername,func) { //add the player to the database
   var playerInstance = new playerModel();
   playerInstance.playerid = playerid;
   playerInstance.playername = playername;
@@ -48,18 +48,13 @@ function addPlayerToDB(playerid,playername,func) { //add the player to the datab
     if (!err) { func(); }
     else { console.log(err); }
   },{'args':func}));
-}
-function bind(scope, fn) {
-  return function () {
-    fn.apply(scope, arguments);
-  };
-}
-function getPlayerFromDB(playerid,func) { //get the player from the database
+};
+getPlayerFromDB = function(playerid,func) { //get the player from the database
   playerModel.findOne({playerid},callback(function(err,player) {
     if (!err) { func(player); }
     else { console.log(err); }
   },{'args':func}));
-}
+};
 
 addPlayerToDB('1234','asdf',function(){
   console.log('added player');
