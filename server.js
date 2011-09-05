@@ -62,6 +62,7 @@ function getPlayerFromDB(playerid,func) { //get the player from the database
 }
 
 addPlayerToDB('1234','asdf',function(){
+  console.log('added player');
   getPlayerFromDB('1234',function(player) {
     console.log('Player '+player.playerid+', '+player.playername);
   });
