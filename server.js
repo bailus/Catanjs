@@ -41,13 +41,19 @@ var Player = new Schema({playerid:String,playername:String});
 var playerModel = mongoose.model('playerModel',Player);
 
 getPlayerFromDB = function(playerid,func) { //get the player from the database
-  playerModel.findOne({'playerid':playerid},func);
+  playerModel.findOne({'playerid':playerid},callback(function(err,player) {
+    if (!err) { if (func) { func(player); } }
+    else { console.log(err); }
+  },{'args':func}));
 };
 addPlayerToDB = function(playerid,playername,func) { //add the player to the database
   var playerInstance = new playerModel();
   playerInstance.playerid = playerid;
   playerInstance.playername = playername;
-  playerInstance.save(func);
+  playerInstance.save(callback(function (err) {
+    if (!err) { if (func) { func(); } }
+    else { console.log(err); }
+  },{'args':func}));
 };
 
 addPlayerToDB('1234','asdf',function(){
