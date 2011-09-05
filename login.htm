@@ -59,10 +59,6 @@
       <a href="/authenticate?openid=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid" title="Login with your Google account"><div class="login google"></div></a>
       <a href="/authenticate?openid=me.yahoo.com" title="Login with your Yahoo! account"><div class="login yahoo"></div></a>
       <a href="/authenticate?openid=facebook.anyopenid.com" title="Login with your Facebook account"><div class="login facebook"></div></a>
-      <a href="/authenticate?openid=twitter.anyopenid.com" title="Login with your Twitter account"><div class="login twitter"></div></a>
-      <a href="/authenticate?openid=linkedin.anyopenid.com" title="Login with your Linkedin account"><div class="login linkedin"></div></a>
-      <a href="/authenticate?openid=myspace.anyopenid.com" title="Login with your Myspace account"><div class="login myspace"></div></a>
-      <a href="/authenticate?openid=friendfeed.anyopenid.com" title="Login with your friendfeed account"><div class="login friendfeed"></div></a>
       <span title="Login with your AOL account">
         <div class="login aol"></div>
         <form class="aol">
@@ -78,6 +74,12 @@
           <div><input name="openid" /><input type="submit" value="Login" /></div>
         </form>
       </span>
+    </div>
+    <div id="morelogins">
+      <a href="/authenticate?openid=twitter.anyopenid.com" title="Login with your Twitter account"><div class="serviceicon twitter"></div></a>
+      <a href="/authenticate?openid=linkedin.anyopenid.com" title="Login with your Linkedin account"><div class="serviceicon linkedin"></div></a>
+      <a href="/authenticate?openid=myspace.anyopenid.com" title="Login with your Myspace account"><div class="serviceicon myspace"></div></a>
+      <a href="/authenticate?openid=friendfeed.anyopenid.com" title="Login with your friendfeed account"><div class="serviceicon friendfeed"></div></a>
     </div>
     <script>
       $('form').parent().children('.login').click(function(event){
