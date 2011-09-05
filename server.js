@@ -429,18 +429,18 @@ var bank = function(gameid,player,data) {
 var chat = function(gameid,player,playername,data) {
   io.of('/'+gameid).emit('chat',player,playername,data);
 };
-lobbychatbuffer = [];
+var lobbychatbuffer = [];
 var lobbychat = function(playerid,playername,playerservice,data) {
   var date = new Date();
-  var then, now, res = 3;
+  var then, now, counter = 3;
   for (line in lobbychatbuffer) {
     if (lobbychatbuffer[line].playerid == playerid) {
       then = new Date(lobbychatbuffer[line].date).getTime();
       now = date.getTime();
-      if (now-then<10000) { res -= 1; } //if its been less than 10 seconds since this player last said something
+      if (now-then<10000) { counter -= 1; } //if its been less than 10 seconds since this player last said something
     }
   }
-  if (res) {
+  if (counter) {
     if (lobbychatbuffer.length >= 10) { lobbychatbuffer.splice(0,1); }
     var date = date.toUTCString();
     lobbychatbuffer.push({'playerid':playerid,'playername':playername,'playerservice':playerservice,'data':data,'date':date});
