@@ -59,7 +59,7 @@ addPlayerToDB = function(playerid,playername,func) { //add the player to the dat
   });
 };
 
-addPlayerToDB('1234','asdf',function(err){
+addPlayerToDB('321','asdf',function(err){
   if (err) { console.log('error adding player to db'); }
   else {
     getPlayerFromDB('1234',function(err,player) {
