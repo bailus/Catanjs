@@ -14,50 +14,23 @@ io.set('transports',['websocket','flashsocket']);
 /*,'htmlfile','xhr-polling','jsonp-polling'*/
 
 
-callback = function(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
-	var cb = function(){
-		var args = opts.args ? opts.args : [];
-		var scope = opts.scope ? opts.scope : this;
-		var fargs = opts.supressArgs === true ?
-			[] : toArray(arguments);
-		func.apply(scope,fargs.concat(args));
-	}
-	return cb;
-};
-toArray = function(arrayLike){  //A utility function for callback()
-	var arr = [];
-	for(var i = 0; i < arrayLike.length; i++){
-		arr.push(arrayLike[i]);
-	}
-	return arr;
-};
-
-
-
 //connect to the database
 mongoose.connect('mongodb://localhost/game');
 var Schema = mongoose.Schema;
 var Player = new Schema({playerid:String,playername:String});
 var playerModel = mongoose.model('playerModel',Player);
 
-addPlayerToDB = function(playerid,playername,func) { //add the player to the database
-  var playerInstance = new playerModel();
-  playerInstance.playerid = playerid;
-  playerInstance.playername = playername;
-  playerInstance.save(callback(function (err) {
-    if (!err) { func(); }
-    else { console.log(err); }
-  },{'args':func}));
+var getPlayerFromDB = function(playerid,func) { //get the player from the database
+  playerModel.findOne({'playerid':playerid},func(err,player));
 };
-getPlayerFromDB = function(playerid,func) { //get the player from the database
-  playerModel.findOne({'playerid':playerid},callback(function(err,player) {
-    if (!err) { func(player); }
-    else { console.log(err); }
-  },{'args':func}));
+var addPlayerToDB = function(player,func) { //add the player to the database
+  var playerInstance = new playerModel();
+  playerInstance.playerid = player.playerid;
+  playerInstance.playername = player.playername;
+  playerInstance.save(func(err));
 };
 
 addPlayerToDB('1234','asdf',function(){
-  console.log('added player');
   getPlayerFromDB('1234',function(player) {
     console.log('Player '+player.playerid+', '+player.playername);
   });
