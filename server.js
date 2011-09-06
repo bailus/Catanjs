@@ -847,6 +847,7 @@ http.get('/verify', function(req, res){
       console.log(result);
       console.log(players);
       loadPlayer(playerid,function(err,player){ //create the player in the db if it doesn't exist already, else update the db entry
+ console.log('asdf');
         if (err) { res.send('Database Error: '+err); }
         else {
           if (player) {
@@ -856,7 +857,7 @@ http.get('/verify', function(req, res){
           }
           savePlayer(player,function(err){
             if (err) { res.send('Database Error: '+err); }
-            else { console.log('player saved to database');  res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
+            else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
           });
         }
       });
