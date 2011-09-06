@@ -46,7 +46,7 @@ loadPlayer = function(playerid,func) { //get the player from the database
   },{'args':func}));
 };
 savePlayer = function(newplayer,func) { //save the player to the database
-  loadPlayer(newplayer.playerid,function(err,player){
+  getPlayer(newplayer.playerid,function(err,player){
     if (!player) {
       console.log('creating a new player in the database');
       var player = new playerModel();
@@ -59,7 +59,7 @@ savePlayer = function(newplayer,func) { //save the player to the database
   });
 };
 
-savePlayer({playerid:'321',playername:'popopopopopop'},function(err){ //Database test
+/*savePlayer({playerid:'321',playername:'popopopopopop'},function(err){ //Database test
   if (err) { console.log('error adding player to db'); }
   else {
     loadPlayer('321',function(err,player) {
@@ -67,7 +67,7 @@ savePlayer({playerid:'321',playername:'popopopopopop'},function(err){ //Database
       else { console.log('Player '+player.playerid+', '+player.playername); }
     });
   }
-});
+});*/
 
 
 var randomOrder = function(){ return (Math.round(Math.random())-0.5); };
@@ -555,16 +555,15 @@ io.of('/'+gameid).on('connection', function (socket) {
     if (!(playername == '')) {
 	  socket.set('playername',playername);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
-	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
-      /*loadPlayer(playerid,function(err,player){
+	    var newplayer = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
+      loadPlayer(playerid,function(err,player){
         if (!err)&&(!player) {
-          savePlayer(player);
+          var player = {'playerid':playerid,'playername':playername,'logins'};
         } else if (player) {
-          if (player.logins) { player.logins += 1; } else { player.logins = 1; }
-          
-          savePlayer(player);
+          player.logins += 1;
         }
-      });*/
+        savePlayer(player,function(err){});
+      });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
       console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
