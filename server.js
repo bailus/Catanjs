@@ -866,10 +866,10 @@ http.get('/verify', function(req, res){
   });
 });
 http.get('/player/:id',function(req, res){
-  loadPlayer(req.params.id,callback(function(err,player){
-    if ((!err)&&(player)) { req.send(player); }
-    else { req.send('{}'); }
-  },{'scope':this}));
+  loadPlayer(req.params.id,function(err,player){
+    if ((!err)&&(player)) { res.send(player); }
+    else { res.send('{}'); }
+  });
 });
 http.get('/game', function(req, res){
   var a = 0;
