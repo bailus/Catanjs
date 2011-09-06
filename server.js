@@ -866,7 +866,7 @@ http.get('/verify', function(req, res){
   });
 });
 http.get('/player/:id',function(req, res){
-  res.contentType('application/json');
+  //res.contentType('application/json');
   loadPlayer(req.params.id,function(err,player){
     if ((!err)&&(player)) {
       res.send('{"playerid":'+player.playerid+',"playername":'+player.playername+',"logins":'+player.logins+'}');
