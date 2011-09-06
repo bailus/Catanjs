@@ -557,7 +557,7 @@ io.of('/'+gameid).on('connection', function (socket) {
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
 	    var newplayer = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
       loadPlayer(playerid,function(err,player){
-        if (!err)&&(!player) {
+        if ((!err)&&(!player)) {
           var player = {'playerid':playerid,'playername':playername,'logins'};
         } else if (player) {
           player.logins += 1;
