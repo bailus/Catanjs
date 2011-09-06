@@ -559,15 +559,7 @@ io.of('/'+gameid).on('connection', function (socket) {
     if (!(playername == '')) {
 	  socket.set('playername',playername);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
-	    var newplayer = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
-      loadPlayer(playerid,function(err,player){
-        if ((!err)&&(!player)) {
-          var player = {'playerid':playerid,'playername':playername,'logins':1};
-        } else if (player) {
-          player.logins += 1;
-        }
-        savePlayer(player,function(err){});
-      });
+	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
       console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
@@ -854,7 +846,20 @@ http.get('/verify', function(req, res){
       players.push({'id':id,'nickname':nickname,'service':s,'key':key});
       console.log(result);
       console.log(players);
-      res.redirect('http://bailus.no.de/game?id='+id+'&key='+key);
+      loadPlayer(playerid,function(err,player){ //create the player in the db if it doesn't exist already, else update the db entry
+        if (err) { res.send('Database Error: '+err); }
+        else {
+          if (player) {
+            player.logins += 1;
+          } else {
+            var player = {'playerid':playerid,'playername':playername,'logins':1};
+          }
+          savePlayer(player,function(err){
+            if (err) { res.send('Database Error: '+err); }
+            else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
+          });
+        }
+      });
     } else {
       res.redirect('http://bailus.no.de/');
     }
