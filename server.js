@@ -55,7 +55,7 @@ savePlayer = function(newplayer,func) { //save the player to the database
     player.playername = newplayer.playername;
     player.save(callback(function (err) {
       if (func.type == 'function') { func(err); }
-    },{'args':func}));
+    },{'args':func})); 
   });
 };
 
