@@ -50,7 +50,7 @@ loadPlayer = function(playerid,func) { //get the player from the database
   },{'args':func}));
 };
 savePlayer = function(newplayer,func) { //save the player to the database
-  getPlayer(newplayer.playerid,function(err,player){
+  loadPlayer(newplayer.playerid,function(err,player){
     if (!player) {
       console.log('creating a new player in the database');
       var player = new playerModel();
@@ -854,10 +854,10 @@ http.get('/verify', function(req, res){
           } else {
             var player = {'playerid':id,'playername':nickname,'logins':1};
           }
-          savePlayer(player,function(err){
+          /*savePlayer(player,function(err){
             if (err) { res.send('Database Error: '+err); }
             else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
-          });
+          });*/
         }
       });
     } else {
