@@ -856,7 +856,7 @@ http.get('/verify', function(req, res){
           }
           savePlayer(player,function(err){
             if (err) { res.send('Database Error: '+err); }
-            else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
+            else { console.log('player saved to database');  res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
           });
         }
       });
