@@ -37,7 +37,11 @@ toArray = function(arrayLike){  //A utility function for callback()
 //connect to the database
 mongoose.connect('mongodb://localhost/game');
 var Schema = mongoose.Schema;
-var playerSchema = new Schema({playerid:String,playername:String});
+var playerSchema = new Schema({
+  playerid:String,
+  playername:String,
+  logins:Number
+});
 var playerModel = mongoose.model('playerModel',playerSchema);
 
 loadPlayer = function(playerid,func) { //get the player from the database
@@ -558,7 +562,7 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    var newplayer = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
       loadPlayer(playerid,function(err,player){
         if ((!err)&&(!player)) {
-          var player = {'playerid':playerid,'playername':playername,'logins'};
+          var player = {'playerid':playerid,'playername':playername,'logins':1};
         } else if (player) {
           player.logins += 1;
         }
