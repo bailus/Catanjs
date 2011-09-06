@@ -59,7 +59,7 @@ savePlayer = function(newplayer,func) { //save the player to the database
   });
 };
 
-savePlayer('321','popopopopopop',function(err){ //Database test
+savePlayer({playerid:'321',playername:'popopopopopop'},function(err){ //Database test
   if (err) { console.log('error adding player to db'); }
   else {
     loadPlayer('321',function(err,player) {
