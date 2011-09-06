@@ -854,10 +854,10 @@ http.get('/verify', function(req, res){
           } else {
             var player = {'playerid':id,'playername':nickname,'logins':1};
           }
-          /*savePlayer(player,function(err){
+          savePlayer(player,function(err){
             if (err) { res.send('Database Error: '+err); }
             else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
-          });*/
+          });
         }
       });
     } else {
