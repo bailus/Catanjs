@@ -37,32 +37,32 @@ toArray = function(arrayLike){  //A utility function for callback()
 //connect to the database
 mongoose.connect('mongodb://localhost/game');
 var Schema = mongoose.Schema;
-var Player = new Schema({playerid:String,playername:String});
-var playerModel = mongoose.model('playerModel',Player);
+var playerSchema = new Schema({playerid:String,playername:String});
+var playerModel = mongoose.model('playerModel',playerSchema);
 
-getPlayerFromDB = function(playerid,func) { //get the player from the database
+loadPlayer = function(playerid,func) { //get the player from the database
   playerModel.findOne({'playerid':playerid},callback(function(err,player) {
-    func(err,player);
+      if (func) { func(err,player); }
   },{'args':func}));
 };
-addPlayerToDB = function(playerid,playername,func) { //add the player to the database
-  getPlayerFromDB(playerid,function(err,player){
+savePlayer = function(newplayer,func) { //save the player to the database
+  loadPlayer(newplayer.playerid,function(err,player){
     if (!player) {
       console.log('creating a new player in the database');
       var player = new playerModel();
     }
-    player.playerid = playerid;
-    player.playername = playername;
+    player.playerid = newplayer.playerid;
+    player.playername = newplayer.playername;
     player.save(callback(function (err) {
-      func(err);
+      if (func) { func(err); }
     },{'args':func}));
   });
 };
 
-addPlayerToDB('321','popopopopopop',function(err){
+savePlayer('321','popopopopopop',function(err){ //Database test
   if (err) { console.log('error adding player to db'); }
   else {
-    getPlayerFromDB('321',function(err,player) {
+    loadPlayer('321',function(err,player) {
       if (err) { console.log('error getting player from db'); }
       else { console.log('Player '+player.playerid+', '+player.playername); }
     });
@@ -556,6 +556,15 @@ io.of('/'+gameid).on('connection', function (socket) {
 	  socket.set('playername',playername);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
 	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
+      /*loadPlayer(playerid,function(err,player){
+        if (!err)&&(!player) {
+          savePlayer(player);
+        } else if (player) {
+          if (player.logins) { player.logins += 1; } else { player.logins = 1; }
+          
+          savePlayer(player);
+        }
+      });*/
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
       console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
@@ -566,8 +575,8 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    });
 	    socket.set('player',player);
 	    socket.set('gameid',gameid);
-            sendStats(gameid);
-            sendCards(gameid,player);
+      sendStats(gameid);
+      sendCards(gameid,player);
 	    if ((games[gameid].currentTurn == 0)&&(games[gameid].players.length == games[gameid].maxPlayers)) { endTurn(gameid); } //start the game
 	    socket.on('build',function(data){
 	      socket.get('player',function(err,player){
