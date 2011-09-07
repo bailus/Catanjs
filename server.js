@@ -57,11 +57,11 @@ savePlayer = function(newplayer,func) { //save the player to the database
       console.log('creating a new player in the database');
       var player = new playerModel();
     }
-    if (player.playerid) { player.playerid = newplayer.playerid; }
-    if (player.playername) { player.playername = newplayer.playername; }
-    if (player.logins) { player.logins = newplayer.logins; }
-    if (player.wins) { player.wins = newplayer.wins; }
-    if (player.fails) { player.wins = newplayer.fails; }
+    if (newplayer.playerid) { player.playerid = newplayer.playerid; }
+    if (newplayer.playername) { player.playername = newplayer.playername; }
+    if (newplayer.logins) { player.logins = newplayer.logins; }
+    if (newplayer.wins) { player.wins = newplayer.wins; }
+    if (newplayer.fails) { player.wins = newplayer.fails; }
     player.save(callback(function (err) {
       if (func) { func(err); }
     },{'args':func}));
