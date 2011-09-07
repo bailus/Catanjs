@@ -1278,12 +1278,12 @@ function chatsend() {
 }
 function lobbychat(date,playerid,playername,playerservice,data) {
   var date = new Date(date);
-  data = data.replace(/\[b]/g,'<span class="bold">')
-            .replace(/\[\/b]/g,'</span>')
-            .replace(/\[i]/g,'<span class="italic">')
-            .replace(/\[\/i]/g,'</span>')
-            .replace(/\[u]/g,'<span class="underline">')
-            .replace(/\[\/u]/g,'</span>')
+  data = data
+            .replace(/\<.*>/g,'') //remove all html
+            .replace(/\[b](?=\[\/b])/g,'<span class="bold">').replace(/\[\/b]/g,'</span>')
+            .replace(/\[i](?=\[\/i])/g,'<span class="italic">').replace(/\[\/i]/g,'</span>')
+            .replace(/\[u](?=\[\/u])/g,'<span class="underline">').replace(/\[\/u]/g,'</span>')
+            .replace(/\[.*]/g,'') //remove all unknown bbcode
             .replace(/:lol:/g,'<span class="smile smile017"></span>')
             .replace(/:lol:/g,'<span class="smile smile017"></span>')
             .replace(/:lol:/g,'<span class="smile smile017"></span>')
