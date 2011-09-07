@@ -719,13 +719,11 @@ io.of('/'+gameid).on('connection', function (socket) {
 		        if (games[gameid].players[p].playerid == '') { q += 1; }
 		      }
 		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }
-          loadPlayer(playerid,callback(function(err,player){
-            if (1) { //TODO check if the player won
-              savePlayer({'playerid':playerid,'win':true});
-            } else {
-              savePlayer({'playerid':playerid,'fail':true});
-            }
-          },{'scope':this}));
+          if (1) { //TODO check if the player won
+            savePlayer({'playerid':playerid,'win':true});
+          } else {
+            savePlayer({'playerid':playerid,'fail':true});
+          }
 	      });
 	      });
 	    });
