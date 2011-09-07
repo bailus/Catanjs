@@ -1246,16 +1246,17 @@ function lobby() {
 	});
 }
 function profile() {
-  $('.profile').empty().remove();
-	$.getJSON($(this).attr('href'),callback(function(data){
-    var div = $('<div class="profile"></div>').hide().appendTo(this);
-    var d; for (d in data) { div.append('<div>'+d+': '+data[d]+'</div>'); }
-    div.click(function(){
-      $(this).slideUp(100).empty().remove();
-    });
-    div.slideDown(100);
-	},{'scope':this}));
-  return false;
+  if ($(this).children('.profile').length) {
+    $(this).slideUp(70).empty().remove();
+  } else {
+    $('.profile').empty().remove();
+	  $.getJSON($(this).attr('href'),callback(function(data){
+      var div = $('<div class="profile"></div>').hide().appendTo(this);
+      var d; for (d in data) { div.append('<div>'+d+': '+data[d]+'</div>'); }
+      div.slideDown(70);
+	  },{'scope':this}));
+    return false;
+  }
 }
 
 function joinGame() {
