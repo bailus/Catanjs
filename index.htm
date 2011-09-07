@@ -2217,8 +2217,8 @@ function lobbychat(date,playerid,playername,playerservice,data) {
             .replace(/\[sub]/g,'<span class="subtext">').replace(/\[\/sub]/g,'</span>')
             .replace(/\[super]/g,'<span class="supertext">').replace(/\[\/super]/g,'</span>')
             .replace(/\[[pre|code]]/g,'<span class="monospaced">').replace(/\[\/[pre|code]]/g,'</span>')
-            .replace(/\[url\=(.*)](.*)\[\/url]/g,'<a href="$1">$2</a>')
-            .replace(/\[url](.*)\[\/url]/g,'<a href="$1">$1</a>')
+            .replace(/\[url\=([^\]]*)](.*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$2</a>')
+            .replace(/\[url](.*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$1</a>')
             .replace(/\[.*]/g,'') //remove all unknown bbcode
             .replace(/:lol:/g,'<span class="smile smile017"></span>')
             .replace(/:lol:/g,'<span class="smile smile017"></span>')
