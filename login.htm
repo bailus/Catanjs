@@ -56,6 +56,9 @@
       margin-bottom:60px;
       font-size:40px;
     }
+    .example {
+      font-size:9px;
+    }
   </style>
   <link rel="stylesheet" type="text/css" href="themes/login.css" />
   <body>
@@ -66,30 +69,31 @@
       Please sign in using one of the following services:
     </div>
     <div id="logins">
-      <a href="/authenticate?openid=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid" title="Login with your Google account"><div class="login google"></div></a>
-      <a href="/authenticate?openid=me.yahoo.com" title="Login with your Yahoo! account"><div class="login yahoo"></div></a>
-      <a href="/authenticate?openid=facebook.anyopenid.com" title="Login with your Facebook account"><div class="login facebook"></div></a>
-      <span title="Login with your AOL account">
+      <a href="/authenticate?openid=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid" title="Sign in with your Google account"><div class="login google"></div></a>
+      <a href="/authenticate?openid=me.yahoo.com" title="Sign in with your Yahoo! account"><div class="login yahoo"></div></a>
+      <a href="/authenticate?openid=facebook.anyopenid.com" title="Sign in with your Facebook account"><div class="login facebook"></div></a>
+      <span title="Sign in with your AOL account">
         <div class="login aol"></div>
         <form class="aol">
           <div>Enter your AOL username:</div>
           <div><input name="openid" class="aol" /><input type="button" value="Login" /></div>
         </form>
       </span>
-      <a href="/authenticate?openid=live.anyopenid.com" title="Login with your Windows Live account"><div class="login live"></div></a>
-      <span title="Login with your openID account">
+      <a href="/authenticate?openid=live.anyopenid.com" title="Sign in with your Windows Live account"><div class="login live"></div></a>
+      <span title="Sign in with your openID account">
         <div class="login openid"></div>
         <form method="get" action="/authenticate">
-          <div>Login using openID:</div>
+          <div>Please enter your openID:</div>
           <div><input name="openid" /><input type="submit" value="Login" /></div>
+          <div class="example">example: http://user.myopenid.com</div>
         </form>
       </span>
     </div>
     <div id="morelogins">
-      <a href="/authenticate?openid=twitter.anyopenid.com" title="Login with your Twitter account"><div class="morelogin twitter"></div></a>
-      <a href="/authenticate?openid=linkedin.anyopenid.com" title="Login with your Linkedin account"><div class="morelogin linkedin"></div></a>
-      <a href="/authenticate?openid=myspace.anyopenid.com" title="Login with your Myspace account"><div class="morelogin myspace"></div></a>
-      <a href="/authenticate?openid=friendfeed.anyopenid.com" title="Login with your friendfeed account"><div class="morelogin friendfeed"></div></a>
+      <a href="/authenticate?openid=twitter.anyopenid.com" title="Sign in with your Twitter account"><div class="morelogin twitter"></div></a>
+      <a href="/authenticate?openid=linkedin.anyopenid.com" title="Sign in with your Linkedin account"><div class="morelogin linkedin"></div></a>
+      <a href="/authenticate?openid=myspace.anyopenid.com" title="Sign in with your Myspace account"><div class="morelogin myspace"></div></a>
+      <a href="/authenticate?openid=friendfeed.anyopenid.com" title="Sign in with your friendfeed account"><div class="morelogin friendfeed"></div></a>
     </div>
     <script>
       $('form').parent().children('.login').click(function(event){
