@@ -40,7 +40,9 @@ var Schema = mongoose.Schema;
 var playerSchema = new Schema({
   playerid:String,
   playername:String,
-  logins:Number
+  logins:Number,
+  wins:Number,
+  fails::Number
 });
 var playerModel = mongoose.model('playerModel',playerSchema);
 
@@ -58,9 +60,11 @@ savePlayer = function(newplayer,func) { //save the player to the database
     if (player.playerid) { player.playerid = newplayer.playerid; }
     if (player.playername) { player.playername = newplayer.playername; }
     if (player.logins) { player.logins = newplayer.logins; }
+    if (player.wins) { player.wins = newplayer.wins; }
+    if (player.fails) { player.wins = newplayer.fails; }
     player.save(callback(function (err) {
       if (func) { func(err); }
-    },{'args':func})); 
+    },{'args':func}));
   });
 };
 
@@ -711,6 +715,13 @@ io.of('/'+gameid).on('connection', function (socket) {
 		        if (games[gameid].players[p].playerid == '') { q += 1; }
 		      }
 		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }
+          loadPlayer(playerid,callback(function(err,player){
+            if (1) { //TODO check if the player won
+              savePlayer({'playerid':playerid,'logins':player.fails+1});
+            } else {
+              savePlayer({'playerid':playerid,'logins':player.wins+1});
+            }
+          },{'scope':this}));
 	      });
 	      });
 	    });
@@ -857,7 +868,7 @@ http.get('/verify', function(req, res){
             console.log(player);
             player.logins += 1;
           } else {
-            var player = {'playerid':id,'playername':nickname,'logins':1};
+            var player = {'playerid':id,'playername':nickname,'logins':1,'wins':0,'fails':0};
             console.log('Database: created new player');
             console.log(player);
           }
@@ -889,7 +900,7 @@ http.get('/player/:id',function(req, res){
       if (player) {
         console.log('Database: Loaded player');
         console.log(player);
-        res.send('{"Player Name":"'+player.playername+'","Logins":"'+player.logins+'"}');
+        res.send('{"Player Name":"'+player.playername+'","Logins":"'+player.logins+'","wins":"'+player.wins+'","fails":"'+player.fails+'"}');
       }
       else {
         console.log("Database: Player doesn't exist");
