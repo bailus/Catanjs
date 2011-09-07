@@ -849,11 +849,18 @@ body {
   top: 18px;
   left:2px;
   padding: 2px 5px;
+  font-weight:normal;
 }
 
 .bold { font-weight:bold; }
 .italic { font-style:italic; }
 .underline { text-decoration:underline; }
+.overline { text-decoration:overline; }
+.strikethrough { text-decoration:line-through; }
+.subtext { vertical-align:sub; }
+.supertext { vertical-align:super; }
+.subtext, .supertext, .small { font-size:80%; }
+.monospaced { font-family:monospace; }
 
 #konsole { display:none; }
 .debug { display:none; }
