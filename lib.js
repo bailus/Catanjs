@@ -181,3 +181,21 @@ a.css("overflow","hidden").css(a.from);if(m=="content"||m=="both"){f=f.concat(["
 child.to=c.effects.setTransition(child,f,d.to.y,child.to)}if(d.from.x!=d.to.x){child.from=c.effects.setTransition(child,k,d.from.x,child.from);child.to=c.effects.setTransition(child,k,d.to.x,child.to)}child.css(child.from);child.animate(child.to,b.duration,b.options.easing,function(){n&&c.effects.restore(child,h)})})}a.animate(a.to,{queue:false,duration:b.duration,easing:b.options.easing,complete:function(){a.to.opacity===0&&a.css("opacity",a.from.opacity);p=="hide"&&a.hide();c.effects.restore(a,
 n?e:g);c.effects.removeWrapper(a);b.callback&&b.callback.apply(this,arguments);a.dequeue()}})})}})(jQuery);
 ;
+callback = function(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
+	var cb = function(){
+		var args = opts.args ? opts.args : [];
+		var scope = opts.scope ? opts.scope : this;
+		var fargs = opts.supressArgs === true ?
+			[] : toArray(arguments);
+		func.apply(scope,fargs.concat(args));
+	}
+	return cb;
+};
+toArray = function(arrayLike){  //A utility function for callback()
+	var arr = [];
+	for(var i = 0; i < arrayLike.length; i++){
+		arr.push(arrayLike[i]);
+	}
+	return arr;
+};
+
