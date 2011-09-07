@@ -719,6 +719,7 @@ io.of('/'+gameid).on('connection', function (socket) {
 		        if (games[gameid].players[p].playerid == '') { q += 1; }
 		      }
 		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }
+console.log('qwert');
           if (1) { //TODO check if the player won
             savePlayer({'playerid':playerid,'win':true});
           } else {
