@@ -727,6 +727,7 @@ body {
   height:20px;line-height:20px;
   font-size:13px;
   cursor:pointer;
+  position:relative;
 }
 #games, #newgame, #connecting {
   position:fixed;
@@ -844,14 +845,17 @@ body {
 }
 .profile {
   z-index:100000100;
-  background-color:black;
+  background-color:#222;
   border:1px solid white;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   color:white;
   width:100px;
-  height:100px;
+  position:absolute;
+  top: 18px;
+  left:2px;
+  padding: 2px 5px;
 }
 
 #konsole { display:none; }

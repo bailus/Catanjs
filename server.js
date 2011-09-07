@@ -906,7 +906,7 @@ http.get('/player/:id',function(req, res){
       if (player) {
         console.log('Database: Loaded player');
         console.log(player);
-        res.send('{"Player Name":"'+player.playername+'","Logins":"'+player.logins+'","Wins":"'+player.wins+'","Fails":"'+player.fails+'"}');
+        res.send('{"Logins":"'+player.logins+'","Wins":"'+player.wins+'","Fails":"'+player.fails+'"}');
       }
       else {
         console.log("Database: Player doesn't exist");
