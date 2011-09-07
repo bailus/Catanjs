@@ -42,7 +42,7 @@ var playerSchema = new Schema({
   playername:String,
   logins:Number,
   wins:Number,
-  fails::Number
+  fails:Number
 });
 var playerModel = mongoose.model('playerModel',playerSchema);
 
