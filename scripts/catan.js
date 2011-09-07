@@ -1252,7 +1252,7 @@ function profile() {
     var d; for (d in data) { div.append('<div>'+d+': '+data[d]+'</div>'); }
 	},{'scope':this}));
   div.click(function(){
-    $(this).empty().remove();
+    $(this).slideUp(100).empty().remove();
   });
   div.slideDown(100);
   return false;
