@@ -1246,11 +1246,12 @@ function lobby() {
 	});
 }
 function profile() {
-	$.getJSON($(this).attr('href'),function(data){
+	//$.getJSON($(this).attr('href'),function(data){
+	$.getJSON('player/1234',function(data){
     $('<div class="profile"></div>')
       .append('<div class="playername">'+data.playername+'</div>')
       .append('<div class="playerid">'+data.playerid+'</div>')
-      .append('<div class="logins">'+data.logins+'</div>')
+      //.append('<div class="logins">'+data.logins+'</div>')
       .appendTo(this);
 	});
   return false;
