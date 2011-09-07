@@ -850,6 +850,10 @@ body {
   padding: 2px 5px;
 }
 
+.bold { font-weight:bold; }
+.italic { font-style:italic; }
+.underline { text-decoration:underline; }
+
 #konsole { display:none; }
 .debug { display:none; }
 
