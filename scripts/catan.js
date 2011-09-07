@@ -1246,7 +1246,7 @@ function lobby() {
 	});
 }
 function profile() {
-	$.getJSON('player/1234',function(){
+	$.get('player/1234',function(){
 alert('asdf');
     /*$('<div class="profile"></div>')
       .append('<div class="playername">'+data.playername+'</div>')
