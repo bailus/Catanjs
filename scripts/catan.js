@@ -1279,7 +1279,11 @@ function chatsend() {
 function lobbychat(date,playerid,playername,playerservice,data) {
   var date = new Date(date);
   data = data
-            .replace(/\<.*>/g,'') //remove all html
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
             .replace(/\[b]/g,'<span class="bold">').replace(/\[\/b]/g,'</span>')
             .replace(/\[i]/g,'<span class="italic">').replace(/\[\/i]/g,'</span>')
             .replace(/\[u]/g,'<span class="underline">').replace(/\[\/u]/g,'</span>')
