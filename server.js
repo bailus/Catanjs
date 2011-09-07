@@ -54,14 +54,18 @@ loadPlayer = function(playerid,func) { //get the player from the database
 savePlayer = function(newplayer,func) { //save the player to the database
   loadPlayer(newplayer.playerid,function(err,player){
     if (!player) {
-      console.log('creating a new player in the database');
       var player = new playerModel();
+      player.playerid = newplayer.playerid;
+      player.playername = 'undefined';
+      player.logins = 0;
+      player.wins = 0;
+      player.fails = 0;
     }
     if (newplayer.playerid) { player.playerid = newplayer.playerid; }
     if (newplayer.playername) { player.playername = newplayer.playername; }
-    if (newplayer.logins) { player.logins = newplayer.logins; }
-    if (newplayer.wins) { player.wins = newplayer.wins; }
-    if (newplayer.fails) { player.wins = newplayer.fails; }
+    if (newplayer.login) { player.logins = player.logins+1; }
+    if (newplayer.win) { player.wins = player.wins+1; }
+    if (newplayer.fail) { player.fails = player.fails+1; }
     player.save(callback(function (err) {
       if (func) { func(err); }
     },{'args':func}));
@@ -717,9 +721,9 @@ io.of('/'+gameid).on('connection', function (socket) {
 		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }
           loadPlayer(playerid,callback(function(err,player){
             if (1) { //TODO check if the player won
-              savePlayer({'playerid':playerid,'logins':player.fails+1});
+              savePlayer({'playerid':playerid,'win':true});
             } else {
-              savePlayer({'playerid':playerid,'logins':player.wins+1});
+              savePlayer({'playerid':playerid,'fail':true});
             }
           },{'scope':this}));
 	      });
@@ -858,7 +862,7 @@ http.get('/verify', function(req, res){
       players.push({'id':id,'nickname':nickname,'service':s,'key':key});
       console.log(result);
       console.log(players);
-      loadPlayer(id,function(err,player){ //create the player in the db if it doesn't exist already, else update the db entry
+      /*loadPlayer(id,function(err,player){ //create the player in the db if it doesn't exist already, else update the db entry
         if (err) {
           console.log('Database Error: '+err);
           res.send('Database Error: '+err);
@@ -882,7 +886,11 @@ http.get('/verify', function(req, res){
             }
           });
         }
-      });
+      });*/
+      savePlayer({'playerid':id,'playername':nickname,'login':true},function(err)){
+        if (err) { res.send('Database Error: '+err); }
+        else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
+      }
     } else {
       res.redirect('http://bailus.no.de/');
     }
@@ -900,7 +908,7 @@ http.get('/player/:id',function(req, res){
       if (player) {
         console.log('Database: Loaded player');
         console.log(player);
-        res.send('{"Player Name":"'+player.playername+'","Logins":"'+player.logins+'","wins":"'+player.wins+'","fails":"'+player.fails+'"}');
+        res.send('{"Player Name":"'+player.playername+'","Logins":"'+player.logins+'","Wins":"'+player.wins+'","Fails":"'+player.fails+'"}');
       }
       else {
         console.log("Database: Player doesn't exist");
