@@ -1248,7 +1248,8 @@ function lobby() {
 	});
 }
 function profile() {
-	$.get('player/1234',callback(function(data){
+  $('.profile').empty().remove();
+	$.get($(this).attr('href'),callback(function(data){
     data = $.parseJSON(data);
     $('<div class="profile"></div>')
       .append('<div class="playername">'+data.playername+'</div>')
