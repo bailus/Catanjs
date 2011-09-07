@@ -888,7 +888,7 @@ http.get('/player/:id',function(req, res){
       if (player) {
         console.log('Database: Loaded player');
         console.log(player);
-        res.send('{"playerid":"'+player.playerid+'","playername":"'+player.playername+'","logins":"'+player.logins+'"}');
+        res.send('{"playername":"'+player.playername+'","logins":"'+player.logins+'"}');
       }
       else {
         console.log("Database: Player doesn't exist");

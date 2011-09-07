@@ -1248,14 +1248,12 @@ function lobby() {
 function profile() {
   $('.profile').empty().remove();
 	$.getJSON($(this).attr('href'),callback(function(data){
-    $('<div class="profile"></div>')
-      .append('<div class="playername">'+data.playername+'</div>')
-      .append('<div class="playerid">'+data.playerid+'</div>')
-      .append('<div class="logins">'+data.logins+'</div>')
-      .appendTo(this);
+    var div = $('<div class="profile"></div>').appendTo(this);
+    var d; for (d in data) { div.append('<div class="'+d+'">'+d+': '+data[d]+'</div>'); }
 	},{'scope':this}));
   return false;
 }
+
 function joinGame() {
   lobbysocket.emit('joingame',$(this).attr('id').slice(4));
 }
