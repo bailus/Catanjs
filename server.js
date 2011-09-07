@@ -887,7 +887,7 @@ http.get('/verify', function(req, res){
           });
         }
       });*/
-      savePlayer({'playerid':id,'playername':nickname,'login':true},function(err)){
+      savePlayer({'playerid':id,'playername':nickname,'login':true},function(err){
         if (err) { res.send('Database Error: '+err); }
         else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
       }
