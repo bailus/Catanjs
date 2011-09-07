@@ -1248,14 +1248,14 @@ function lobby() {
 	});
 }
 function profile() {
-	//$.getJSON($(this).attr('href'),function(data){
+  var element = this;
 	$.getJSON('player/1234',callback(function(data){
     $('<div class="profile"></div>')
       .append('<div class="playername">'+data.playername+'</div>')
       .append('<div class="playerid">'+data.playerid+'</div>')
       //.append('<div class="logins">'+data.logins+'</div>')
       .appendTo(this);
-	},{scope:this}));
+	},{'args':element}));
   return false;
 }
 function joinGame() {
