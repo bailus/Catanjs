@@ -1249,7 +1249,7 @@ function lobby() {
 }
 function profile() {
   if ($(this).children('.profile').length) {
-    $(this).slideUp(70).empty().remove();
+    $(this).children('.profile').slideUp(70).empty().remove();
   } else {
     $('.profile').empty().remove();
 	  $.getJSON($(this).attr('href'),callback(function(data){
