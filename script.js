@@ -1249,6 +1249,7 @@ function lobby() {
 }
 function profile() {
 	$.get('player/1234',function(data){
+    data = $.parseJSON(data);
     alert(data.playername);
     /*$('<div class="profile"></div>')
       .append('<div class="playername">'+data.playername+'</div>')
