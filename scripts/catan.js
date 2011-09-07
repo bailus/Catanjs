@@ -1249,7 +1249,7 @@ function profile() {
   $('.profile').empty().remove();
 	$.getJSON($(this).attr('href'),callback(function(data){
     var div = $('<div class="profile"></div>').appendTo(this);
-    var d; for (d in data) { div.append('<div class="'+d+'">'+d+': '+data[d]+'</div>'); }
+    var d; for (d in data) { div.append('<div>'+d+': '+data[d]+'</div>'); }
 	},{'scope':this}));
   return false;
 }
