@@ -1230,7 +1230,7 @@ function lobby() {
 	lobbysocket.on('players',function(data){
 		var j, playersDiv = $('#players').empty();
 		for (j in data) {
-			$('<a class="player" href="player/'+data[j].id+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</a>').click(profile).appendTo(playersDiv);
+			$('<div class="player" href="player/'+data[j].id+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</div>').click(profile).appendTo(playersDiv);
 		}
 	});
 	lobbysocket.on('game',function(data){
