@@ -1294,7 +1294,7 @@ function lobbychat(date,playerid,playername,playerservice,data) {
             .replace(/\[super]/g,'<span class="supertext">').replace(/\[\/super]/g,'</span>')
             .replace(/\[[pre|code]]/g,'<span class="monospaced">').replace(/\[\/[pre|code]]/g,'</span>')
             .replace(/\[url\=([^\]]*)](.*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$2</a>')
-            .replace(/\[url](.*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$1</a>')
+            .replace(/\[url]([^\]]*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$1</a>')
             .replace(/\[.*]/g,'') //remove all unknown bbcode
             .replace(/:lol:/g,'<span class="smile smile017"></span>')
             .replace(/:lol:/g,'<span class="smile smile017"></span>')
@@ -1338,7 +1338,10 @@ function lobbychat(date,playerid,playername,playerservice,data) {
             .replace(/B\)/g,'<span class="smile smile035"></span>')
             .replace(/c:/g,'<span class="smile smile036"></span>')
             .replace(/C:/g,'<span class="smile smile037"></span>');
-  $('<div><div class="player"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div><div class="time">'+date.toLocaleTimeString()+'</div><div class="text">'+data+'</div></div>').hide().prependTo('#lobbychat').slideDown(100);
+  var newline = $('<div></div>');
+  $('<div class="player" href="player/'+playerid+'"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div>').click(profile).appendTo(newline);
+  $('<div class="time">'+date.toLocaleTimeString()+'</div><div class="text">'+data+'</div>').appendTo(newline);
+  newline.hide().prependTo('#lobbychat').slideDown(100);
 }
 function lobbychatsend() {
   var input = $('#lobbychatinput');
