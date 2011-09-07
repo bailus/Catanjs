@@ -1252,8 +1252,8 @@ function profile() {
       .append('<div class="playername">'+data.playername+'</div>')
       .append('<div class="playerid">'+data.playerid+'</div>')
       .append('<div class="logins">'+data.logins+'</div>')
-      .appendTo(this);
-	});*/
+      .appendTo(this);*/
+	});
   return false;
 }
 function joinGame() {
