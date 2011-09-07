@@ -877,12 +877,23 @@ http.get('/verify', function(req, res){
   });
 });
 http.get('/player/:id',function(req, res){
-  //res.contentType('application/json');
+  res.contentType('application/json');
+  console.log('Loading player: '+req.params.id);
   loadPlayer(req.params.id,function(err,player){
-    if ((!err)&&(player)) {
-      res.send('{"playerid":"'+player.playerid+'","playername":"'+player.playername+'","logins":"'+player.logins+'"}');
+    if (err) {
+      console.log('Database Error: '+err);
+      res.send('{}');
+    } else {
+      if (player) {
+        console.log('Database: Loaded player');
+        console.log(player);
+        res.send('{"playerid":"'+player.playerid+'","playername":"'+player.playername+'","logins":"'+player.logins+'"}');
+      }
+      else {
+        console.log("Database: Player doesn't exist");
+        res.send('{}');
+      }
     }
-    else { res.send('{}'); }
   });
 });
 http.get('/game', function(req, res){

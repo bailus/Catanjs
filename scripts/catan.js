@@ -1247,8 +1247,7 @@ function lobby() {
 }
 function profile() {
   $('.profile').empty().remove();
-	$.get($(this).attr('href'),callback(function(data){
-    data = $.parseJSON(data);
+	$.getJSON($(this).attr('href'),callback(function(data){
     $('<div class="profile"></div>')
       .append('<div class="playername">'+data.playername+'</div>')
       .append('<div class="playerid">'+data.playerid+'</div>')
