@@ -55,7 +55,7 @@ savePlayer = function(newplayer,func) { //save the player to the database
       console.log('creating a new player in the database');
       var player = new playerModel();
     }
-    if (player.playeri) { player.playerid = newplayer.playerid;
+    if (player.playerid) { player.playerid = newplayer.playerid; }
     if (player.playername) { player.playername = newplayer.playername; }
     if (player.logins) { player.logins = newplayer.logins; }
     player.save(callback(function (err) {
