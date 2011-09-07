@@ -878,8 +878,9 @@ http.get('/verify', function(req, res){
 });
 http.get('/player/:id',function(req, res){
   res.contentType('application/json');
-  console.log('Loading player: '+req.params.id);
-  loadPlayer(req.params.id,function(err,player){
+  var id = encodeURIComponent(req.params.id)
+  console.log('Loading player: '+id);
+  loadPlayer(id,function(err,player){
     if (err) {
       console.log('Database Error: '+err);
       res.send('{}');
