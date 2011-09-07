@@ -833,6 +833,17 @@ body {
 #lobbychatsend:hover {
   background-color:#444;
 }
+.profile {
+  z-index:100000100;
+  background-color:black;
+  border:1px solid white;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color:white;
+  width:100px;
+  height:100px;
+}
 
 #konsole { display:none; }
 .debug { display:none; }
