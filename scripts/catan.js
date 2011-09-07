@@ -1247,7 +1247,7 @@ function lobby() {
 }
 function profile() {
   if ($(this).children('.profile').length) {
-    $(this).children('.profile').slideUp(50);
+    $(this).children('.profile').slideUp(50,function(){ $(this).empty().remove(); });
   } else {
     $('.profile').empty().remove();
 	  $.getJSON($(this).attr('href'),callback(function(data){
