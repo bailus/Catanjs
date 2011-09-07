@@ -1230,7 +1230,7 @@ function lobby() {
 	lobbysocket.on('players',function(data){
 		var j, playersDiv = $('#players').empty();
 		for (j in data) {
-			$('<div class="player" title="'+decodeURIComponent(data[j].id)+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</div>').appendTo(playersDiv);
+			$('<a class="player" href="player/'+data[j].id+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</a>').click(profile).appendTo(playersDiv);
 		}
 	});
 	lobbysocket.on('game',function(data){
@@ -1246,6 +1246,16 @@ function lobby() {
 	lobbysocket.on('chat',function(date,playerid,playername,playerservice,data){
 		lobbychat(date,playerid,playername,playerservice,data);
 	});
+}
+function profile() {
+	$.getJSON($(this).attr(href),function(data){
+    $('<div class="profile"></div>')
+      .append('<div class="playername">'+data.playername+'</div>')
+      .append('<div class="playerid">'+data.playerid+'</div>')
+      .append('<div class="logins">'+data.logins+'</div>')
+      .appendTo(this);
+	});
+  return false;
 }
 function joinGame() {
   lobbysocket.emit('joingame',$(this).attr('id').slice(4));
