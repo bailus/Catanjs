@@ -1248,9 +1248,13 @@ function lobby() {
 function profile() {
   $('.profile').empty().remove();
 	$.getJSON($(this).attr('href'),callback(function(data){
-    var div = $('<div class="profile"></div>').appendTo(this);
+    var div = $('<div class="profile"></div>')hide().appendTo(this);
     var d; for (d in data) { div.append('<div>'+d+': '+data[d]+'</div>'); }
 	},{'scope':this}));
+  div.click(function(){
+    $(this).empty().remove();
+  });
+  div.slideDown(100);
   return false;
 }
 
