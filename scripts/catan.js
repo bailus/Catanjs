@@ -1246,7 +1246,7 @@ function lobby() {
 	});
 }
 function profile() {
-	$.getJSON($(this).attr(href),function(data){
+	$.getJSON($(this).attr('href'),function(data){
     $('<div class="profile"></div>')
       .append('<div class="playername">'+data.playername+'</div>')
       .append('<div class="playerid">'+data.playerid+'</div>')
