@@ -876,7 +876,7 @@ http.get('/verify', function(req, res){
         else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
       });
     } else {
-      if (error) { res.redirect('http://bailus.no.de/?error='+encodeURIComponent(err)); }
+      if (error) { res.redirect('http://bailus.no.de/?error='+encodeURIComponent(error)); }
       else { res.redirect('http://bailus.no.de/?error=Not_authenticated'); }
     }
   });
