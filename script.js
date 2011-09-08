@@ -1343,8 +1343,10 @@ function chat(date,player,playerid,playername,playerservice,data) {
 }
 function chatsend() {
   var input = $('#chatinput');
-  socket.emit('chat',input.attr('value'));
-  input.attr('value','');
+  if (input.attr('value').length) {
+    socket.emit('chat',input.attr('value'));
+    input.attr('value','').focus();
+  }
   return false;
 }
 function lobbychat(date,playerid,playername,playerservice,data) {
