@@ -1359,8 +1359,10 @@ function lobbychat(date,playerid,playername,playerservice,data) {
 }
 function lobbychatsend() {
   var input = $('#lobbychatinput');
-  lobbysocket.emit('chat',input.attr('value'));
-  input.attr('value','');
+  if (input.attr('value').length) {
+    lobbysocket.emit('chat',input.attr('value'));
+    input.attr('value','').focus();
+  }
   return false;
 }
 function newgamebutton() {
