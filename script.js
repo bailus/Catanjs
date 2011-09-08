@@ -1311,7 +1311,7 @@ function bbDecode(data) {
     .replace(/:[P|p]/g,'<span class="smile smile020"></span>')
     .replace(/:[Q|q]/g,'<span class="smile smile021"></span>')
     .replace(/:[T|t]/g,'<span class="smile smile022"></span>')
-    .replace(/:\[||l]/g,'<span class="smile smile023"></span>')
+    .replace(/:[\||l]/g,'<span class="smile smile023"></span>')
     .replace(/;\)/g,'<span class="smile smile024"></span>')
     .replace(/=B/g,'<span class="smile smile025"></span>')
     .replace(/=[D]/g,'<span class="smile smile026"></span>')
