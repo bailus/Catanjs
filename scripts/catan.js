@@ -1276,7 +1276,6 @@ function bbDecode(data) {
     .replace(/\[sub]/g,'<span class="subtext">').replace(/\[\/sub]/g,'</span>')
     .replace(/\[super]/g,'<span class="supertext">').replace(/\[\/super]/g,'</span>')
     .replace(/\[[pre|code]]/g,'<span class="monospaced">').replace(/\[\/[pre|code]]/g,'</span>')
-    .replace(/\[.*]/g,'') //remove all unknown bbcode
     .replace(/:lol:/g,'<span class="smile smile017"></span>')
     .replace(/:lol:/g,'<span class="smile smile017"></span>')
     .replace(/:lol:/g,'<span class="smile smile017"></span>')
