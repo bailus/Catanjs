@@ -560,14 +560,14 @@ body {
 #sidepanel {
   position:fixed;
   right:0;top:0;
-  width:460px;height:100%;
+  width:440px;height:100%;
   background-color:#000;
   z-index:10000000;
 }
 #chat {
   position:absolute;
-  left:40px;width:406px;
-  top:60px;bottom:120px;
+  left:30px;width:400px;
+  top:35px;bottom:8px;
   border:1px solid #666;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -641,6 +641,7 @@ body {
   line-height:16px;
   font-size:13px;
   padding-top:4px;
+  margin-top:-1px;
 }
 #sidepanelhide {
   position:absolute;
@@ -651,33 +652,40 @@ body {
 }
 #sidepanel form {
   position:absolute;
-  height:24px;width:400px;
-  bottom:85px;left:40px;
+  height:22px;width:400px;
+  bottom:85px;left:30px;
+  border:1px solid #666;
   border:1px solid #666;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  padding-left:4px;padding-top:4px;
+  top:5px;
 }
 #chatinput {
   background-color:black;
   color:white;
   border:none;
   width:330px;
-  height:18px;line-height:18px;
+  height:100%;line-height:18px;
   padding:0;margin:0;
+  line-height:100%;
+  padding-left:3px;
 }
 #chatsend {
   background-color:#222;
   color:white;
   font-weight:bold;
-  border:1px solid #666;
+  border:none;
+  border-left:1px solid #666;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
   width:63px;
-  height:20px;line-height:18px;
+  height:100%;
   padding:0;margin:0;
+  position:absolute;
+  top:0;
+  right:0;
 }
 #chatsend:hover {
   background-color:#444;
