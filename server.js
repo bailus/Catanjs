@@ -718,6 +718,8 @@ io.of('/'+gameid).on('connection', function (socket) {
 	      });
 	      });
 	      });
+	      });
+	      });
 	    });
 	    socket.on('disconnect',function(data){
 	      socket.get('player',function(err,player){
