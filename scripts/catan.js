@@ -1339,7 +1339,7 @@ function chat(date,player,playerid,playername,playerservice,data) {
   $('<div class="time">'+date.toLocaleTimeString()+'</div><div class="text">'+data+'</div>').appendTo(newline);
   newline.hide().prependTo('#chat').slideDown(100);
   if ($('#sidepanel').hasClass('hide')) { //if the chat box isn't visible...
-    $('<div class="chat player'+player+'">'+data+'</div>').click(function(){ $('#sidepanel').removeClass('hide'); $('#chatinput').focus(); }).hide().appendTo('#playerspanel .player'+player).slideDown(100).delay(4000).slideUp(100);
+    $('<div class="chat player player'+player+'">'+data+'</div>').click(function(){ $('#sidepanel').removeClass('hide'); $('#chatinput').focus(); }).hide().appendTo('#playerspanel .player'+player).slideDown(100).delay(4000).slideUp(100);
   }
 }
 function chatsend() {
