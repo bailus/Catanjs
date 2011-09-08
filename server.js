@@ -562,7 +562,7 @@ io.of('/'+gameid).on('connection', function (socket) {
     for (p in players) {
       if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) {
         playername = players[p].nickname;
-        playerid = encodeURIComponent(data.key);
+        playerid = encodeURIComponent(data.id);
         key = players[p].key;
         playerservice = players[p].service;
       }
