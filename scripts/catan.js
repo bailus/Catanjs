@@ -1332,6 +1332,7 @@ function joinGame() {
   }
 }*/
 function chat(date,player,playerid,playername,playerservice,data) {
+alert('data');
   var date = new Date(date);
   data = bbDecode(data);
   var newline = $('<div></div>');
