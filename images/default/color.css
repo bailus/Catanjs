@@ -22,11 +22,11 @@
 .player6 > .playerBackground, #bottompanelcover.player6, #playerspanel .player6, #chat .player.player6 { background-color: rgba(75,75,75,0.6); }
 .player7 > .playerBackground, #bottompanelcover.player7, #playerspanel .player7, #chat .player.player7 { background-color: rgba(114,64,0,0.6); }
 #bottompanel, #playerspanel {  background-color:rgba(0,0,0,0.6); }
-#chat .text.player1 { border-top: 2px solid rgb(150,0,10); }
-#chat .text.player2 { border-top: 2px solid rgb(0,85,150); }
-#chat .text.player3 { border-top: 2px solid rgb(167,167,167); }
-#chat .text.player4 { border-top: 2px solid rgb(256,140,0); }
-#chat .text.player5 { border-top: 2px solid rgb(18,127,0); }
-#chat .text.player6 { border-top: 2px solid rgb(75,75,75); }
-#chat .text.player7 { border-top: 2px solid rgb(114,64,0); }
+#chat .text.player1 { border-top: 2px solid rgba(150,0,10,0.6); }
+#chat .text.player2 { border-top: 2px solid rgba(0,85,150,0.6); }
+#chat .text.player3 { border-top: 2px solid rgba(167,167,167,0.6); }
+#chat .text.player4 { border-top: 2px solid rgba(256,140,0,0.6); }
+#chat .text.player5 { border-top: 2px solid rgba(18,127,0,0.6); }
+#chat .text.player6 { border-top: 2px solid rgba(75,75,75,0.6); }
+#chat .text.player7 { border-top: 2px solid rgba(114,64,0,0.6); }
 
