@@ -3,6 +3,7 @@ body {
   overflow:hidden;
   color:white;
   background-color:#000;
+  background-image:url('background.jpg');
 }
 #cursor {
   position:absolute;
