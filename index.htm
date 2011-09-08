@@ -574,20 +574,20 @@ body {
   border-radius: 6px;
   overflow:auto;
 }
-#chat > div {
+/*#chat > div {
   margin:10px;
   color:white;
   width:360px;
   font-size:14px;
   line-height:25px;
-}
-#lobbychat > div {
+}*/
+#lobbychat > div, #chat > div {
   margin:4px;
 }
-#lobbychat > div + div {
+#lobbychat > div + div, #chat > div + div {
   margin-top:14px;
 }
-#chat > div > span {
+/*#chat > div > span {
   margin-right:10px;
   padding:3px 5px;
   font-weight:bold;
@@ -595,12 +595,12 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
   white-space:nowrap;
-}
-#lobbychat .serviceicon {
+}*/
+#lobbychat .serviceicon, #chat .serviceicon {
   margin:2px;
   margin-right:4px;
 }
-#lobbychat .player {
+#lobbychat .player, #chat .player {
   margin-right:4px;
   font-weight:bold;
   -webkit-border-top-left-radius: 3px;
@@ -619,7 +619,7 @@ body {
   position:relative;
   cursor:pointer;
 }
-#lobbychat .time {
+#lobbychat .time, #chat .time {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -629,7 +629,7 @@ body {
   padding-top:8px;
   font-size:10px;
 }
-#lobbychat .text {
+#lobbychat .text, #chat .text {
   font-size:13px;
   line-height:20px;
   word-wrap: break-word;
