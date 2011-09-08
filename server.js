@@ -497,8 +497,10 @@ var bank = function(gameid,player,data) {
     }
   }
 };
-var chat = function(gameid,player,playername,data) {
-  io.of('/'+gameid).emit('chat',player,playername,data);
+var chat = function(gameid,date,player,playerid,playername,playerservice,data) {
+//var chat = function(gameid,player,playername,data) {
+  //io.of('/'+gameid).emit('chat',player,playername,data);
+  io.of('/'+gameid).emit('chat',date,player,playerid,playername,playerservice,data);
 };
 var lobbychatbuffer = [];
 var lobbychat = function(playerid,playername,playerservice,data) {
@@ -562,13 +564,15 @@ io.of('/'+gameid).on('connection', function (socket) {
         playername = players[p].nickname;
         playerid = encodeURIComponent(data.key);
         key = players[p].key;
-        service = players[p].service;
+        playerservice = players[p].service;
       }
     }
     if (!(playername == '')) {
 	  socket.set('playername',playername);
+    socket.set('playerid',playerid);
+    socket.set('playerservice',playerservice);
 	  if (games[gameid].players.length < games[gameid].maxPlayers) {
-	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':service, 'key':key });
+	    var player = games[gameid].players.push({ cards:{ore:0,wheat:0,wood:0,brick:0,sheep:0}, developmentCards:[], developmentCardsPending:[], sock:socket, trade:{give:{},get:{},player:0}, 'playername':playername, 'playerid':playerid, 'service':playerservice, 'key':key });
 	    io.of('/lobby').emit('game',[games[gameid].type,games[gameid].name,games[gameid].players.length+'/'+games[gameid].maxPlayers,gameid]);
       console.log('Game '+gameid+': Player '+player+' connected');
 	    socket.emit('init',{
@@ -703,9 +707,14 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    });
 	    socket.on('chat',function(data){
 	      socket.get('player',function(err,player){
+	      socket.get('playerid',function(err,playerid){
 	      socket.get('playername',function(err,playername){
+	      socket.get('playerservice',function(err,playerservice){
 	      socket.get('gameid',function(err,gameid){
-		      chat(gameid,player,playername,data);
+		      //chat(gameid,player,playername,data);
+          var date = new Date();
+          date = date.toUTCString();
+		      chat(gameid,date,player,playerid,playername,playerservice,data);
 	      });
 	      });
 	      });

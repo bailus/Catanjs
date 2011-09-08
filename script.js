@@ -1210,8 +1210,10 @@ function connect(gameid) {
 	socket.on('tradeDecline',function(data){
 		displayTrade(data,1);
 	});
-	socket.on('chat',function(player,playername,data){
-		chat(player,playername,data);
+	socket.on('chat',function(date,player,playerid,playername,playerservice,data){
+	//socket.on('chat',function(player,playername,data){
+		//chat(player,playername,data);
+    chat(date,player,playerid,playername,playerservice,data);
 	});
 }
 
@@ -1260,15 +1262,85 @@ function profile() {
     return false;
   }
 }
-
+function bbDecode(data) {
+  return data
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\[b]/g,'<span class="bold">').replace(/\[\/b]/g,'</span>')
+    .replace(/\[i]/g,'<span class="italic">').replace(/\[\/i]/g,'</span>')
+    .replace(/\[u]/g,'<span class="underline">').replace(/\[\/u]/g,'</span>')
+    .replace(/\[o]/g,'<span class="overline">').replace(/\[\/o]/g,'</span>')
+    .replace(/\[s]/g,'<span class="strikethrough">').replace(/\[\/s]/g,'</span>')
+    .replace(/\[small]/g,'<span class="small">').replace(/\[\/small]/g,'</span>')
+    .replace(/\[sub]/g,'<span class="subtext">').replace(/\[\/sub]/g,'</span>')
+    .replace(/\[super]/g,'<span class="supertext">').replace(/\[\/super]/g,'</span>')
+    .replace(/\[[pre|code]]/g,'<span class="monospaced">').replace(/\[\/[pre|code]]/g,'</span>')
+    .replace(/\[url\=([^\]]*)](.*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$2</a>')
+    .replace(/\[url]([^\]]*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$1</a>')
+    .replace(/\[.*]/g,'') //remove all unknown bbcode
+    .replace(/:lol:/g,'<span class="smile smile017"></span>')
+    .replace(/:lol:/g,'<span class="smile smile017"></span>')
+    .replace(/:lol:/g,'<span class="smile smile017"></span>')
+    .replace(/,':o/g,'<span class="smile smile000"></span>')
+    .replace(/-_-/g,'<span class="smile smile001"></span>')
+    .replace(/>:\(/g,'<span class="smile smile029"></span>')
+    .replace(/>:\[/g,'<span class="smile smile030"></span>')
+    .replace(/>:]/g,'<span class="smile smile031"></span>')
+    .replace(/>:D/g,'<span class="smile smile032"></span>')
+    .replace(/>:O/g,'<span class="smile smile033"></span>')
+    .replace(/D:</g,'<span class="smile smile038"></span>')
+    .replace(/O_o/g,'<span class="smile smile039"></span>')
+    .replace(/3:/g,'<span class="smile smile002"></span>')
+    .replace(/8\|/g,'<span class="smile smile003"></span>')
+    .replace(/:\$/g,'<span class="smile smile004"></span>')
+    .replace(/:'/g,'<span class="smile smile005"></span>')
+    .replace(/:\(/g,'<span class="smile smile006"></span>')
+    .replace(/:\)/g,'<span class="smile smile007"></span>')
+    .replace(/:,/g,'<span class="smile smile008"></span>')
+    .replace(/:3/g,'<span class="smile smile009"></span>')
+    .replace(/:</g,'<span class="smile smile010"></span>')
+    .replace(/:\\/g,'<span class="smile smile011"></span>')
+    .replace(/:b/g,'<span class="smile smile012"></span>')
+    .replace(/:D/g,'<span class="smile smile013"></span>')
+    .replace(/:I/g,'<span class="smile smile014"></span>')
+    .replace(/:J/g,'<span class="smile smile015"></span>')
+    .replace(/:L/g,'<span class="smile smile016"></span>')
+    .replace(/:o/g,'<span class="smile smile018"></span>')
+    .replace(/:O/g,'<span class="smile smile019"></span>')
+    .replace(/:P/g,'<span class="smile smile020"></span>')
+    .replace(/:Q/g,'<span class="smile smile021"></span>')
+    .replace(/:T/g,'<span class="smile smile022"></span>')
+    .replace(/:\|/g,'<span class="smile smile023"></span>')
+    .replace(/;\)/g,'<span class="smile smile024"></span>')
+    .replace(/=B/g,'<span class="smile smile025"></span>')
+    .replace(/=D/g,'<span class="smile smile026"></span>')
+    .replace(/=s/g,'<span class="smile smile027"></span>')
+    .replace(/=V/g,'<span class="smile smile028"></span>')
+    .replace(/\^\^/g,'<span class="smile smile034"></span>')
+    .replace(/B\)/g,'<span class="smile smile035"></span>')
+    .replace(/c:/g,'<span class="smile smile036"></span>')
+    .replace(/C:/g,'<span class="smile smile037"></span>');
+}
 function joinGame() {
   lobbysocket.emit('joingame',$(this).attr('id').slice(4));
 }
-function chat(player,playername,data) {
-console.log(player);
-console.log(playername);
+/*function chat(player,playername,data) {
   $('<div><span class="player'+player+'">'+playername+'</span>'+data+'</div>').hide().prependTo('#chat').slideDown(100);
   if ($('#sidepanel').hasClass('hide')) {
+    $('<div class="chat player'+player+'">'+data+'</div>').click(function(){ $('#sidepanel').removeClass('hide'); $('#chatinput').focus(); }).hide().appendTo('#playerspanel .player'+player).slideDown(100).delay(4000).slideUp(100);
+  }
+}*/
+function chat(date,player,playerid,playername,playerservice,data) {
+  var date = new Date(date);
+  data = bbDecode(data);
+  var newline = $('<div></div>');
+  $('<div class="player'+player+'" href="player/'+playerid+'"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div>').click(profile).appendTo(newline);
+  $('<div class="time">'+date.toLocaleTimeString()+'</div><div class="text">'+data+'</div>').appendTo(newline);
+  newline.hide().prependTo('#lobbychat').slideDown(100);
+  if ($('#sidepanel').hasClass('hide')) { //if the chat box isn't visible...
     $('<div class="chat player'+player+'">'+data+'</div>').click(function(){ $('#sidepanel').removeClass('hide'); $('#chatinput').focus(); }).hide().appendTo('#playerspanel .player'+player).slideDown(100).delay(4000).slideUp(100);
   }
 }
@@ -1280,66 +1352,7 @@ function chatsend() {
 }
 function lobbychat(date,playerid,playername,playerservice,data) {
   var date = new Date(date);
-  data = data
-            .replace(/&/g, '&amp;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/\[b]/g,'<span class="bold">').replace(/\[\/b]/g,'</span>')
-            .replace(/\[i]/g,'<span class="italic">').replace(/\[\/i]/g,'</span>')
-            .replace(/\[u]/g,'<span class="underline">').replace(/\[\/u]/g,'</span>')
-            .replace(/\[o]/g,'<span class="overline">').replace(/\[\/o]/g,'</span>')
-            .replace(/\[s]/g,'<span class="strikethrough">').replace(/\[\/s]/g,'</span>')
-            .replace(/\[small]/g,'<span class="small">').replace(/\[\/small]/g,'</span>')
-            .replace(/\[sub]/g,'<span class="subtext">').replace(/\[\/sub]/g,'</span>')
-            .replace(/\[super]/g,'<span class="supertext">').replace(/\[\/super]/g,'</span>')
-            .replace(/\[[pre|code]]/g,'<span class="monospaced">').replace(/\[\/[pre|code]]/g,'</span>')
-            .replace(/\[url\=([^\]]*)](.*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$2</a>')
-            .replace(/\[url]([^\]]*)\[\/url]/g,'<a href="$1" target="_blank" rel="nofollow">$1</a>')
-            .replace(/\[.*]/g,'') //remove all unknown bbcode
-            .replace(/:lol:/g,'<span class="smile smile017"></span>')
-            .replace(/:lol:/g,'<span class="smile smile017"></span>')
-            .replace(/:lol:/g,'<span class="smile smile017"></span>')
-            .replace(/,':o/g,'<span class="smile smile000"></span>')
-            .replace(/-_-/g,'<span class="smile smile001"></span>')
-            .replace(/>:\(/g,'<span class="smile smile029"></span>')
-            .replace(/>:\[/g,'<span class="smile smile030"></span>')
-            .replace(/>:]/g,'<span class="smile smile031"></span>')
-            .replace(/>:D/g,'<span class="smile smile032"></span>')
-            .replace(/>:O/g,'<span class="smile smile033"></span>')
-            .replace(/D:</g,'<span class="smile smile038"></span>')
-            .replace(/O_o/g,'<span class="smile smile039"></span>')
-            .replace(/3:/g,'<span class="smile smile002"></span>')
-            .replace(/8\|/g,'<span class="smile smile003"></span>')
-            .replace(/:\$/g,'<span class="smile smile004"></span>')
-            .replace(/:'/g,'<span class="smile smile005"></span>')
-            .replace(/:\(/g,'<span class="smile smile006"></span>')
-            .replace(/:\)/g,'<span class="smile smile007"></span>')
-            .replace(/:,/g,'<span class="smile smile008"></span>')
-            .replace(/:3/g,'<span class="smile smile009"></span>')
-            .replace(/:</g,'<span class="smile smile010"></span>')
-            .replace(/:\\/g,'<span class="smile smile011"></span>')
-            .replace(/:b/g,'<span class="smile smile012"></span>')
-            .replace(/:D/g,'<span class="smile smile013"></span>')
-            .replace(/:I/g,'<span class="smile smile014"></span>')
-            .replace(/:J/g,'<span class="smile smile015"></span>')
-            .replace(/:L/g,'<span class="smile smile016"></span>')
-            .replace(/:o/g,'<span class="smile smile018"></span>')
-            .replace(/:O/g,'<span class="smile smile019"></span>')
-            .replace(/:P/g,'<span class="smile smile020"></span>')
-            .replace(/:Q/g,'<span class="smile smile021"></span>')
-            .replace(/:T/g,'<span class="smile smile022"></span>')
-            .replace(/:\|/g,'<span class="smile smile023"></span>')
-            .replace(/;\)/g,'<span class="smile smile024"></span>')
-            .replace(/=B/g,'<span class="smile smile025"></span>')
-            .replace(/=D/g,'<span class="smile smile026"></span>')
-            .replace(/=s/g,'<span class="smile smile027"></span>')
-            .replace(/=V/g,'<span class="smile smile028"></span>')
-            .replace(/\^\^/g,'<span class="smile smile034"></span>')
-            .replace(/B\)/g,'<span class="smile smile035"></span>')
-            .replace(/c:/g,'<span class="smile smile036"></span>')
-            .replace(/C:/g,'<span class="smile smile037"></span>');
+  data = bbDecode(data);
   var newline = $('<div></div>');
   $('<div class="player" href="player/'+playerid+'"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div>').click(profile).appendTo(newline);
   $('<div class="time">'+date.toLocaleTimeString()+'</div><div class="text">'+data+'</div>').appendTo(newline);

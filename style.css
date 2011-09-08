@@ -608,8 +608,8 @@ body {
   padding-right:4px;
   font-size:12px;
   background-color:#222;
-  z-index:100000001;
   position:relative;
+  cursor:pointer;
 }
 #lobbychat .time {
   -webkit-border-radius: 3px;
