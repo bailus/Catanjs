@@ -561,10 +561,11 @@ body {
   left:40px;width:406px;
   top:60px;bottom:120px;
   border:1px solid #666;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   overflow:auto;
+  font-size:13px;
 }
 /*#chat > div {
   margin:10px;
