@@ -725,7 +725,7 @@ body {
   overflow:auto;
   overflow-x:hidden;
   background-color:black;
-  background-color:rgba(32,32,32,0.8);
+  background-color:rgba(0,0,0,0.8);
 }
 #players .player {
   height:20px;line-height:20px;
@@ -744,7 +744,7 @@ body {
   overflow:auto;
   overflow-x:hidden;
   background-color:black;
-  background-color:rgba(32,32,32,0.8);
+  background-color:rgba(0,0,0,0.8);
   padding:4px;
 }
 #games { top:165px;width:340px; }
