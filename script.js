@@ -1334,13 +1334,12 @@ function joinGame() {
   }
 }*/
 function chat(date,player,playerid,playername,playerservice,data) {
-alert('data');
   var date = new Date(date);
   data = bbDecode(data);
   var newline = $('<div></div>');
   $('<div class="player'+player+'" href="player/'+playerid+'"><div class="serviceicon '+playerservice+'"></div>'+playername+'</div>').click(profile).appendTo(newline);
   $('<div class="time">'+date.toLocaleTimeString()+'</div><div class="text">'+data+'</div>').appendTo(newline);
-  newline.hide().prependTo('#lobbychat').slideDown(100);
+  newline.hide().prependTo('#chat').slideDown(100);
   if ($('#sidepanel').hasClass('hide')) { //if the chat box isn't visible...
     $('<div class="chat player'+player+'">'+data+'</div>').click(function(){ $('#sidepanel').removeClass('hide'); $('#chatinput').focus(); }).hide().appendTo('#playerspanel .player'+player).slideDown(100).delay(4000).slideUp(100);
   }
