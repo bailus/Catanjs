@@ -871,31 +871,6 @@ http.get('/verify', function(req, res){
       players.push({'id':id,'nickname':nickname,'service':s,'key':key});
       console.log(result);
       console.log(players);
-      /*loadPlayer(id,function(err,player){ //create the player in the db if it doesn't exist already, else update the db entry
-        if (err) {
-          console.log('Database Error: '+err);
-          res.send('Database Error: '+err);
-        } else {
-          if (player) {
-            console.log('Database: loaded player');
-            console.log(player);
-            player.logins += 1;
-          } else {
-            var player = {'playerid':id,'playername':nickname,'logins':1,'wins':0,'fails':0};
-            console.log('Database: created new player');
-            console.log(player);
-          }
-          savePlayer(player,function(err){
-            if (err) {
-              console.log('Database Error: '+err);
-              res.send('Database Error: '+err);
-            } else {
-              console.log('Database: saved player');
-              res.redirect('http://bailus.no.de/game?id='+id+'&key='+key);
-            }
-          });
-        }
-      });*/
       savePlayer({'playerid':id,'playername':nickname,'login':true},function(err){
         if (err) { res.send('Database Error: '+err); }
         else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
