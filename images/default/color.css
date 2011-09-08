@@ -22,4 +22,11 @@
 .player6 > .playerBackground, #bottompanelcover.player6, #playerspanel .player6, #chat .player6 { background-color: rgba(75,75,75,0.6); }
 .player7 > .playerBackground, #bottompanelcover.player7, #playerspanel .player7, #chat .player7 { background-color: rgba(114,64,0,0.6); }
 #bottompanel, #playerspanel {  background-color:rgba(0,0,0,0.6); }
+.text.player1 { border-top: 2px solid rgb(150,0,10); }
+.text.player2 { border-top: 2px solid rgb(0,85,150); }
+.text.player3 { border-top: 2px solid rgb(167,167,167); }
+.text.player4 { border-top: 2px solid rgb(256,140,0); }
+.text.player5 { border-top: 2px solid rgb(18,127,0); }
+.text.player6 { border-top: 2px solid rgb(75,75,75); }
+.text.player7 { border-top: 2px solid rgb(114,64,0); }
 
