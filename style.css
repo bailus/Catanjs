@@ -5,6 +5,9 @@ body {
   background-color:#000;
   background-image:url('background.jpg');
 }
+#lobby {
+  background-image:url('background.jpg');
+}
 #cursor {
   position:absolute;
   z-index:10000000;
