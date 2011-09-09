@@ -906,16 +906,18 @@ http.get('/game', function(req, res){
   var a = 0;
   for (p in players) {
     if ((encodeURIComponent(req.query.id) == players[p].id)&&(req.query.key == players[p].key)) { a = 1; }
-console.log(encodeURIComponent(req.query.id));
-console.log(players[p].id);
-console.log(req.query.key);
-console.log(players[p].key);
   }
   if (a) {
     res.contentType('text/html');
     res.sendfile('index.htm');
   } else {
     res.redirect('http://bailus.no.de/?error=Invalid_Key');
+for (p in players) {
+console.log(encodeURIComponent(req.query.id));
+console.log(players[p].id);
+console.log(req.query.key);
+console.log(players[p].key);
+}
   }
 });
 http.get('/themes/default.css', function(req, res){
