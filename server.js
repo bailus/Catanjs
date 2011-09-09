@@ -852,36 +852,41 @@ http.get('/authenticate', function(req, res){
 http.get('/verify', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
     if (!error && result.authenticated) {
-      res.contentType('text/html');
-      var nickname;
-      if (result.fullname) {
-        nickname = result.fullname;
-      } else if (result.nickname) {
-	      nickname = result.nickname;
-      } else if (result.firstname && result.lastname) {
-	      nickname = result.firstname+' '+result.lastname;
-      } else if (result.email) {
-	      nickname = result.email.split('@',1)[0];
-      } else {
-	      nickname = result.claimedIdentifier;
+      var p, q = 1, id = encodeURIComponent(result.claimedIdentifier);
+      for (p in players) {
+        if (players[p].id == id) { q = 0; }
       }
-      var key = Math.floor(Math.random()*10000000000000000);
-      var id = encodeURIComponent(result.claimedIdentifier);
-      var s = 'openid';
-      if (result.claimedIdentifier.substr(0,21) == 'https://me.yahoo.com/') { s = 'yahoo'; }
-      else if (result.claimedIdentifier.substr(0,27) == 'https://live.anyopenid.com/') { s = 'live'; }
-      else if (result.claimedIdentifier.substr(0,31) == 'https://facebook.anyopenid.com/') { s = 'facebook'; }
-      else if (result.claimedIdentifier.substr(0,32) == 'https://www.google.com/accounts/') { s = 'google'; }
-      players.push({'id':id,'nickname':nickname,'service':s,'key':key});
-      console.log(result);
-      console.log(players);
-      savePlayer({'playerid':id,'playername':nickname,'login':true},function(err){
-        if (err) { res.send('Database Error: '+err); }
-        else { res.redirect('http://bailus.no.de/game?id='+id+'&key='+key); }
-      });
+      if (q) {
+        res.contentType('text/html');
+        var nickname;
+        if (result.fullname) {
+          nickname = result.fullname;
+        } else if (result.nickname) {
+	        nickname = result.nickname;
+        } else if (result.firstname && result.lastname) {
+	        nickname = result.firstname+' '+result.lastname;
+        } else if (result.email) {
+	        nickname = result.email.split('@',1)[0];
+        } else {
+	        nickname = result.claimedIdentifier;
+        }
+        var key = Math.floor(Math.random()*10000000000000000);
+        var s = 'openid';
+        if (result.claimedIdentifier.substr(0,21) == 'https://me.yahoo.com/') { s = 'yahoo'; }
+        else if (result.claimedIdentifier.substr(0,27) == 'https://live.anyopenid.com/') { s = 'live'; }
+        else if (result.claimedIdentifier.substr(0,31) == 'https://facebook.anyopenid.com/') { s = 'facebook'; }
+        else if (result.claimedIdentifier.substr(0,32) == 'https://www.google.com/accounts/') { s = 'google'; }
+        players.push({'id':id,'nickname':nickname,'service':s,'key':key});
+        console.log(result);
+        console.log(players);
+        savePlayer({'playerid':id,'playername':nickname,'login':true},function(err){
+          if (err) { res.send('Database Error: '+err); }
+          else { res.redirect('game?id='+id+'&key='+key); }
+        });
+      } else { res.redirect('?error=Already_playing'); }
     } else {
       if (error) { res.redirect('http://bailus.no.de/?error='+encodeURIComponent(error)); }
-      else { res.redirect('http://bailus.no.de/?error=Not_authenticated'); }
+      else { res.redirect('?error=Not_authenticated'); }
     }
   });
 });
