@@ -65,6 +65,17 @@
       border:1px solid white;
       color:white;
     }
+    #connecting {
+      z-index:1000;
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      background-image:url('/background.jpg');
+      background-color:white;
+      text-align:center;
+      font-size:45px;
+      font-weight:bold;
+    }
   </style>
   <link rel="stylesheet" type="text/css" href="themes/login.css" />
   <body>
@@ -101,7 +112,7 @@
       <a href="/authenticate?openid=myspace.anyopenid.com" title="Sign in with your Myspace account"><div class="morelogin myspace"></div></a>
       <a href="/authenticate?openid=friendfeed.anyopenid.com" title="Sign in with your friendfeed account"><div class="morelogin friendfeed"></div></a>
     </div>
-    <div id="">Connecting...</div>
+    <div id="connecting">Connecting...</div>
     <script>
       $('form').parent().children('.login').click(function(event){
         if ($(this).parent().hasClass('visible')) {
@@ -119,7 +130,7 @@
       $('form.aol').submit(function(){
         window.location = '/authenticate?openid=openid.aol.com%2F'+$('input.aol').attr('value'); return false;
       });
-      function animate() { $('#connecting').fadeIn(300).delay(10000).fadeOut(200); });
+      var animate = function() { $('#connecting').fadeIn(300).delay(10000).fadeOut(200); });
       $('#logins a, #morelogins a').click(animate);
       $('form').submit(animate);
     </script>
