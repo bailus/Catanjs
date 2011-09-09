@@ -1215,11 +1215,15 @@ function connect(gameid) {
 	});
 }
 
+var randomOrder = function(){ return (Math.round(Math.random())-0.5); };
+var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Making bricks...'];
 var lobbysocket;
 function lobby() {
 	lobbysocket = io.connect('http://'+window.location.hostname+'/lobby');
 	lobbysocket.on('login',function(){
 		lobbysocket.emit('login',{'id':id,'key':key});
+    connectionText.sort(randomOrder());
+    $('#connecting').text(connectionText[0]);
 	});
 	lobbysocket.on('games',function(data){
 		var i, gamesDiv = $('#games').empty();
@@ -1228,6 +1232,7 @@ function lobby() {
 		}
 	});
 	lobbysocket.on('players',function(data){
+    $('#connecting').fadeOut(300);
 		var j, playersDiv = $('#players').empty();
 		for (j in data) {
 			$('<div class="player" href="player/'+data[j].id+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</div>').click(profile).appendTo(playersDiv);

@@ -732,7 +732,7 @@ body {
   cursor:pointer;
   position:relative;
 }
-#games, #newgame, #connecting {
+#games, #newgame {
   position:fixed;
   left:10px;width:350px;
   top:140px;bottom:40px;
@@ -748,7 +748,6 @@ body {
 }
 #games { top:165px;width:340px; }
 #newgame { z-index:100000010;display:none; }
-#connecting { z-index:100000020;display:none; }
 #gamebuttons {
   position:fixed;
   left:10px;top:140px;
@@ -865,6 +864,17 @@ body {
   left:2px;
   padding: 2px 5px;
   font-weight:normal;
+}
+#connecting {
+  z-index:100000200;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background-image:url('/background.jpg');
+  line-height:100%;
+  text-align:center;
+  font-size:45px;
+  font-weight:bold;
 }
 
 .bold { font-weight:bold; }
