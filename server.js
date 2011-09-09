@@ -911,10 +911,9 @@ http.get('/game', function(req, res){
     res.contentType('text/html');
     res.sendfile('index.htm');
   } else {
-    res.redirect('http://bailus.no.de/?error=Invalid_Key');
 console.log('Invalid key');
 console.log(players);
-}
+    res.redirect('http://bailus.no.de/?error=Invalid_Key');
   }
 });
 http.get('/themes/default.css', function(req, res){
