@@ -807,9 +807,9 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
           var plist = [];
           for (i in players) {
             if (players[i].id == playerid) {
-              plist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
-            } else {
               players.splice(i,1); i -= 1;
+            } else {
+              plist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
             }
           }
 	        io.of('/lobby').emit('players',plist);
