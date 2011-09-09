@@ -724,13 +724,14 @@ io.of('/'+gameid).on('connection', function (socket) {
 	    socket.on('disconnect',function(data){
 	      socket.get('player',function(err,player){
 	      socket.get('gameid',function(err,gameid){
+	      socket.get('playerid',function(err,playerid){
 		      games[gameid].players[player-1].playerid = '';
-		      var p, q = 0;
+		      /*var p, q = 0;
 		      for (p in games[gameid].players) {
 		        if (games[gameid].players[p].playerid == '') { q += 1; }
 		      }
-		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }
-          if (1) { //TODO check if the player won
+		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }*/
+          if (0) { //TODO check if the player won
             savePlayer({'playerid':playerid,'win':true});
           } else {
             savePlayer({'playerid':playerid,'fail':true});
@@ -909,8 +910,6 @@ http.get('/game', function(req, res){
     res.contentType('text/html');
     res.sendfile('index.htm');
   } else {
-console.log('Invalid key');
-console.log(players);
     res.redirect('http://bailus.no.de/?error=Invalid_Key');
   }
 });
