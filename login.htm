@@ -131,7 +131,9 @@
       $('form.aol').submit(function(){
         window.location = '/authenticate?openid=openid.aol.com%2F'+$('input.aol').attr('value'); return false;
       });
-      var animate = function() { $('#connecting').fadeIn(300,function(){ window.location.href = this.href; }).delay(10000).fadeOut(200); return false; });
+      var animate = function() {
+        $('#connecting').fadeIn(300).delay(10000).fadeOut(200);
+      }
       $('#logins a, #morelogins a').click(animate);
       $('form').submit(animate);
     </script>
