@@ -118,6 +118,7 @@
       $('form.aol').submit(function(){
         window.location = '/authenticate?openid=openid.aol.com%2F'+$('input.aol').attr('value'); return false;
       });
+      $('#logins a, #morelogins a').click(function(){ $('#connecting').fadeIn(300).delay(10000).fadeOut(200); });
     </script>
   </body>
 </html>
