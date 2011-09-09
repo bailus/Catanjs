@@ -133,11 +133,10 @@
       });
       var animate = function() {
         var title = '', connecting = $('#connecting');
+alert($(this).attr('title'));
         if ($(this).attr('title').length) { title = $(this).attr('title'); }
         else if ($(this).parent().attr('title').length) { title = $(this).parent().attr('title'); }
-        if (title = '') {
-          connecting.text('Connecting...')
-        } else {
+        if (title != '') {
           connecting.text('Connecting to '+title+'...')
         }
         connecting.fadeIn(300).delay(100000,function(){ window.location.reload(true); });
