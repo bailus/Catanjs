@@ -738,6 +738,7 @@ io.of('/'+gameid).on('connection', function (socket) {
           }
 	      });
 	      });
+	      });
 	    });
 	  } else { //game full
 	    console.log('Game full');
