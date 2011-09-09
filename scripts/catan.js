@@ -1,3 +1,4 @@
+var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Building boats...'];
 var turnCounter = 0;
 var totalPlayers = 4;
 var thisPlayer = 0;
@@ -1218,14 +1219,11 @@ function connect(gameid) {
 }
 
 var randomOrder = function(){ return (Math.round(Math.random())-0.5); };
-//var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Building boats...'];
 var lobbysocket;
 function lobby() {
 	lobbysocket = io.connect('http://'+window.location.hostname+'/lobby');
 	lobbysocket.on('login',function(){
 		lobbysocket.emit('login',{'id':id,'key':key});
-    //connectionText.sort(randomOrder());
-    //$('#connecting').text(connectionText[0]);
     $('#connecting').fadeOut(300);
 	});
 	lobbysocket.on('games',function(data){
@@ -1247,6 +1245,8 @@ function lobby() {
 		thisgame.slideDown(200);
 	});
 	lobbysocket.on('gameid',function(data){
+    connectionText.sort(randomOrder());
+    $('#connecting').text(connectionText[0]);
     $('#connecting').fadeIn(300,function(){
   		$('#lobby').hide();
     });
