@@ -1218,13 +1218,13 @@ function connect(gameid) {
 }
 
 var randomOrder = function(){ return (Math.round(Math.random())-0.5); };
-//var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Making bricks...'];
+//var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Building boats...'];
 var lobbysocket;
 function lobby() {
 	lobbysocket = io.connect('http://'+window.location.hostname+'/lobby');
 	lobbysocket.on('login',function(){
 		lobbysocket.emit('login',{'id':id,'key':key});
-    connectionText.sort(randomOrder());
+    //connectionText.sort(randomOrder());
     //$('#connecting').text(connectionText[0]);
     $('#connecting').fadeOut(300);
 	});
