@@ -881,12 +881,12 @@ http.get('/verify', function(req, res){
         console.log(players);
         savePlayer({'playerid':id,'playername':nickname,'login':true},function(err){
           if (err) { res.send('Database Error: '+err); }
-          else { res.redirect('game?id='+id+'&key='+key); }
+          else { res.redirect('/game?id='+id+'&key='+key); }
         });
-      } else { res.redirect('?error=Already_playing'); }
+      } else { res.redirect('/?error=Already_playing'); }
     } else {
-      if (error) { res.redirect('http://bailus.no.de/?error='+encodeURIComponent(error)); }
-      else { res.redirect('?error=Not_authenticated'); }
+      if (error) { res.redirect('/?error='+encodeURIComponent(error)); }
+      else { res.redirect('/?error=Not_authenticated'); }
     }
   });
 });
