@@ -804,14 +804,13 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	    });
 	    socket.on('disconnect',function(data){
 	      socket.get('playerid',function(err,playerid){
-          var plist = [], i, j = -1;
+          var plist = [];
           for (i in players) {
             if (players[i].id == playerid) {
-              j = i;
-            } else {
               plist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
+            } else {
+              players.splice(i,1); i -= 1;
             }
-            if (j != -1) { players.splice(j,1); }
           }
 	        io.of('/lobby').emit('players',plist);
 	      });
