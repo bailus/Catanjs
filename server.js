@@ -758,7 +758,7 @@ return gameid;
 var lobby = io.of('/lobby').on('connection',function(socket){  //initial connection from the client
   socket.emit('login');
   socket.on('login',function(data){
-    var playername = '';
+    var playername = '', playerid = '', playerservice = '';
     for (p in players) {
       if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playerid = players[p].id; playername = players[p].nickname; playerservice = players[p].service; }
     }
@@ -911,7 +911,7 @@ http.get('/game', function(req, res){
     res.contentType('text/html');
     res.sendfile('index.htm');
   } else {
-    res.redirect('http://bailus.no.de/');
+    res.redirect('http://bailus.no.de/?error=Invalid_Key');
   }
 });
 http.get('/themes/default.css', function(req, res){
