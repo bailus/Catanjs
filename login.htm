@@ -101,6 +101,7 @@
       <a href="/authenticate?openid=myspace.anyopenid.com" title="Sign in with your Myspace account"><div class="morelogin myspace"></div></a>
       <a href="/authenticate?openid=friendfeed.anyopenid.com" title="Sign in with your friendfeed account"><div class="morelogin friendfeed"></div></a>
     </div>
+    <div id="">Connecting...</div>
     <script>
       $('form').parent().children('.login').click(function(event){
         if ($(this).parent().hasClass('visible')) {
@@ -118,7 +119,9 @@
       $('form.aol').submit(function(){
         window.location = '/authenticate?openid=openid.aol.com%2F'+$('input.aol').attr('value'); return false;
       });
-      $('#logins a, #morelogins a').click(function(){ $('#connecting').fadeIn(300).delay(10000).fadeOut(200); });
+      function animate() { $('#connecting').fadeIn(300).delay(10000).fadeOut(200); });
+      $('#logins a, #morelogins a').click(animate);
+      $('form').submit(animate);
     </script>
   </body>
 </html>
