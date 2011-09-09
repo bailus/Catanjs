@@ -802,9 +802,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	    });
 	    socket.on('disconnect',function(data){
 	      socket.get('playerid',function(err,playerid){
-          var p, plist = [];
-          for (p in players) { if (players[p].id == playerid) { players.splice(p,1); } }
-          console.log(players);
+          var plist = [];
           for (i in players) {
             plist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
           }
