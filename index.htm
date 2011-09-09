@@ -2201,7 +2201,7 @@ function lobby() {
 		thisgame.slideDown(200);
 	});
 	lobbysocket.on('gameid',function(data){
-		$('#lobby').hide();
+		$('#lobby').fadeOut(300)
 		connect(data);
 	});
 	lobbysocket.on('chat',function(date,playerid,playername,playerservice,data){
