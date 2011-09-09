@@ -1172,6 +1172,7 @@ function connect(gameid) {
 	  refreshTradeButtons();
 	  refreshCards();
 	  if (data.robber) { makeRobber(); }
+		$('#connecting').fadeOut(300)
 	});
 	socket.on('build',function(data){
 	  if (data[2] == 'road') { buildRoad(data[0],data[1],data[3]); }
@@ -1247,7 +1248,9 @@ function lobby() {
 		thisgame.slideDown(200);
 	});
 	lobbysocket.on('gameid',function(data){
-		$('#lobby').fadeOut(300)
+    $('#connecting').fadeIn(300,function(){
+  		$('#lobby').hide();
+    });
 		connect(data);
 	});
 	lobbysocket.on('chat',function(date,playerid,playername,playerservice,data){
