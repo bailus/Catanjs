@@ -2126,7 +2126,8 @@ function connect(gameid) {
 	  refreshTradeButtons();
 	  refreshCards();
 	  if (data.robber) { makeRobber(); }
-		$('#connecting').fadeOut(300)
+    $('#lobby').hide();
+		$('#connecting').fadeOut(300);
 	});
 	socket.on('build',function(data){
 	  if (data[2] == 'road') { buildRoad(data[0],data[1],data[3]); }
@@ -2181,6 +2182,7 @@ function lobby() {
 		lobbysocket.emit('login',{'id':id,'key':key});
     connectionText.sort(randomOrder());
     //$('#connecting').text(connectionText[0]);
+    $('#connecting').fadeOut(300);
 	});
 	lobbysocket.on('games',function(data){
 		var i, gamesDiv = $('#games').empty();
@@ -2189,7 +2191,6 @@ function lobby() {
 		}
 	});
 	lobbysocket.on('players',function(data){
-    $('#connecting').fadeOut(300);
 		var j, playersDiv = $('#players').empty();
 		for (j in data) {
 			$('<div class="player" href="player/'+data[j].id+'"><div class="serviceicon '+data[j].service+'"></div>'+data[j].nickname+'</div>').click(profile).appendTo(playersDiv);
