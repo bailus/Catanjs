@@ -95,6 +95,7 @@
     <div id="title">
       bailus.no.de
     </div>
+    <div id="error"></div>
     <div id="logintext">
       Please sign in using one of the following services:
     </div>
@@ -106,7 +107,7 @@
         <div class="login aol"></div>
         <form class="aol">
           <div>Enter your AOL username:</div>
-          <div><input name="openid" class="aol" /><input type="button" value="Login" /></div>
+          <div><input name="openid" class="aol" /><input type="submit" value="Login" /></div>
         </form>
       </span>
       <a href="/authenticate?openid=live.anyopenid.com" title="Windows Live"><div class="login live"></div></a>
@@ -127,6 +128,12 @@
     </div>
     <div id="connecting">Connecting...</div>
     <script>
+      $.ready(function(){
+        var error = location.search.match(/?error=(.*)/)[1];
+        if (error) {
+          $('#error').text(error);
+        }
+      });
       $('form').parent().children('.login').click(function(event){
         if ($(this).parent().hasClass('visible')) {
           $('.visible').animate({ width:64 },300);
@@ -150,7 +157,7 @@
         if (title != '') {
           connecting.text('Connecting to '+title+'...')
         }
-        connecting.fadeIn(300);
+        connecting.fadeIn(300).delay(10000).fadeOut();
       }
       $('#logins a, #morelogins a').click(animate);
       $('form').submit(animate);
