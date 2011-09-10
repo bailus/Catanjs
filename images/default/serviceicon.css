@@ -4,3 +4,15 @@
   margin-top:2px;
   margin-right:4px;
 }
+.serviceicon.aol { background-position: 0 0; }
+.serviceicon.facebook { background-position: 0 -64; }
+.serviceicon.friendfeed { background-position: 0 -128; }
+.serviceicon.google { background-position: 0 -192; }
+.serviceicon.linkedin { background-position: 0 -256; }
+.serviceicon.live { background-position: 0 -320; }
+.serviceicon.livejournal { background-position: 0 -384; }
+.serviceicon.myspace { background-position: 0 -448; }
+.serviceicon.openid { background-position: 0 -512; }
+.serviceicon.twitter { background-position: 0 -576; }
+.serviceicon.yahoo { background-position: 0 -640; }
+
