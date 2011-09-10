@@ -1,4 +1,4 @@
-var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Building boats...'];
+var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Manufacturing bricks...'];
 var turnCounter = 0;
 var totalPlayers = 4;
 var thisPlayer = 0;
