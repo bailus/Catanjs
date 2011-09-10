@@ -128,7 +128,7 @@
     </div>
     <div id="connecting">Connecting...</div>
     <script>
-      $.ready(function(){
+      $(document).ready(function(){
         var error = location.search.match(/error=(.*)/)[1];
         if (error) {
           $('#error').text(error);
