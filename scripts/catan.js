@@ -1245,8 +1245,8 @@ function lobby() {
 		thisgame.slideDown(200);
 	});
 	lobbysocket.on('gameid',function(data){
-    connectionText.sort(randomOrder());
-    $('#connecting').text(connectionText[0]);
+    /*connectionText.sort(randomOrder());
+    $('#connecting').text(connectionText[0]);*/
     $('#connecting').fadeIn(300,function(){
   		$('#lobby').hide();
     });
