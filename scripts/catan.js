@@ -1246,10 +1246,12 @@ function lobby() {
 	});
 	lobbysocket.on('gameid',function(data){
     connectionText.sort(randomOrder);
-    $('#connecting').text(connectionText[0]);
-    $('#connecting').fadeIn(300,function(){
-  		$('#lobby').hide();
-    });
+    $('#connecting')
+      .text(connectionText[0])
+      .css({'background-image':'url(background.jpg)'});
+      .fadeIn(300,function(){
+    		$('#lobby').hide();
+      });
 		connect(data);
 	});
 	lobbysocket.on('chat',function(date,playerid,playername,playerservice,data){
