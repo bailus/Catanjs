@@ -871,8 +871,9 @@ body {
   background-color:white;
   color:black;
   text-align:center;
-  font-size:45px;
+  font-size:32px;
   font-weight:bold;
+  padding-top:200px;
 }
 
 .bold { font-weight:bold; }
