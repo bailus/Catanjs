@@ -692,7 +692,8 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
   overflow:auto;
-  background-color:rgba(0,0,0,0.8);
+  background-color:rgba(255,255,255,0.4);
+  border:2px solid white;
 }
 #lobby {
   position:fixed;
@@ -721,13 +722,12 @@ body {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  border:1px solid #666;
   overflow:auto;
   padding:4px;
   overflow:auto;
   overflow-x:hidden;
-  background-color:black;
-  background-color:rgba(0,0,0,0.8);
+  background-color:rgba(255,255,255,0.4);
+  border:2px solid white;
 }
 #players .player {
   height:20px;line-height:20px;
@@ -742,11 +742,10 @@ body {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  border:1px solid #666;
   overflow:auto;
   overflow-x:hidden;
-  background-color:black;
-  background-color:rgba(0,0,0,0.8);
+  background-color:rgba(255,255,255,0.4);
+  border:2px solid white;
   padding:4px;
 }
 #games { top:115px; }
@@ -757,10 +756,9 @@ body {
   width:350px;height:20px;
 }
 #gamebuttons > div {
-  background-color:#222;
-  color:white;
+  background-color:rgba(255,255,255,0.4);
+  border:2px solid white;
   font-weight:bold;
-  border:1px solid #666;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -771,7 +769,10 @@ body {
   text-align:center;
 }
 #gamebuttons > div:hover {
-  background-color:#444;
+  background-color:rgba(255,255,255,0.6);
+}
+#gamebuttons > div:active {
+  background-color:rgba(255,255,255,0.8);
 }
 #games > div {
   color:white;
@@ -818,10 +819,8 @@ body {
   bottom:40px;height:20px;
 }
 #lobbychatinput {
-  background-color:black;
-  background-color:rgba(0,0,0,0.8);
-  color:white;
-  border:1px solid #666;
+  background-color:rgba(255,255,255,0.4);
+  border:2px solid white;
   padding:0;margin:0;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -833,11 +832,10 @@ body {
   min-width:70%;
 }
 #lobbychatsend {
-  background-color:#222;
-  background-color:rgba(32,32,32,0.8);
+  background-color:rgba(255,255,255,0.4);
+  border:2px solid white;
   color:white;
   font-weight:bold;
-  border:1px solid #666;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -850,8 +848,10 @@ body {
   text-align:center;
 }
 #lobbychatsend:hover {
-  background-color:#444;
-  background-color:rgba(64,64,64,0.8);
+  background-color:rgba(255,255,255,0.6);
+}
+#lobbychatsend:active {
+  background-color:rgba(255,255,255,0.8);
 }
 .profile {
   z-index:100000100;
