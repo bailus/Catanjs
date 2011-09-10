@@ -131,7 +131,7 @@
       $(document).ready(function(){
         var error = location.search.match(/error=(.*)/)[1];
         if (error) {
-          $('#error').text(error);
+          $('#error').text(decodeURIComponent(error));
         }
       });
       $('form').parent().children('.login').click(function(event){

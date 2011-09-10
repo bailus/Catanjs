@@ -841,9 +841,9 @@ http.get('/', function(req, res){
 http.get('/authenticate', function(req, res){
   relyingParty.authenticate(req.query.openid, false, function(error, authUrl) {
     if (error) {
-      res.redirect('/?error=Authentication_failed_'+error);
+      res.redirect('/?error=Authentication failed: '+encodeURIComponent(error));
     } else if (!authUrl) {
-      res.redirect('/?error=Authentication_failed');
+      res.redirect('/?error=Authentication%20failed');
     } else {
       res.redirect(authUrl);
     }
@@ -880,13 +880,13 @@ http.get('/verify', function(req, res){
         console.log(result);
         console.log(players);
         savePlayer({'playerid':id,'playername':nickname,'login':true},function(err){
-          if (err) { res.send('Database Error: '+err); }
+          if (err) { res.redirect('/?error='+encodeURIComponent('Database Error: '+err)); }
           else { res.redirect('/game?id='+id+'&key='+key); }
         });
-      } else { res.redirect('/?error=Already_playing'); }
+      } else { res.redirect('/?error=Already%20playing'); }
     } else {
       if (error) { res.redirect('/?error='+encodeURIComponent(error)); }
-      else { res.redirect('/?error=Not_authenticated'); }
+      else { res.redirect('/?error=Not%20authenticated'); }
     }
   });
 });
@@ -920,7 +920,7 @@ http.get('/game', function(req, res){
     res.contentType('text/html');
     res.sendfile('index.htm');
   } else {
-    res.redirect('http://bailus.no.de/?error=Invalid_Key');
+    res.redirect('http://bailus.no.de/?error=Invalid%20Key');
   }
 });
 http.get('/themes/default.css', function(req, res){
