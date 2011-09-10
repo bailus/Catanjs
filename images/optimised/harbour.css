@@ -1,0 +1,58 @@
+.harbour {
+  position:absolute;
+  background-repeat:no-repeat;
+  z-index:7;
+}
+.harbour .icon {
+  position:absolute;
+  width:90px;height:90px;
+  background-repeat:no-repeat;
+}
+.harbour.sw {
+  width:89px;height:87px;
+  bottom:0;left:0;
+  background-position: 0px -403px;
+}
+.harbour.se {
+  width:89px;height:87px;
+  bottom:0;right:0;
+  background-position: 0px -306px;
+}
+.harbour.s {
+  width:106px;height:37px;
+  bottom:10px;left:41px;
+  background-position: 0px -259px;
+}
+.harbour.nw {
+  width:86px;height:93px;
+  top:0;left:0;
+  background-position: 0px -156px;
+}
+.harbour.ne {
+  width:86px;height:93px;
+  top:0;right:0;
+  background-position: 0px -53px;
+}
+.harbour.n {
+  width:116px;height:43px;
+  top:10px;left:36px;
+  background-position: 0px 0px;
+}
+.harbour.n .icon {
+  top:10px;left:13px;
+}
+.harbour.nw .icon {
+  top:10px;left:40px;
+}
+.harbour.ne .icon {
+  top:10px;right:40px;
+}
+.harbour.s .icon {
+  bottom:10px;left:8px;
+}
+.harbour.sw .icon {
+  bottom:20px;left:40px;
+}
+.harbour.se .icon {
+  bottom:20px;right:40px;
+}
