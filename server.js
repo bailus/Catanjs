@@ -794,9 +794,9 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
 	      });
 	    });
 	    socket.on('joingame',function(data){
-	      if (games[data].players.length < games[data].maxPlayers) {
+	      //if (games[data].players.length < games[data].maxPlayers) {
 	        socket.emit('gameid','/'+data); //tell the client to join the game
-	      }
+	      //}
 	    });
 	    socket.on('newgame',function(data){
 	      //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
