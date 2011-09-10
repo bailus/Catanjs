@@ -8,7 +8,7 @@ do
   for f in *
   do
     mime=$(file --mime-type -b $f)
-    if [ "$mime" == text* ]; then
+    if [[ $mime =~ text.* ]]; then
       cat $f >> ../../themes/${t}.css
       echo '' >> ../../themes/${t}.css
     else
