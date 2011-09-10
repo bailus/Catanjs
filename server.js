@@ -923,9 +923,9 @@ http.get('/game', function(req, res){
     res.redirect('http://bailus.no.de/?error=Invalid%20Key');
   }
 });
-http.get('/themes/default.css', function(req, res){
+http.get('/themes/game.css', function(req, res){
   res.contentType('text/css');
-  res.sendfile('themes/default.css');
+  res.sendfile('themes/game.css');
 });
 http.get('/themes/login.css', function(req, res){
   res.contentType('text/css');
