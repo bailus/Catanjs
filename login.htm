@@ -89,14 +89,15 @@
       padding-top:200px;
       display:none;
     }
-    #error {
+    #error > span {
       padding:10px;
-      margin:20px auto;
-      width:450px;
       background-color:#FFB;
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
       border-radius: 10px;
+    }
+    #error {
+      margin-bottom:20px;
     }
   </style>
   <link rel="stylesheet" type="text/css" href="themes/login.css" />
@@ -140,7 +141,7 @@
       $(document).ready(function(){
         var error = location.search.match(/error=(.*)/)[1];
         if (error) {
-          $('#error').text(decodeURIComponent(error));
+          $('<span>'+decodeURIComponent(error)+'</span>').appendTo('#error');
         }
         else { $('#error').hide(); }
       });
