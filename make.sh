@@ -11,7 +11,7 @@ echo '' >> index.htm
 echo '<style>' >> index.htm
 cat style.css >> index.htm
 echo '' >> index.htm
-echo '</style><link rel="stylesheet" type="text/css" href="themes/default.css" id="themeCSS"></head><body class="background">' >> index.htm
+echo '</style><link rel="stylesheet" type="text/css" href="http://bailus.no.de.nyud.net/themes/default.css" id="themeCSS"></head><body class="background">' >> index.htm
 cat body.htm >> index.htm
 echo '' >> index.htm
 echo '<script>' >> index.htm
