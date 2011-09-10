@@ -11,7 +11,7 @@ echo '<style>' >> index.htm
 cat style.css >> index.htm
 echo '' >> index.htm
 echo '</style><style id="themeCSS">' >> index.htm
-cat themes/default.css >> index.htm
+cat themes/game.css >> index.htm
 echo '' >> index.htm
 echo '</style></head><body class="background">' >> index.htm
 cat body.htm >> index.htm

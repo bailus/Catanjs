@@ -1,8 +1,0 @@
-body #board .city { bottom:-10px; }
-.city.player1, #buttonCity.player1 { background-position: 0 0; }
-.city.player2, #buttonCity.player2 { background-position: 0 -81px; }
-.city.player3, #buttonCity.player3 { background-position: 0 -162px; }
-.city.player4, #buttonCity.player4 { background-position: 0 -243px; }
-.city.player5, #buttonCity.player5 { background-position: 0 -324px; }
-.city.player6, #buttonCity.player6 { background-position: 0 -405px; }
-.city.player7, #buttonCity.player7 { background-position: 0 -486px; }
