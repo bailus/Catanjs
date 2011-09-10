@@ -1,4 +1,4 @@
-var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...'];
+var connectionText = ['Populating farms...','Mining ore...','Planting wheat...','Baking bricks...'];
 var turnCounter = 0;
 var totalPlayers = 4;
 var thisPlayer = 0;
