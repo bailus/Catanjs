@@ -841,7 +841,7 @@ http.get('/', function(req, res){
 http.get('/authenticate', function(req, res){
   relyingParty.authenticate(req.query.openid, false, function(error, authUrl) {
     if (error) {
-      res.redirect('/?error=Authentication failed: '+encodeURIComponent(error));
+      res.redirect('/?error='+encodeURIComponent('Authentication failed: '+error));
     } else if (!authUrl) {
       res.redirect('/?error=Authentication%20failed');
     } else {
