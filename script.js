@@ -1250,7 +1250,7 @@ function lobby() {
     connectionText.sort(randomOrder);
     $('#connecting')
       .text(connectionText[0])
-      .css({'background-image':'url(background.jpg)'});
+      .css({'background-image':'url(background.jpg)'})
       .fadeIn(300,function(){
     		$('#lobby').hide();
       });
