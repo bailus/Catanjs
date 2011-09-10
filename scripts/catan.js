@@ -1,4 +1,4 @@
-var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...','Manufacturing bricks...'];
+var connectionText = ['Shearing sheep...','Chopping wood...','Mining ore...'];
 var turnCounter = 0;
 var totalPlayers = 4;
 var thisPlayer = 0;
@@ -1245,8 +1245,8 @@ function lobby() {
 		thisgame.slideDown(200);
 	});
 	lobbysocket.on('gameid',function(data){
-    /*connectionText.sort(randomOrder());
-    $('#connecting').text(connectionText[0]);*/
+    connectionText.sort(randomOrder);
+    $('#connecting').text(connectionText[0]);
     $('#connecting').fadeIn(300,function(){
   		$('#lobby').hide();
     });
