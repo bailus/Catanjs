@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>bailus.no.de</title>
+    <script src="lib.js"></script>
+  </head>
+  <style>﻿
+    body {
+      color:black;
+      font-family:"droid sans", "calibri", "arial", sans-serif;
+      background-color:white;
+    }
+    #title {
+      font-weight:bold;
+      margin-top:40px;
+      margin-bottom:60px;
+      font-size:40px;
+    }
+    #logintext {
+      margin-bottom:10px;
+      font-size:14px;
+      color:#333;
+    }
+    #error {
+      margin-bottom:20px;
+    }
+    #error > span {
+      padding:10px;
+      background-color:#FFB;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+    #connecting {
+      z-index:1000;
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      background-color:white;
+      color:black;
+      text-align:center;
+      font-size:32px;
+      font-weight:bold;
+      padding-top:200px;
+      display:none;
+    }
+    fieldset { border-style:none; }
+    img { border-style:none; }
+    form.openid ul { text-align:center; list-style-type:none; display:inline; }
+    form.openid ul li { float:left; padding:4px; }
+    form.openid ul li span { padding:0 1em 0 3px; }
+    form.openid fieldset { clear:both; padding:1em 0; }
+    form.openid div+fieldset { display:none; }
+    form.openid label { display:block; font-weight:bold; font-size:larger; margin-bottom:.5em; }
+    input[name=openid_username] { width:8em; }
+    input[name=openid_identifier] { width:18em; }
+    form.openid ul li.highlight { -moz-border-radius:4px; -webkit-border-radius:4px; background-color: #FD6; }
+    form.openid fieldset div { font-family:arial;-moz-border-radius:4px; -webkit-border-radius:4px; padding:10px;display:inline-block; background-color:#DDD; }
+    form.openid input[type='submit'] { margin-left:1em;}
+
+    .openidlogo{ color:#F7931E;padding:6px 0px 8px 28px;background-repeat:no-repeat; }
+
+    #openid_login{ float:left; font-size:larger; width:30%; margin:2em 1em; text-align:center; }
+    #openid_login div{ margin-top:0.5em; }
+    #openid_login div+span{ font-size:smaller; }
+  </style>
+  <link rel="stylesheet" type="text/css" href="themes/login.css" />
+  <body>
+    <div id="title">
+      bailus.no.de
+    </div>
+    <div id="error"></div>
+    <div id="logintext">
+      Please sign in using one of the following services:
+    </div>
+    <form class="openid" method="get" action="/authenticate?openid="> 
+      <div><ul class="providers"> 
+      <li class="openid" title="OpenID">
+		    <div class="login openid"></div><span><strong>http://{your-openid-url}</strong></span></li> 
+      <li class="direct" title="Google"> 
+		    <div class="login google"></div><span>https://www.google.com/accounts/o8/id</span></li> 
+      <li class="direct" title="Yahoo"> 
+		    <div class="login yahoo"></div><span>http://yahoo.com/</span></li> 
+      <li class="username" title="AOL screen name"> 
+		    <div class="login aol"></div><span>http://openid.aol.com/<strong>username</strong></span></li> 
+      <li class="username" title="MyOpenID user name"> 
+		    <div class="login myopenid"></div><span>http://<strong>username</strong>.myopenid.com/</span></li> 
+      <li class="username" title="Flickr user name"> 
+		    <div class="morelogin flickr"></div><span>http://flickr.com/<strong>username</strong>/</span></li> 
+      <li class="username" title="Technorati user name"> 
+		    <div class="morelogin technorati"></div><span>http://technorati.com/people/technorati/<strong>username</strong>/</span></li> 
+      <li class="username" title="Wordpress blog name"> 
+		    <div class="morelogin wordpress"></div><span>http://<strong>username</strong>.wordpress.com</span></li> 
+      <li class="username" title="Blogger blog name"> 
+		    <div class="morelogin blogger"></div><span>http://<strong>username</strong>.blogspot.com/</span></li> 
+      <li class="username" title="LiveJournal blog name"> 
+		    <div class="morelogin livejournal"></div><span>http://<strong>username</strong>.livejournal.com</span></li> 
+      <li class="username" title="ClaimID user name"> 
+		    <div class="morelogin claimid"></div><span>http://claimid.com/<strong>username</strong></span></li> 
+      <li class="username" title="Vidoop user name"> 
+		    <div class="morelogin vidoop"></div><span>http://<strong>username</strong>.myvidoop.com/</span></li> 
+      <li class="username" title="Verisign user name"> 
+		    <div class="morelogin verisign"></div><span>http://<strong>username</strong>.pip.verisignlabs.com/</span></li> 
+      </ul></div> 
+      <fieldset> 
+      <label for="openid_username">Enter your <span>Provider user name</span></label> 
+      <div><span></span><input type="text" name="openid_username" /><span></span> 
+      <input type="submit" value="Login" /></div> 
+      </fieldset> 
+      <fieldset> 
+      <label for="openid_identifier">Enter your <a class="openidlogo" href="http://openid.net">OpenID</a></label> 
+      <div><input type="text" name="openid_identifier" /> 
+      <input type="submit" value="Login" /></div> 
+      </fieldset> 
+    </form>
+    <script>
+      $(function() { $("form.openid:eq(0)").openid(); });
+    </script>
+  </body>
+</html>
