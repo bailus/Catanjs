@@ -928,7 +928,17 @@ body {
   <div id="lobbytitle">bailus.no.de</div>
   <div id="gamebuttons"><div id="newgamebutton">New Game</div></div>
   <div id="games"></div>
-  <div id="joingame" style="display:none;">
+  <div id="newgame">
+    <form>
+      <div>Name:<input type="text" value="FUUUUUUUU" id="newgamename"></input></div>
+      <div>Type:<input type="text" value="basic" id="newgametype"></input></div>
+      <div>Players:<input type="text" value="4" id="newgameplayers"></input></div>
+      <div>Robber:<input type="checkbox" value="1" id="newgamerobber"></input></div>
+      <div><input type="submit" id="newgamesubmit" value="Start"></input></div>
+      <div><input type="button" id="newgamecancel" value="Cancel"></input></div>
+    </form>
+  </div>
+  <!--<div id="joingame" style="display:none;">
     <div class="text">Waiting for other players...</div>
     <div class="boardicon"></div>
     <div class="type"></div>
@@ -940,7 +950,7 @@ body {
         </div>Samuel Bailey</div>
       </div>
     </div>
-  </div>
+  </div>-->
   <div id="players"></div>
   <div id="lobbychat"></div>
   <form>
