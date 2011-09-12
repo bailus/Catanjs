@@ -4,56 +4,12 @@
   <head>
     <title>bailus.no.de</title>
     <script src="lib.js"></script>
-    <link rel="openid.server" href="http://www.myopenid.com/server">
-    <link rel="openid.delegate" href="http://bailus.myopenid.com">
   </head>
-  <style>
+  <style>﻿
     body {
       color:black;
       font-family:"droid sans", "calibri", "arial", sans-serif;
       background-color:white;
-    }
-    body > * {
-      width:100%;
-      text-align:center;
-    }
-    #logins > * {
-      width:64px;height:64px;
-      margin:5px;
-      overflow:hidden;
-      position:relative;
-      display:inline-block;
-    }
-    #morelogins > * {
-      width:32px;height:32px;
-      margin:3px;
-      overflow:hidden;
-      position:relative;
-      display:inline-block;
-    }
-    .login {
-      width:64px;height:64px;
-      background-repeat: no-repeat;
-      cursor:pointer;
-    }
-    .morelogin {
-      width:48px;height:48px;
-      background-repeat: no-repeat;
-      cursor:pointer;
-    }
-    #logins form {
-      position:absolute;
-      top:0;left:69px;
-      width:245px;height:64px;
-      background-color:#CFCFCF;
-      padding-top:4px;
-      font-size:13px;
-      line-height:21px;
-    }
-    #logintext {
-      margin-bottom:10px;
-      font-size:14px;
-      color:#333;
     }
     #title {
       font-weight:bold;
@@ -61,22 +17,20 @@
       margin-bottom:60px;
       font-size:40px;
     }
-    .example {
-      font-size:9px;
+    #logintext {
+      margin-bottom:10px;
+      font-size:14px;
+      color:#333;
     }
-    input {
-      background-color:#EEE;
-      border:1px solid #555;
-      margin: 0 1px;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      border-radius: 3px;
+    #error {
+      margin-bottom:20px;
     }
-    input:active, input:active+input, input:focus, input:focus+input {
-      background-color:white;
-    }
-    input[type="submit"]:hover {
-      background-color:#FD6;
+    #error > span {
+      padding:10px;
+      background-color:#FFB;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
     }
     #connecting {
       z-index:1000;
@@ -91,16 +45,25 @@
       padding-top:200px;
       display:none;
     }
-    #error > span {
-      padding:10px;
-      background-color:#FFB;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-    }
-    #error {
-      margin-bottom:20px;
-    }
+    fieldset { border-style:none; }
+    img { border-style:none; }
+    form.openid ul { text-align:center; list-style-type:none; display:inline; }
+    form.openid ul li { float:left; padding:4px; }
+    form.openid ul li span { padding:0 1em 0 3px; }
+    form.openid fieldset { clear:both; padding:1em 0; }
+    form.openid div+fieldset { display:none; }
+    form.openid label { display:block; font-weight:bold; font-size:larger; margin-bottom:.5em; }
+    input[name=openid_username] { width:8em; }
+    input[name=openid_identifier] { width:18em; }
+    form.openid ul li.highlight { -moz-border-radius:4px; -webkit-border-radius:4px; background-color: #FD6; }
+    form.openid fieldset div { font-family:arial;-moz-border-radius:4px; -webkit-border-radius:4px; padding:10px;display:inline-block; background-color:#DDD; }
+    form.openid input[type='submit'] { margin-left:1em;}
+
+    .openidlogo{ color:#F7931E;padding:6px 0px 8px 28px;background-repeat:no-repeat; }
+
+    #openid_login{ float:left; font-size:larger; width:30%; margin:2em 1em; text-align:center; }
+    #openid_login div{ margin-top:0.5em; }
+    #openid_login div+span{ font-size:smaller; }
   </style>
   <link rel="stylesheet" type="text/css" href="themes/login.css" />
   <body>
@@ -111,69 +74,48 @@
     <div id="logintext">
       Please sign in using one of the following services:
     </div>
-    <div id="logins">
-      <a href="/authenticate?openid=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid" title="Google"><div class="login google"></div></a>
-      <a href="/authenticate?openid=me.yahoo.com" title="Yahoo!"><div class="login yahoo"></div></a>
-      <a href="/authenticate?openid=facebook.anyopenid.com" title="Facebook"><div class="login facebook"></div></a>
-      <span title="AOL">
-        <div class="login aol"></div>
-        <form class="aol">
-          <div>Enter your AOL username:</div>
-          <div><input name="openid" class="aol" /><input type="submit" value="Login" /></div>
-        </form>
-      </span>
-      <a href="/authenticate?openid=live.anyopenid.com" title="Windows Live"><div class="login live"></div></a>
-      <span title="openID">
-        <div class="login openid"></div>
-        <form method="get" action="/authenticate">
-          <div>Please enter your openID:</div>
-          <div><input name="openid" /><input type="submit" value="Login" /></div>
-          <div class="example">example: http://user.myopenid.com</div>
-        </form>
-      </span>
-    </div>
-    <div id="morelogins">
-      <a href="/authenticate?openid=twitter.anyopenid.com" title="Twitter"><div class="morelogin twitter"></div></a>
-      <a href="/authenticate?openid=linkedin.anyopenid.com" title="Linkedin"><div class="morelogin linkedin"></div></a>
-      <a href="/authenticate?openid=myspace.anyopenid.com" title="Myspace"><div class="morelogin myspace"></div></a>
-      <a href="/authenticate?openid=friendfeed.anyopenid.com" title="friendfeed"><div class="morelogin friendfeed"></div></a>
-    </div>
-    <div id="connecting">Connecting...</div>
+    <form class="openid" method="post" action="/authenticate?openid="> 
+      <div><ul class="providers"> 
+      <li class="openid" title="OpenID">
+		    <div class="login openid"></div><span><strong>http://{your-openid-url}</strong></span></li> 
+      <li class="direct" title="Google"> 
+		    <div class="login google"></div><span>https://www.google.com/accounts/o8/id</span></li> 
+      <li class="direct" title="Yahoo"> 
+		    <div class="login yahoo"></div><span>http://yahoo.com/</span></li> 
+      <li class="username" title="AOL screen name"> 
+		    <div class="login aol"></div><span>http://openid.aol.com/<strong>username</strong></span></li> 
+      <li class="username" title="MyOpenID user name"> 
+		    <div class="login myopenid"></div><span>http://<strong>username</strong>.myopenid.com/</span></li> 
+      <li class="username" title="Flickr user name"> 
+		    <div class="morelogin flickr"></div><span>http://flickr.com/<strong>username</strong>/</span></li> 
+      <li class="username" title="Technorati user name"> 
+		    <div class="morelogin technorati"></div><span>http://technorati.com/people/technorati/<strong>username</strong>/</span></li> 
+      <li class="username" title="Wordpress blog name"> 
+		    <div class="morelogin wordpress"></div><span>http://<strong>username</strong>.wordpress.com</span></li> 
+      <li class="username" title="Blogger blog name"> 
+		    <div class="morelogin blogger"></div><span>http://<strong>username</strong>.blogspot.com/</span></li> 
+      <li class="username" title="LiveJournal blog name"> 
+		    <div class="morelogin livejournal"></div><span>http://<strong>username</strong>.livejournal.com</span></li> 
+      <li class="username" title="ClaimID user name"> 
+		    <div class="morelogin claimid"></div><span>http://claimid.com/<strong>username</strong></span></li> 
+      <li class="username" title="Vidoop user name"> 
+		    <div class="morelogin vidoop"></div><span>http://<strong>username</strong>.myvidoop.com/</span></li> 
+      <li class="username" title="Verisign user name"> 
+		    <div class="morelogin verisign"></div><span>http://<strong>username</strong>.pip.verisignlabs.com/</span></li> 
+      </ul></div> 
+      <fieldset> 
+      <label for="openid_username">Enter your <span>Provider user name</span></label> 
+      <div><span></span><input type="text" name="openid_username" /><span></span> 
+      <input type="submit" value="Login" /></div> 
+      </fieldset> 
+      <fieldset> 
+      <label for="openid_identifier">Enter your <a class="openidlogo" href="http://openid.net">OpenID</a></label> 
+      <div><input type="text" name="openid_identifier" /> 
+      <input type="submit" value="Login" /></div> 
+      </fieldset> 
+    </form>
     <script>
-      $(document).ready(function(){
-        var error = location.search.match(/error=(.*)/)[1];
-        if (error) {
-          $('<span>'+decodeURIComponent(error)+'</span>').appendTo('#error');
-        }
-        else { $('#error').hide(); }
-      });
-      $('form').parent().children('.login').click(function(event){
-        if ($(this).parent().hasClass('visible')) {
-          $('.visible').animate({ width:64 },300);
-          $('.visible').removeClass('visible');
-        }
-        else {
-          $('.visible').animate({ width:64 },300);
-          $('.visible').removeClass('visible');
-          $(this).parent().animate({ width:316 },300,function(){
-            $(this).addClass('visible');
-          });
-        }
-      });
-      $('form.aol').submit(function(){
-        window.location = '/authenticate?openid=openid.aol.com%2F'+$('input.aol').attr('value'); return false;
-      });
-      var animate = function() {
-        var title = '', connecting = $('#connecting');
-        if ($(this).attr('title').length) { title = $(this).attr('title'); }
-        else if ($(this).parent().attr('title').length) { title = $(this).parent().attr('title'); }
-        if (title != '') {
-          connecting.text('Connecting to '+title+'...')
-        }
-        connecting.fadeIn(300).delay(10000).fadeOut();
-      }
-      $('#logins a, #morelogins a').click(animate);
-      $('form').submit(animate);
+      $(function() { $("form.openid:eq(0)").openid(); });
     </script>
   </body>
 </html>

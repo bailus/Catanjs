@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>bailus.no.de</title>
+    <script src="lib.js"></script>
+    <link rel="openid.server" href="http://www.myopenid.com/server">
+    <link rel="openid.delegate" href="http://bailus.myopenid.com">
+  </head>
+  <style>
+    body {
+      color:black;
+      font-family:"droid sans", "calibri", "arial", sans-serif;
+      background-color:white;
+    }
+    body > * {
+      width:100%;
+      text-align:center;
+    }
+    #logins > * {
+      width:64px;height:64px;
+      margin:5px;
+      overflow:hidden;
+      position:relative;
+      display:inline-block;
+    }
+    #morelogins > * {
+      width:32px;height:32px;
+      margin:3px;
+      overflow:hidden;
+      position:relative;
+      display:inline-block;
+    }
+    .login {
+      width:64px;height:64px;
+      background-repeat: no-repeat;
+      cursor:pointer;
+    }
+    .morelogin {
+      width:48px;height:48px;
+      background-repeat: no-repeat;
+      cursor:pointer;
+    }
+    #logins form {
+      position:absolute;
+      top:0;left:69px;
+      width:245px;height:64px;
+      background-color:#CFCFCF;
+      padding-top:4px;
+      font-size:13px;
+      line-height:21px;
+    }
+    #logintext {
+      margin-bottom:10px;
+      font-size:14px;
+      color:#333;
+    }
+    #title {
+      font-weight:bold;
+      margin-top:40px;
+      margin-bottom:60px;
+      font-size:40px;
+    }
+    .example {
+      font-size:9px;
+    }
+    input {
+      background-color:#EEE;
+      border:1px solid #555;
+      margin: 0 1px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+    input:active, input:active+input, input:focus, input:focus+input {
+      background-color:white;
+    }
+    input[type="submit"]:hover {
+      background-color:#FD6;
+    }
+    #connecting {
+      z-index:1000;
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      background-color:white;
+      color:black;
+      text-align:center;
+      font-size:32px;
+      font-weight:bold;
+      padding-top:200px;
+      display:none;
+    }
+    #error > span {
+      padding:10px;
+      background-color:#FFB;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+    #error {
+      margin-bottom:20px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="themes/login.css" />
+  <body>
+    <div id="title">
+      bailus.no.de
+    </div>
+    <div id="error"></div>
+    <div id="logintext">
+      Please sign in using one of the following services:
+    </div>
+    <div id="logins">
+      <a href="/authenticate?openid=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid" title="Google"><div class="login google"></div></a>
+      <a href="/authenticate?openid=me.yahoo.com" title="Yahoo!"><div class="login yahoo"></div></a>
+      <a href="/authenticate?openid=facebook.anyopenid.com" title="Facebook"><div class="login facebook"></div></a>
+      <span title="AOL">
+        <div class="login aol"></div>
+        <form class="aol">
+          <div>Enter your AOL username:</div>
+          <div><input name="openid" class="aol" /><input type="submit" value="Login" /></div>
+        </form>
+      </span>
+      <a href="/authenticate?openid=live.anyopenid.com" title="Windows Live"><div class="login live"></div></a>
+      <span title="openID">
+        <div class="login openid"></div>
+        <form method="get" action="/authenticate">
+          <div>Please enter your openID:</div>
+          <div><input name="openid" /><input type="submit" value="Login" /></div>
+          <div class="example">example: http://user.myopenid.com</div>
+        </form>
+      </span>
+    </div>
+    <div id="morelogins">
+      <a href="/authenticate?openid=twitter.anyopenid.com" title="Twitter"><div class="morelogin twitter"></div></a>
+      <a href="/authenticate?openid=linkedin.anyopenid.com" title="Linkedin"><div class="morelogin linkedin"></div></a>
+      <a href="/authenticate?openid=myspace.anyopenid.com" title="Myspace"><div class="morelogin myspace"></div></a>
+      <a href="/authenticate?openid=friendfeed.anyopenid.com" title="friendfeed"><div class="morelogin friendfeed"></div></a>
+    </div>
+    <div id="connecting">Connecting...</div>
+    <script>
+      $(document).ready(function(){
+        var error = location.search.match(/error=(.*)/)[1];
+        if (error) {
+          $('<span>'+decodeURIComponent(error)+'</span>').appendTo('#error');
+        }
+        else { $('#error').hide(); }
+      });
+      $('form').parent().children('.login').click(function(event){
+        if ($(this).parent().hasClass('visible')) {
+          $('.visible').animate({ width:64 },300);
+          $('.visible').removeClass('visible');
+        }
+        else {
+          $('.visible').animate({ width:64 },300);
+          $('.visible').removeClass('visible');
+          $(this).parent().animate({ width:316 },300,function(){
+            $(this).addClass('visible');
+          });
+        }
+      });
+      $('form.aol').submit(function(){
+        window.location = '/authenticate?openid=openid.aol.com%2F'+$('input.aol').attr('value'); return false;
+      });
+      var animate = function() {
+        var title = '', connecting = $('#connecting');
+        if ($(this).attr('title').length) { title = $(this).attr('title'); }
+        else if ($(this).parent().attr('title').length) { title = $(this).parent().attr('title'); }
+        if (title != '') {
+          connecting.text('Connecting to '+title+'...')
+        }
+        connecting.fadeIn(300).delay(10000).fadeOut();
+      }
+      $('#logins a, #morelogins a').click(animate);
+      $('form').submit(animate);
+    </script>
+  </body>
+</html>

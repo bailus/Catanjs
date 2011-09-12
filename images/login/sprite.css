@@ -1,0 +1,20 @@
+.login.aol { background-position: 0 0; }
+.login.facebook { background-position: 0 -16px; }
+.login.flickr { background-position: 0 -32px; }
+.login.google { background-position: 0 -48px; }
+.login.myopenid { background-position: 0 -64px; }
+.login.myspace { background-position: 0 -80px; }
+.login.openid { background-position: 0 -96px; }
+.login.yahoo { background-position: 0 -112px; }
+.login { width:60px;height:16px;background-repeat:no-repeat; }
+
+.morelogin.blogger { background-position: 0 0; }
+.morelogin.claimid { background-position: 0 -16px; }
+.morelogin.flickr { background-position: 0 -32px; }
+.morelogin.livejournal { background-position: 0 -48px; }
+.morelogin.myopenid { background-position: 0 -64px; }
+.morelogin.technorati { background-position: 0 -80px; }
+.morelogin.verisign { background-position: 0 -96px; }
+.morelogin.vidoop { background-position: 0 -112px; }
+.morelogin.wordpress { background-position: 0 -128px; }
+.morelogin { width:16px;height:16px;background-repeat:no-repeat; }
