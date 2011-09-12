@@ -839,7 +839,7 @@ http.get('/', function(req, res){
   res.sendfile('login.htm');
 });
 http.get('/authenticate', function(req, res){
-  relyingParty.authenticate(req.query.openid, false, function(error, authUrl) {
+  relyingParty.authenticate(req.query.openid_identifier, false, function(error, authUrl) {
     if (error) {
       res.redirect('/?error='+encodeURIComponent('Authentication failed: '+error));
     } else if (!authUrl) {
