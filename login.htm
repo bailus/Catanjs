@@ -120,7 +120,7 @@
     </form>
     <script>
       $(document).ready(function(){
-        if (location.search instanceof Object) { var error = location.search.match(/error=(.*)/)[1]; }
+        if (location.search) { var error = location.search.match(/error=(.*)/)[1]; }
         if (error) {
           $('<span>'+decodeURIComponent(error)+'</span>').appendTo('#error');
         }
