@@ -10,8 +10,8 @@ var io = require('socket.io').listen(http),
 //io.enable('browser client etag');          // apply etag caching logic based on version number
 //io.set('log level', 1);                    // reduce logging
 
-//io.set('transports',['websocket','flashsocket']);
-/*,'htmlfile','xhr-polling','jsonp-polling'*/
+io.set('transports',['xhr-polling']);
+/*,'htmlfile',,'jsonp-polling''websocket','flashsocket'*/
 
 
 callback = function(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
