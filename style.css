@@ -817,10 +817,13 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
   position:absolute;
+  left:0;top:0;
+  height:16px;line-height:16px;
+}
+#lobbychatinputwrapper {
+  position:absolute;
   left:0;right:70px;
-  top:0;height:16px;
-  line-height:16px;
-  min-width:70%;
+  top:0;height:20px;
 }
 #lobbychatsend {
   background-color:rgba(151,189,201,0.8);
