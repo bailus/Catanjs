@@ -74,7 +74,7 @@
     <div id="logintext">
       Please sign in using one of the following services:
     </div>
-    <form class="openid" method="get" action="/authenticate?openid="> 
+    <form class="openid" method="get" action="/authenticate"> 
       <div><ul class="providers"> 
       <li class="openid" title="OpenID">
 		    <div class="login openid"></div><span><strong>http://{your-openid-url}</strong></span></li>
@@ -119,6 +119,13 @@
       </fieldset> 
     </form>
     <script>
+      $(document).ready(function(){
+        var error = location.search.match(/error=(.*)/)[1];
+        if (error) {
+          $('<span>'+decodeURIComponent(error)+'</span>').appendTo('#error');
+        }
+        else { $('#error').hide(); }
+      });
       $(function() { $("form.openid:eq(0)").openid(); });
     </script>
   </body>
