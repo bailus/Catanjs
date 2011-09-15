@@ -57,7 +57,7 @@ body #board .city { bottom:-10px; }
 .player5 > .playerBackground, #bottompanelcover.player5, #playerspanel > .player5 { background-color: rgb(18,127,0); }
 .player6 > .playerBackground, #bottompanelcover.player6, #playerspanel > .player6 { background-color: rgb(75,75,75); }
 .player7 > .playerBackground, #bottompanelcover.player7, #playerspanel > .player7 { background-color: rgb(114,64,0); }
-#bottompanel, #playerspanel {  background-color:rgba(0,0,0,0.6); }
+#bottompanel {  background-color:rgba(0,0,0,0.6); }
 .player1 > .playerBackground, #bottompanelcover.player1, #playerspanel .player1, #chat .player.player1 { background-color: rgba(150,0,10,0.6); }
 .player2 > .playerBackground, #bottompanelcover.player2, #playerspanel .player2, #chat .player.player2 { background-color: rgba(0,85,150,0.6); }
 .player3 > .playerBackground, #bottompanelcover.player3, #playerspanel .player3, #chat .player.player3 { background-color: rgba(167,167,167,0.6); }
