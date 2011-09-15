@@ -1377,9 +1377,12 @@ function lobbychatsend() {
   return false;
 }
 function newgamebutton() {
+  $('#gamelist > *').hide();
   $('#newgame').show();
 }
 function newgamecancel() {
+  $('#games').show();
+  $('#gamebuttons').show();
   $('#newgame').hide();
 }
 function makenewgame() {
