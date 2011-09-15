@@ -206,7 +206,7 @@ body {
   top:0;left:0;
   width:200%;height:77px;
   z-index:10000;
-  background-color:rgba(151,189,201,0.6);
+  background-color:rgba(151, 189, 201, 0.8);
 }
 #playerspanel > * {
   width:160px;
@@ -557,15 +557,14 @@ body {
 #sidepanel {
   position:fixed;
   right:0;top:0;
-  width:440px;height:100%;
-  background-color:rgba(151,189,201,0.8);
+  width:380px;height:100%;
+  background-color:rgba(194, 220, 229, 0.8);
   z-index:10000000;
 }
 #chat {
   position:absolute;
-  left:30px;width:400px;
+  left:30px;width:350px;
   top:35px;bottom:8px;
-  border:1px solid #666;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -645,7 +644,7 @@ body {
   position:absolute;
   left:0;top:0;
   width:20px;height:100%;
-  background-color:rgba(255,255,255,0.2);
+  background-color:rgba(255,255,255,0.4);
   border-left:2px solid grey;
 }
 #sidepanel form {
@@ -657,33 +656,6 @@ body {
   -moz-border-radius: 6px;
   border-radius: 6px;
   top:5px;
-}
-#chatinput {
-  background-color:black;
-  color:white;
-  border:none;
-  width:330px;
-  height:100%;line-height:18px;
-  padding:0;margin:0;
-  line-height:100%;
-  padding-left:3px;
-  overflow:hidden;
-}
-#chatsend {
-  background-color:#222;
-  color:white;
-  font-weight:bold;
-  border:none;
-  border-left:1px solid #666;
-  width:63px;
-  height:100%;
-  padding:0;margin:0;
-  position:absolute;
-  top:0;
-  right:0;
-}
-#chatsend:hover {
-  background-color:#444;
 }
 #lobbychat {
   position:fixed;
@@ -831,6 +803,8 @@ body {
   position:fixed;
   right:170px;left:370px;
   top:90px;height:28px;
+}
+#lobby > form, #sidepanel > form {
   -webkit-border-top-left-radius: 6px;
   -webkit-border-top-right-radius: 6px;
   -moz-border-radius-topleft: 6px;
@@ -839,7 +813,7 @@ body {
   border-top-right-radius: 6px;
   background-color:rgba(255,255,255,0.3);
 }
-#lobbychatinput {
+#lobbychatinput, #chatinput {
   background-color:rgba(151,189,201,0.8);
   border:1px solid rgba(255,255,255,0.6);
   padding:0;margin:0;
@@ -855,16 +829,16 @@ body {
   padding-left:4px;
   font-size:13px;
 }
-#lobbychatinput:active {
+#lobbychatinput:active, #chatinput:active {
   border:1px solid white;
 }
-#lobbychatinputwrapper {
+#lobbychatinputwrapper, #chatinputwrapper {
   position:absolute;
   left:0;right:75px;
   top:0;height:20px;
   left:5px;top:4px;
 }
-#lobbychatsend {
+#lobbychatsend, #chatsend {
   background-color:rgba(255,255,255,0.6);
   font-weight:bold;
   -webkit-border-bottom-right-radius: 3px;
@@ -882,7 +856,7 @@ body {
   text-align:center;
   border:none;
 }
-#lobbychatsend:hover, #lobbychatsend:active {
+#lobbychatsend:hover, #lobbychatsend:active, #chatsend:hover, #chatsend:active {
   background-color:white;
 }
 .profile {
@@ -2400,7 +2374,7 @@ $('#boardcontainer').draggable({ scroll: false, cursor: 'move', distance:30 });
   delta = delta*10;
   $('#boardcontainer').css('zoom',$('#boardcontainer').css('zoom')*100+delta+'%');
 });*/
-$('#sidepanelhide').click(function(){ if ($('#sidepanel').width() < 30) { $('#sidepanel').animate({width:'460px'},400).removeClass('hide'); } else { $('#sidepanel').animate({width:'20px'},400).addClass('hide'); } });
+$('#sidepanelhide').click(function(){ if ($('#sidepanel').width() < 30) { $('#sidepanel').animate({width:'380px'},400).removeClass('hide'); } else { $('#sidepanel').animate({width:'20px'},400).addClass('hide'); } });
 $('#sidepanel form').submit(chatsend);
 $('#lobby > form').submit(lobbychatsend);
 $('#newgame form').submit(makenewgame);
