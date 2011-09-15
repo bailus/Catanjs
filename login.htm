@@ -63,7 +63,7 @@
     }
     fieldset { border-style:none; }
     img { border-style:none; }
-    form.openid ul { text-align:center; list-style-type:none; display:inline; }
+    form.openid ul { text-align:center; list-style-type:none; display:inline; padding:0; }
     form.openid ul li { display:inline-block; padding:4px; }
     form.openid ul li span { padding:0 1em 0 3px; }
     form.openid fieldset { clear:both; padding:1em 0; }
@@ -91,7 +91,6 @@
       <div id="logintext">
         Please sign in using one of the following services:
       </div>
-      <div>
         <ul class="providers"> 
           <li class="openid" title="OpenID">
             <div class="login openid"></div><span><strong>http://{your-openid-url}</strong></span></li>
@@ -124,7 +123,6 @@
           <li class="username" title="Verisign user name"> 
             <div class="morelogin verisign"></div><span>http://<strong>username</strong>.pip.verisignlabs.com/</span></li> 
         </ul>
-      </div> 
       <fieldset> 
         <label for="openid_username">Enter your <span>Provider user name</span></label> 
         <div>
