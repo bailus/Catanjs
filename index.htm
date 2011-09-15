@@ -768,7 +768,7 @@ body {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
-#gamebuttons > div, #newgamebuttons > div {
+#gamebuttons > div, #newgamebuttons > input {
   background-color:rgba(255,255,255,0.6);
   font-weight:bold;
   -webkit-border-radius: 3px;
@@ -780,6 +780,8 @@ body {
   font-size:11px;
   text-align:center;
   margin:4px;
+  border:none;
+  display:block;
 }
 #gamebuttons > div:hover {
   background-color:white;
@@ -963,8 +965,8 @@ body {
     <div id="newgame">
       <form>
         <div id="newgamebuttons">
-          <div><input type="submit" id="newgamesubmit" value="Start"></input></div>
-          <div><input type="button" id="newgamecancel" value="Cancel"></input></div>
+          <input type="submit" id="newgamesubmit" value="Start"></input>
+          <input type="button" id="newgamecancel" value="Cancel"></input>
         </div>
         <div>Name:<input type="text" value="FUUUUUUUU" id="newgamename"></input></div>
         <div>Type:<input type="text" value="basic" id="newgametype"></input></div>

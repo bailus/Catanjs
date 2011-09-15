@@ -760,7 +760,7 @@ body {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
-#gamebuttons > div, #newgamebuttons > div {
+#gamebuttons > div, #newgamebuttons > input {
   background-color:rgba(255,255,255,0.6);
   font-weight:bold;
   -webkit-border-radius: 3px;
@@ -772,6 +772,8 @@ body {
   font-size:11px;
   text-align:center;
   margin:4px;
+  border:none;
+  display:block;
 }
 #gamebuttons > div:hover {
   background-color:white;
