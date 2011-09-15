@@ -14,19 +14,19 @@
 .player6 > .playerBackground, #bottompanelcover.player6, #playerspanel > .player6 { background-color: rgb(75,75,75); }
 .player7 > .playerBackground, #bottompanelcover.player7, #playerspanel > .player7 { background-color: rgb(114,64,0); }
 #bottompanel {  background-color:rgba(0,0,0,0.6); }
-.player1 > .playerBackground, #bottompanelcover.player1, #playerspanel .player1, #chat .player.player1 { background-color: rgba(150,0,10,0.6); }
-.player2 > .playerBackground, #bottompanelcover.player2, #playerspanel .player2, #chat .player.player2 { background-color: rgba(0,85,150,0.6); }
-.player3 > .playerBackground, #bottompanelcover.player3, #playerspanel .player3, #chat .player.player3 { background-color: rgba(167,167,167,0.6); }
-.player4 > .playerBackground, #bottompanelcover.player4, #playerspanel .player4, #chat .player.player4 { background-color: rgba(256,140,0,0.6); }
-.player5 > .playerBackground, #bottompanelcover.player5, #playerspanel .player5, #chat .player.player5 { background-color: rgba(18,127,0,0.6); }
-.player6 > .playerBackground, #bottompanelcover.player6, #playerspanel .player6, #chat .player.player6 { background-color: rgba(75,75,75,0.6); }
-.player7 > .playerBackground, #bottompanelcover.player7, #playerspanel .player7, #chat .player.player7 { background-color: rgba(114,64,0,0.6); }
+.player1 > .playerBackground, #bottompanelcover.player1, #playerspanel .player1, #chat .player.player1 { background-color: rgba(150,0,10,0.8); }
+.player2 > .playerBackground, #bottompanelcover.player2, #playerspanel .player2, #chat .player.player2 { background-color: rgba(0,85,150,0.8); }
+.player3 > .playerBackground, #bottompanelcover.player3, #playerspanel .player3, #chat .player.player3 { background-color: rgba(167,167,167,0.8); }
+.player4 > .playerBackground, #bottompanelcover.player4, #playerspanel .player4, #chat .player.player4 { background-color: rgba(256,140,0,0.8); }
+.player5 > .playerBackground, #bottompanelcover.player5, #playerspanel .player5, #chat .player.player5 { background-color: rgba(18,127,0,0.8); }
+.player6 > .playerBackground, #bottompanelcover.player6, #playerspanel .player6, #chat .player.player6 { background-color: rgba(75,75,75,0.8); }
+.player7 > .playerBackground, #bottompanelcover.player7, #playerspanel .player7, #chat .player.player7 { background-color: rgba(114,64,0,0.8); }
 #bottompanel {  background-color:rgba(0,0,0,0.6); }
-#chat .text.player1 { border-top: 2px solid rgba(150,0,10,0.6); }
-#chat .text.player2 { border-top: 2px solid rgba(0,85,150,0.6); }
-#chat .text.player3 { border-top: 2px solid rgba(167,167,167,0.6); }
-#chat .text.player4 { border-top: 2px solid rgba(256,140,0,0.6); }
-#chat .text.player5 { border-top: 2px solid rgba(18,127,0,0.6); }
-#chat .text.player6 { border-top: 2px solid rgba(75,75,75,0.6); }
-#chat .text.player7 { border-top: 2px solid rgba(114,64,0,0.6); }
+#chat .text.player1 { border-top: 2px solid rgba(150,0,10,0.8); }
+#chat .text.player2 { border-top: 2px solid rgba(0,85,150,0.8); }
+#chat .text.player3 { border-top: 2px solid rgba(167,167,167,0.8); }
+#chat .text.player4 { border-top: 2px solid rgba(256,140,0,0.8); }
+#chat .text.player5 { border-top: 2px solid rgba(18,127,0,0.8); }
+#chat .text.player6 { border-top: 2px solid rgba(75,75,75,0.8); }
+#chat .text.player7 { border-top: 2px solid rgba(114,64,0,0.8); }
 
