@@ -15,6 +15,7 @@ $.fn.openid = function() {
     }
     $id.val($front.text() + $usr.val() + $end.text());
     return true;
+    $('#connecting').fadeIn(300);
   };
 
   var submitid = function() {
@@ -23,7 +24,7 @@ $.fn.openid = function() {
       return false;
     }
     return true;
-
+    $('#connecting').fadeIn(300);
   };
   var direct = function() {
     var $li = $(this);
@@ -31,8 +32,8 @@ $.fn.openid = function() {
     $li.addClass('highlight');
     $usrfs.fadeOut();
     $idfs.fadeOut();
-
     $this.unbind('submit').submit(function() {
+      $('#connecting').fadeIn(300);
       $id.val($this.find("li.highlight span").text());
     });
     $this.submit();
