@@ -216,7 +216,7 @@ $.fn.openid = function() {
     }
     $id.val($front.text() + $usr.val() + $end.text());
     return true;
-    $('#connecting').fadeIn(300);
+    $('#connecting').fadeIn(600);
   };
 
   var submitid = function() {
@@ -225,7 +225,7 @@ $.fn.openid = function() {
       return false;
     }
     return true;
-    $('#connecting').fadeIn(300);
+    $('#connecting').fadeIn(600);
   };
   var direct = function() {
     var $li = $(this);
@@ -234,7 +234,7 @@ $.fn.openid = function() {
     $usrfs.fadeOut();
     $idfs.fadeOut();
     $this.unbind('submit').submit(function() {
-      $('#connecting').fadeIn(300);
+      $('#connecting').fadeIn(600);
       $id.val($this.find("li.highlight span").text());
     });
     $this.submit();
