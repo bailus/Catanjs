@@ -548,7 +548,7 @@ body {
 }
 #sidepanel {
   position:fixed;
-  right:0;top:90px;
+  right:0;top:77px;
   width:380px;bottom:102px;
   background-color:rgba(194, 220, 229, 0.8);
   z-index:10000000;

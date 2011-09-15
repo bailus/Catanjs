@@ -851,7 +851,7 @@ http.get('/authenticate', function(req, res){
 });
 http.get('/verify', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
-    if (!error && result.authenticated) {
+    if ((!error && result.authenticated)&&(req.query.guest)) {
       var p, q = 1, id = encodeURIComponent(result.claimedIdentifier);
       for (p in players) {
         if (players[p].id == id) { q = 0; }
