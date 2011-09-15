@@ -1,7 +1,8 @@
 body {
   font-family:"droid sans", "calibri", "arial", sans-serif;
   overflow:hidden;
-  color:white;
+  color:black;
+  background-color:#5fa7bf;
   background-image:url('background.jpg');
 }
 #cursor {
@@ -897,11 +898,13 @@ body {
   top:0;left:0;
   width:100%;height:100%;
   background-color:white;
-  color:black;
+  color:#E9F5F8;
   text-align:center;
   font-size:32px;
   font-weight:bold;
   padding-top:200px;
+  background-color:#5fa7bf;
+  background-image:url('background.jpg');
 }
 
 .bold { font-weight:bold; }
