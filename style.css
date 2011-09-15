@@ -850,7 +850,7 @@ body {
 }
 #lobbychatinputwrapper {
   position:absolute;
-  left:0;right:80px;
+  left:0;right:75px;
   top:0;height:20px;
   left:5px;top:4px;
 }
