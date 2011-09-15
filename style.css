@@ -680,12 +680,11 @@ body {
   left:370px;right:170px;
   top:90px;bottom:65px;
   border:1px solid #666;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
   overflow:auto;
   background-color:rgba(151,189,201,0.8);
-  border:2px solid white;
 }
 #lobby {
   position:fixed;
@@ -710,16 +709,15 @@ body {
 #players {
   position:fixed;
   top:90px;bottom:40px;
-  right:10px;width:140px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  right:10px;width:145px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
   overflow:auto;
   padding:4px;
   overflow:auto;
   overflow-x:hidden;
   background-color:rgba(151,189,201,0.8);
-  border:2px solid white;
 }
 #players .player {
   height:20px;line-height:20px;
@@ -729,13 +727,12 @@ body {
 }
 #gamelist {
   position:fixed;
-  left:10px;width:340px;
-  top:140px;bottom:40px;
+  left:10px;width:350px;
+  top:90px;bottom:40px;
   background-color:rgba(151,189,201,0.8);
-  border:2px solid white;  
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
 }
 #games {
   position:absolute;
@@ -756,6 +753,12 @@ body {
 #gamebuttons {
   width:100%;height:28px;
   background-color:rgba(255,255,255,0.3);
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 #gamebuttons > div {
   background-color:rgba(255,255,255,0.6);
@@ -822,7 +825,7 @@ body {
 }
 #lobbychatinput {
   background-color:rgba(151,189,201,0.8);
-  border:2px solid white;
+  border:1px solid rgba(255,255,255,0.6);
   padding:0;margin:0;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -832,6 +835,9 @@ body {
   height:16px;line-height:16px;
   width:100%;
 }
+#lobbychatinput:active {
+  border:1px solid white;
+}
 #lobbychatinputwrapper {
   position:absolute;
   left:0;right:75px;
@@ -839,7 +845,7 @@ body {
 }
 #lobbychatsend {
   background-color:rgba(151,189,201,0.8);
-  border:2px solid white;
+  border:1px solid rgba(255,255,255,0.6);
   font-weight:bold;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -857,6 +863,7 @@ body {
 }
 #lobbychatsend:active {
   background-color:rgba(255,255,255,0.8);
+  border:1px solid white;
 }
 .profile {
   z-index:100000100;
