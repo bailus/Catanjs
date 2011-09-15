@@ -851,7 +851,7 @@ http.get('/authenticate', function(req, res){
 });
 http.get('/verify', function(req, res){
   relyingParty.verifyAssertion(req.url, function(error, result) {
-    if ((!error && result.authenticated)||(req.query.guest)) {
+    if ((!error && result.authenticated)) {
       var p, q = 1, id = encodeURIComponent(result.claimedIdentifier);
       for (p in players) {
         if (players[p].id == id) { q = 0; }
@@ -889,6 +889,12 @@ http.get('/verify', function(req, res){
       else { res.redirect('/?error=Not%20authenticated'); }
     }
   });
+});
+http.get('/guest',function(req,res){
+  var key = Math.floor(Math.random()*10000000000000000);
+  var id = +new Date();
+  players.push({'id':id,'nickname':id,'service':'guest','key':key});
+  res.redirect('/game?id='+id+'&key='+key);
 });
 http.get('/player/:id',function(req, res){
   res.contentType('application/json');
