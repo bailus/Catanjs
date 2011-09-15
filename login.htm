@@ -43,15 +43,12 @@
       position:fixed;
       top:0;left:0;
       width:100%;height:100%;
-      background-color:white;
-      color:#E9F5F8;
       text-align:center;
       font-size:32px;
       font-weight:bold;
       padding-top:200px;
       display:none;
-      background-color:#5fa7bf;
-      background-image:url('background.jpg');
+      background-color:white;
     }
     fieldset { border-style:none;text-align:center; }
     img { border-style:none; }
@@ -141,7 +138,7 @@
         <input type="submit" value="Login" /></div> 
       </fieldset> 
     </form>
-    <div id="connecting">Connecting...</div>
+    <div id="connecting"></div>
     <script>
       $(document).ready(function(){
         if (location.search) { var error = location.search.match(/error=(.*)/)[1]; }
