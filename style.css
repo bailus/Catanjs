@@ -679,7 +679,6 @@ body {
   position:fixed;
   left:370px;right:170px;
   top:90px;bottom:65px;
-  border:1px solid #666;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -832,7 +831,7 @@ body {
   border-radius: 3px;
   position:absolute;
   left:0;top:0;
-  height:16px;line-height:16px;
+  height:18px;line-height:18px;
   width:100%;
 }
 #lobbychatinput:active {
