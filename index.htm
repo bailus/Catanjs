@@ -741,24 +741,29 @@ body {
   top:140px;bottom:40px;
   background-color:rgba(151,189,201,0.8);
   border:2px solid white;  
-}
-#games, #newgame {
-  position:fixed;
-  left:10px;width:340px;;
-  top:140px;bottom:40px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+#games {
+  position:absolute;
+  top:20px;bottom:0;
+  left:0;right:0;
   overflow:auto;
   overflow-x:hidden;
+  border-top:2px solid white;
+}
+#newgame {
+  position:absolute;
+  top:0;bottom:0;
+  left:0;right:0;
+  overflow:auto;
+  overflow-x:hidden;
+  display:none;
   padding:4px;
 }
-#games { top:115px; }
-#newgame { z-index:100000010;display:none; }
 #gamebuttons {
-  position:fixed;
-  left:10px;top:90px;
-  width:350px;height:20px;
+  width:100%;height:20px;
 }
 #gamebuttons > div {
   background-color:rgba(151,189,201,0.8);
