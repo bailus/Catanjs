@@ -727,6 +727,13 @@ body {
   cursor:pointer;
   position:relative;
 }
+#gamelist {
+  position:fixed;
+  left:10px;width:340px;
+  top:140px;bottom:40px;
+  background-color:rgba(151,189,201,0.8);
+  border:2px solid white;  
+}
 #games, #newgame {
   position:fixed;
   left:10px;width:340px;;
@@ -736,8 +743,6 @@ body {
   border-radius: 3px;
   overflow:auto;
   overflow-x:hidden;
-  background-color:rgba(151,189,201,0.8);
-  border:2px solid white;
   padding:4px;
 }
 #games { top:115px; }
