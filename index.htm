@@ -799,8 +799,6 @@ body {
   position:fixed;
   right:170px;left:370px;
   top:90px;height:28px;
-}
-#lobby > form, #sidepanel > form {
   -webkit-border-top-left-radius: 6px;
   -webkit-border-top-right-radius: 6px;
   -moz-border-radius-topleft: 6px;
@@ -828,11 +826,14 @@ body {
 #lobbychatinput:active, #chatinput:active {
   border:1px solid white;
 }
-#lobbychatinputwrapper, #chatinputwrapper {
+#lobbychatinputwrapper {
   position:absolute;
+  left:5px;right:75px;
+  top:4px;height:20px;
+}
+#chatinputwrapper {
   left:0;right:75px;
   top:0;height:20px;
-  left:5px;top:4px;
 }
 #lobbychatsend, #chatsend {
   background-color:rgba(255,255,255,0.6);
