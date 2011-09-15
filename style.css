@@ -824,10 +824,11 @@ body {
   top:4px;height:20px;
 }
 #chatinputwrapper {
+  position:absolute;
   left:0;right:75px;
   top:0;height:20px;
 }
-#lobbychatsend, #chatsend {
+#chatsend, #lobbychatsend {
   background-color:rgba(255,255,255,0.6);
   font-weight:bold;
   -webkit-border-bottom-right-radius: 3px;
@@ -837,13 +838,17 @@ body {
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   position:absolute;
-  right:5px;width:65px;
-  top:4px;height:20px;
+  right:0;width:65px;
+  top:0;height:20px;
   line-height:16px;
   padding:0;margin:0;
   font-size:11px;
   text-align:center;
   border:none;
+}
+#lobbychatsend {
+  right:5px;
+  top:4px;
 }
 #lobbychatsend:hover, #lobbychatsend:active, #chatsend:hover, #chatsend:active {
   background-color:white;
