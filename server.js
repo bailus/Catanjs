@@ -966,6 +966,10 @@ http.get('/background.jpg', function(req, res){
   res.contentType('image/jpeg');
   res.sendfile('background.jpg');
 });
+http.get('/loading.gif', function(req, res){
+  res.contentType('image/gif');
+  res.sendfile('loading.gif');
+});
 /*http.get('/server.js', function(req, res){
   res.contentType('text/javascript');
   res.sendfile('server.js');
