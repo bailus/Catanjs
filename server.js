@@ -804,24 +804,25 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
       });
       socket.on('disconnect',function(data){
         socket.get('playerid',function(err,playerid){
-          var plist = [], p = -1, i, g, h;
+          var plist = [], p = -1, i, j, g, h;
           for (i in players) {
             if (players[i].id == playerid) {
               p = i;
-            } else {
-              plist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
             }
           }
           for (g in games) {
             if (p == -1) { break; }
             for (h in games[g].players) {
-console.log(games[g].players[h].playerid);
-console.log(players[p].id);
               if (games[g].players[h].playerid == players[p].id) { p = -1; break; }
             }
           }
-          if (p != -1) { players.splice(p,1); }
-          io.of('/lobby').emit('players',plist);
+          if (p != -1) {
+            players.splice(p,1);
+            for (j in players) {
+              plist.push({ 'id': players[j].id, 'nickname': players[j].nickname, 'service': players[j].service });
+            }
+            io.of('/lobby').emit('players',plist);
+          }
         });
       });
     }
