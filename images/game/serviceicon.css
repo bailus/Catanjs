@@ -4,7 +4,8 @@
   margin-top:2px;
   margin-right:4px;
 }
-.serviceicon.aol { background-position: 0 0; }
+.serviceicon.guest { background-position: 0 -16px; }
+.serviceicon.aol { background-position: 0 -16px; }
 .serviceicon.facebook { background-position: 0 -16px; }
 .serviceicon.friendfeed { background-position: 0 -32px; }
 .serviceicon.google { background-position: 0 -48px; }
@@ -15,6 +16,7 @@
 .serviceicon.openid { background-position: 0 -128px; }
 .serviceicon.twitter { background-position: 0 -144px; }
 .serviceicon.yahoo { background-position: 0 -160px; }
+
 
 
 
