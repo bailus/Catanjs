@@ -726,15 +726,23 @@ io.of('/'+gameid).on('connection', function (socket) {
 	      socket.get('gameid',function(err,gameid){
 	      socket.get('playerid',function(err,playerid){
 		      games[gameid].players[player-1].playerid = '';
-		      /*var p, q = 0;
-		      for (p in games[gameid].players) {
-		        if (games[gameid].players[p].playerid == '') { q += 1; }
-		      }
-		      if ((q == games[gameid].players.length)&&(games[gameid].currentTurn > 0)) { games.splice(gameid,1); }*/
           if (0) { //TODO check if the player won
             savePlayer({'playerid':playerid,'win':true});
           } else {
             savePlayer({'playerid':playerid,'fail':true});
+          }
+          var i, j, p = -1;
+          for (i in players) {
+            if (players[i].id == playerid) {
+              p = i;
+            }
+          }
+          if (p != -1) {
+            players.splice(p,1);
+            for (j in players) {
+              plist.push({ 'id': players[j].id, 'nickname': players[j].nickname, 'service': players[j].service });
+            }
+            io.of('/lobby').emit('players',plist);
           }
 	      });
 	      });
