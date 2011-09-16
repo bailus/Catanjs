@@ -733,6 +733,8 @@ io.of('/'+gameid).on('connection', function (socket) {
           }
           var i, j, p = -1;
           for (i in players) {
+console.log(players[i].id);
+console.log(playerid);
             if (players[i].id == playerid) {
               p = i;
             }
