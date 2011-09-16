@@ -198,7 +198,7 @@ body #board .city { bottom:-10px; }
   margin-top:2px;
   margin-right:4px;
 }
-.serviceicon.guest { background-position: 0 -16px; }
+.serviceicon.guest { background-position: 0 0; }
 .serviceicon.aol { background-position: 0 -16px; }
 .serviceicon.facebook { background-position: 0 -16px; }
 .serviceicon.friendfeed { background-position: 0 -32px; }
