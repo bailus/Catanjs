@@ -813,8 +813,10 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
             }
           }
           for (g in games) {
-            //if (p == -1) { break; }
+            if (p == -1) { break; }
             for (h in games[g].players) {
+console.log(games[g].players[h].playerid);
+console.log(players[p].id);
               if (games[g].players[h].playerid == players[p].id) { p = -1; break; }
             }
           }
