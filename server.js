@@ -806,7 +806,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
         socket.get('playerid',function(err,playerid){
           var plist = [], p = -1, i;
           for (i in players) {
-            if (players[i].id == playerid) {
+            if (players[i].id == encodeURIComponent(playerid)) {
               //players.splice(i,1); i -= 1;
               p = i;
             } else {
