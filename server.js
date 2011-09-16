@@ -891,10 +891,10 @@ http.get('/verify', function(req, res){
     }
   });
 });
-http.get('/guest/?(:nickname)?',function(req,res){
+http.get('/guest/:nickname',function(req,res){
   var key = Math.floor(Math.random()*10000000000000000);
   var id = +new Date();
-  var nickname = req.params.nickname ? req.params.nickname : 'Guest';
+  var nickname = req.params.nickname.length ? req.params.nickname : 'Guest';
   players.push({'id':id,'nickname':nickname,'service':'guest','key':key});
   res.redirect('/game?id='+id+'&key='+key);
 });
