@@ -807,7 +807,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
           var plist = [], p = -1, i;
           for (i in players) {
 console.log(players[i].id);
-console.log(playerid);
+console.log(playerid); 
             if (players[i].id == playerid) {
               //players.splice(i,1); i -= 1;
               p = i;
