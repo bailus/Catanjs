@@ -765,56 +765,58 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
       if ((encodeURIComponent(data.id) == players[p].id)&&(encodeURIComponent(data.key) == players[p].key)) { playerid = players[p].id; playername = players[p].nickname; playerservice = players[p].service; }
     }
     if (!(playername == '')) {
-	    socket.set('playerid',playerid);
-	    socket.set('playername',playername);
-	    socket.set('playerservice',playerservice);
-	    var i, gameslist = [], playerslist = [];
-	    for (i in games) {
-	      gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
-	    }
+      socket.set('playerid',playerid);
+      socket.set('playername',playername);
+      socket.set('playerservice',playerservice);
+      var i, gameslist = [], playerslist = [];
+      for (i in games) {
+        gameslist.push([games[i].type,games[i].name,games[i].players.length+'/'+games[i].maxPlayers,i]);
+      }
       for (i in players) {
         playerslist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
       }
-	    socket.emit('games',gameslist);
-	    io.of('/lobby').emit('players',playerslist);
+      socket.emit('games',gameslist);
+      io.of('/lobby').emit('players',playerslist);
       var line;
       for (line in lobbychatbuffer) {
         socket.emit('chat',lobbychatbuffer[line].date,lobbychatbuffer[line].playerid,lobbychatbuffer[line].playername,lobbychatbuffer[line].playerservice,lobbychatbuffer[line].data);
       }
-	    socket.on('chat',function(data){
-	      socket.get('playerid',function(err,playerid){
-	      socket.get('playername',function(err,playername){
-	      socket.get('playerservice',function(err,playerservice){
+      socket.on('chat',function(data){
+        socket.get('playerid',function(err,playerid){
+        socket.get('playername',function(err,playername){
+        socket.get('playerservice',function(err,playerservice){
           data = sanitize(data).xss().trim();
           if (data.length) {
-	          lobbychat(playerid,playername,playerservice,data);
+            lobbychat(playerid,playername,playerservice,data);
           }
-	      });
-	      });
-	      });
-	    });
-	    socket.on('joingame',function(data){
-	      if (games[data].players.length < games[data].maxPlayers) {
-	        socket.emit('gameid','/'+data); //tell the client to join the game
-	      }
-	    });
-	    socket.on('newgame',function(data){
-	      //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
-	      socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
-	    });
-	    socket.on('disconnect',function(data){
-	      socket.get('playerid',function(err,playerid){
-          var plist = [];
+        });
+        });
+        });
+      });
+      socket.on('joingame',function(data){
+        if (games[data].players.length < games[data].maxPlayers) {
+          socket.emit('gameid','/'+data); //tell the client to join the game
+        }
+      });
+      socket.on('newgame',function(data){
+        //data = {type:'sea',name:'asdfasdf',maxPlayers:4};
+        socket.emit('gameid','/'+newGame(data)); //tell the client to join the game
+      });
+      socket.on('disconnect',function(data){
+        socket.get('playerid',function(err,playerid){
+          var plist = [], p = -1, i;
           for (i in players) {
             if (players[i].id == playerid) {
-              players.splice(i,1); i -= 1;
+              //players.splice(i,1); i -= 1;
+              p = i;
             } else {
               plist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
             }
           }
-	        io.of('/lobby').emit('players',plist);
-	      });
-	    });
+          if (p != -1) { players.splice(p,1); }
+          io.of('/lobby').emit('players',plist);
+        });
+      });
     }
   });
 });
@@ -893,7 +895,7 @@ http.get('/verify', function(req, res){
 http.get('/guest',function(req,res){
   var key = Math.floor(Math.random()*10000000000000000);
   var id = +new Date();
-  players.push({'id':id,'nickname':id,'service':'guest','key':key});
+  players.push({'id':id,'nickname':'Guest','service':'guest','key':key});
   res.redirect('/game?id='+id+'&key='+key);
 });
 http.get('/player/:id',function(req, res){
