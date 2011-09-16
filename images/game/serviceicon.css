@@ -4,18 +4,17 @@
   margin-top:2px;
   margin-right:4px;
 }
-.serviceicon.guest { background-position: 0 0; }
 .serviceicon.aol { background-position: 0 -16px; }
-.serviceicon.facebook { background-position: 0 -16px; }
-.serviceicon.friendfeed { background-position: 0 -32px; }
-.serviceicon.google { background-position: 0 -48px; }
-.serviceicon.linkedin { background-position: 0 -64px; }
-.serviceicon.live { background-position: 0 -80px; }
-.serviceicon.livejournal { background-position: 0 -96px; }
-.serviceicon.myspace { background-position: 0 -112px; }
-.serviceicon.openid { background-position: 0 -128px; }
-.serviceicon.twitter { background-position: 0 -144px; }
-.serviceicon.yahoo { background-position: 0 -160px; }
+.serviceicon.facebook { background-position: 0 -32px; }
+.serviceicon.friendfeed { background-position: 0 -48px; }
+.serviceicon.google { background-position: 0 -64px; }
+.serviceicon.linkedin { background-position: 0 -80px; }
+.serviceicon.live { background-position: 0 -96px; }
+.serviceicon.livejournal { background-position: 0 -112px; }
+.serviceicon.myspace { background-position: 0 -128px; }
+.serviceicon.openid { background-position: 0 -144px; }
+.serviceicon.twitter { background-position: 0 -160px; }
+.serviceicon.yahoo { background-position: 0 -176px; }
 
 
 
