@@ -10,8 +10,8 @@ var io = require('socket.io').listen(http),
 //io.enable('browser client etag');          // apply etag caching logic based on version number
 //io.set('log level', 1);                    // reduce logging
 
-io.set('transports',['xhr-polling']);
-/*,'htmlfile',,'jsonp-polling''websocket','flashsocket'*/
+io.set('transports',['websocket','xhr-polling','htmlfile','jsonp-polling']);
+/*'flashsocket'*/
 
 
 callback = function(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
@@ -806,10 +806,7 @@ var lobby = io.of('/lobby').on('connection',function(socket){  //initial connect
         socket.get('playerid',function(err,playerid){
           var plist = [], p = -1, i;
           for (i in players) {
-console.log(players[i].id);
-console.log(playerid); 
             if (players[i].id == playerid) {
-              //players.splice(i,1); i -= 1;
               p = i;
             } else {
               plist.push({ 'id': players[i].id, 'nickname': players[i].nickname, 'service': players[i].service });
