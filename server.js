@@ -10,8 +10,8 @@ var io = require('socket.io').listen(http),
 //io.enable('browser client etag');          // apply etag caching logic based on version number
 //io.set('log level', 1);                    // reduce logging
 
-io.set('transports',['websocket','xhr-polling','htmlfile','jsonp-polling']);
-/*'flashsocket'*/
+io.set('transports',['websocket']);
+/*'flashsocket','xhr-polling','htmlfile','jsonp-polling'*/
 
 
 callback = function(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and-binding-and-callback-arguments-and-references/
@@ -914,7 +914,7 @@ http.get('/guest/:nickname',function(req,res){
   var key = Math.floor(Math.random()*10000000000000000);
   var id = +new Date();
   var nickname = req.params.nickname.length ? req.params.nickname : 'Guest';
-  players.push({'id':id,'nickname':nickname,'service':'guest','key':key});
+  players.push({'id':'http%3A%2F%2Fbailus.no.de%2Fguest%2F'+id,'nickname':nickname,'service':'guest','key':key});
   res.redirect('/game?id='+id+'&key='+key);
 });
 http.get('/player/:id',function(req, res){
