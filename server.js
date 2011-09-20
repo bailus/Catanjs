@@ -25,7 +25,7 @@ callback = function(func,opts){	  //http://onemarco.com/2008/11/12/callbacks-and
 	return cb;
 };
 toArray = function(arrayLike){  //A utility function for callback()
-	var arr = [];
+	var arr = []; 
 	for(var i = 0; i < arrayLike.length; i++){
 		arr.push(arrayLike[i]);
 	}
